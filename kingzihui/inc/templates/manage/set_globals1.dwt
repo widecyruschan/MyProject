@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');	
+	mycms.keysubmit('form_globals','submit',true);
+	{:if $config['mail']['mailer'] != 'smtp' && $config['mail']['mailer'] != 'gmail':}$('.smtp').hide();{:/if:} 
+	$('#mailer').change(function(){if($(this).val() != 'smtp' && $(this).val() != 'gmail'){$('.smtp').hide();} else {$('.smtp').show();}});
+	{:if $mycms['get']['tip']:}$('.{:$mycms['get']['tip']:}').css({'border':'2px #F00 solid','background':'#FEE7E0'});{:/if:} 
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}</td>
+			</tr>
+		</table>		
+		<form name="form_globals" id="form_globals" action="" method="post">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['debugging'][0]:}</td>
+				<td>
+					<input name="debugging" type="radio" value="0" {:if $config['debugging'] == 0:}checked{:/if:} /> {:$lang['page']['debugging'][1]:} &nbsp; &nbsp;
+					<input name="debugging" type="radio" value="1" {:if $config['debugging'] == 1:}checked{:/if:} /> {:$lang['page']['debugging'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['debugging_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['debugging']:}{:/literal:}<input name="static" type="hidden" value="1" /></td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['url']:}</td>
+				<td>
+					<input type="text" name="url" class="input rounded url" value="{:$config['url']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['config_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['url']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['home']:}</td>
+				<td>
+					<input type="text" name="home" class="input rounded" value="{:$config['home']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['home_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$config['home']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['lang_total']:}</td>
+				<td>
+					<input type="text" name="lang_total" class="input rounded" value="{:$config['lang_total']:}" size="6" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['lang_total_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$config['lang_total']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['lang_default']:}</td>
+				<td>
+					<select name="lang_default" class="select rounded">
+					{:foreach $web['all_data'] as $n:}
+					<option value="{:$n['lang']:}" {:if $config['lang_default']==$n['lang']:}selected="selected"{:/if:}>{:$n['name']:}</option>
+					{:/foreach:}
+					</select>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['lang_default_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$config['lang_default']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['status'][0]:}</td>
+				<td>
+					<input name="status" type="radio" value="1" {:if $config['status'] == 1:}checked{:/if:} /> {:$lang['page']['status'][1]:} &nbsp; &nbsp;
+					<input name="status" type="radio" value="0" {:if $config['status'] == 0:}checked{:/if:} /> {:$lang['page']['status'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['status_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['status']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['admin_dir']:}</td>
+				<td>
+					<input type="text" name="admin_dir" class="input rounded admin_dir" value="{:$config['admin_dir']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['admin_dir_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$config['admin_dir']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['maintenance']:}</td>
+				<td>
+					<textarea name="maintenance" class="rounded" style="padding:5px;" rows="3" cols="40">{:$config['maintenance']:}</textarea>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['maintenance_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['maintenance']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['zone']:}</td>
+				<td>
+					<input type="text" name="zone" class="input rounded" value="{:$config['zone']:}" size="6" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['zone_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['zone']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['icp']:}</td>
+				<td>
+					<input type="text" name="icp" class="input rounded" value="{:$config['icp']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['icp']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['traffic_statistics']:}</td>
+				<td>
+					<textarea name="traffic_statistics" class="rounded" style="padding:5px;" rows="3" cols="40">{:$config['traffic_statistics']:}</textarea>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['traffic_statistics_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['traffic_statistics']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['guestbook_show'][0]:}</td>
+				<td>
+					<input name="guestbook_show" type="radio" value="1" {:if $config['guestbook_show'] == 1:}checked{:/if:} /> {:$lang['page']['guestbook_show'][1]:} &nbsp; &nbsp;
+					<input name="guestbook_show" type="radio" value="0" {:if $config['guestbook_show'] == 0:}checked{:/if:} /> {:$lang['page']['guestbook_show'][2]:}
+				</td>
+				<td class="field">{:literal:}{:$config['guestbook_show']:}{:/literal:}</td>
+			</tr>
+<!-- template **********************************************************************************-->
+			<tr class="td_top_line">
+				<td class="name">{:$lang['page']['template']['caching'][0]:}</td>
+				<td>
+					<input name="template[caching]" type="radio" value="1" {:if $config['template']['caching'] == 1:}checked{:/if:} /> {:$lang['page']['template']['caching'][1]:} &nbsp; &nbsp;
+					<input name="template[caching]" type="radio" value="0" {:if $config['template']['caching'] == 0:}checked{:/if:} /> {:$lang['page']['template']['caching'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template']['caching_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['template']['caching']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['template']['cache_lifetime'][0]:}</td>
+				<td>
+					<input type="text" name="template[cache_lifetime]" class="input rounded" value="{:$config['template']['cache_lifetime']:}" size="6" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template']['cache_lifetime_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['template']['cache_lifetime']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['template']['auto_clear_caching'][0]:}</td>
+				<td>
+					<input name="template[auto_clear_caching]" type="radio" value="1" {:if $config['template']['auto_clear_caching'] == 1:}checked{:/if:} /> {:$lang['page']['template']['auto_clear_caching'][1]:} &nbsp; &nbsp;
+					<input name="template[auto_clear_caching]" type="radio" value="0" {:if $config['template']['auto_clear_caching'] == 0:}checked{:/if:} /> {:$lang['page']['template']['auto_clear_caching'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template']['auto_clear_caching_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['template']['auto_clear_caching']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['template']['force_compile'][0]:}</td>
+				<td>
+					<input name="template[force_compile]" type="radio" value="1" {:if $config['template']['force_compile'] == 1:}checked{:/if:} /> {:$lang['page']['template']['force_compile'][1]:} &nbsp; &nbsp;
+					<input name="template[force_compile]" type="radio" value="0" {:if $config['template']['force_compile'] == 0:}checked{:/if:} /> {:$lang['page']['template']['force_compile'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template']['force_compile_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['template']['force_compile']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['template']['customize_page']:}</td>
+				<td>
+					<input type="text" name="template[customize_page]" class="input rounded" value="{:$config['template']['customize_page']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template']['customize_page_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['template']['customize_page']:}{:/literal:}</td>
+			</tr>
+			
+<!-- upload **********************************************************************************-->
+			<tr class="td_top_line">
+				<td class="name">{:$lang['page']['upload']['type']:}</td>
+				<td>
+					<input type="text" name="upload[type]" class="input rounded" value="{:$config['upload']['type']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['upload']['type_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['upload']['type']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['upload']['max_annex']:}</td>
+				<td>
+					<input type="text" name="upload[max_annex]" class="input rounded" value="{:$config['upload']['max_annex']:}" size="10" /> KB 
+				</td>
+				<td class="field">{:literal:}{:$config['upload']['max_annex']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['upload']['max_picture']:}</td>
+				<td>
+					<input type="text" name="upload[max_picture]" class="input rounded" value="{:$config['upload']['max_picture']:}" size="10" /> KB 
+				</td>
+				<td class="field">{:literal:}{:$config['upload']['max_picture']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['upload']['date_dir'][0]:}</td>
+				<td>
+					<input name="upload[date_dir]" type="radio" value="1" {:if $config['upload']['date_dir'] == '1':}checked{:/if:} /> {:$lang['page']['upload']['date_dir'][1]:} &nbsp;&nbsp;&nbsp; 
+					<input name="upload[date_dir]" type="radio" value="0" {:if $config['upload']['date_dir'] == '0':}checked{:/if:} /> {:$lang['page']['upload']['date_dir'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['upload']['date_dir_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['upload']['date_dir']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['upload']['naming'][0]:}</td>
+				<td>
+					<select name="upload[naming]" class="select rounded">
+						<option value="0" {:if $config['upload']['naming'] == 0:}selected="selected"{:/if:}>{:$lang['page']['upload']['naming'][1]:}</option>
+						<option value="1" {:if $config['upload']['naming'] == 1:}selected="selected"{:/if:}>{:$lang['page']['upload']['naming'][2]:}</option>
+						<option value="2" {:if $config['upload']['naming'] == 2:}selected="selected"{:/if:}>{:$lang['page']['upload']['naming'][3]:}</option>
+					</select>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['upload']['naming_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['upload']['naming']:}{:/literal:}</td>
+			</tr>
+<!-- mail **********************************************************************************-->
+			<tr class="td_top_line">
+				<td class="name">{:$lang['page']['mail']['mailer'][0]:}</td>
+				<td>
+					<select name="mail[mailer]" class="select rounded" id="mailer">
+						<option value="smtp" {:if $config['mail']['mailer']=='smtp':}selected="selected"{:/if:}>{:$lang['page']['mail']['mailer'][1]:}</option>
+						<option value="mail" {:if $config['mail']['mailer']=='mail':}selected="selected"{:/if:}>{:$lang['page']['mail']['mailer'][2]:}</option>
+						<option value="sendmail" {:if $config['mail']['mailer']=='sendmail':}selected="selected"{:/if:}>{:$lang['page']['mail']['mailer'][3]:}</option>
+						<option value="gmail" {:if $config['mail']['mailer']=='gmail':}selected="selected"{:/if:}>{:$lang['page']['mail']['mailer'][4]:}</option>
+					</select>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['mail']['title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['mailer']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['mail']['frommail']:}</td>
+				<td>
+					<input type="text" name="mail[frommail]" class="input rounded" value="{:$config['mail']['frommail']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['frommail']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['mail']['fromname']:}</td>
+				<td>
+					<input type="text" name="mail[fromname]" class="input rounded" value="{:$config['mail']['fromname']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['fromname']:}{:/literal:}</td>
+			</tr>
+			<tr class="smtp">
+				<td class="name">{:$lang['page']['mail']['smtphost']:}</td>
+				<td>
+					<input type="text" name="mail[smtphost]" class="input rounded" value="{:$config['mail']['smtphost']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['smtphost']:}{:/literal:}</td>
+			</tr>
+			<tr class="smtp">
+				<td class="name">{:$lang['page']['mail']['smptport']:}</td>
+				<td>
+					<input type="text" name="mail[smptport]" class="input rounded" value="{:$config['mail']['smptport']:}" size="10" />
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['smptport']:}{:/literal:}</td>
+			</tr>
+			<tr class="smtp">
+				<td class="name">{:$lang['page']['mail']['smtpauth'][0]:}</td>
+				<td>
+					<input name="mail[smtpauth]" type="radio" value="1" {:if $config['mail']['smtpauth'] == '1':}checked{:/if:} /> {:$lang['page']['mail']['smtpauth'][1]:} &nbsp;&nbsp;&nbsp; 
+					<input name="mail[smtpauth]" type="radio" value="0" {:if $config['mail']['smtpauth'] == '0':}checked{:/if:} /> {:$lang['page']['mail']['smtpauth'][2]:}			
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['smtpauth']:}{:/literal:}</td>
+			</tr>
+			<tr class="smtp">
+				<td class="name">{:$lang['page']['mail']['smtpuser']:}</td>
+				<td>
+					<input type="text" name="mail[smtpuser]" class="input rounded" value="{:$config['mail']['smtpuser']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['smtpuser']:}{:/literal:}</td>
+			</tr>
+			<tr class="smtp">
+				<td class="name">{:$lang['page']['mail']['smtppass']:}</td>
+				<td>
+					<input type="password" name="mail[smtppass]" class="input rounded" value="{:$config['mail']['smtppass']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['smtppass']:}{:/literal:}</td>
+			</tr>
+			<tr class="gmail smtp">
+				<td class="name">{:$lang['page']['mail']['starttls']:}</td>
+				<td>
+					<select name="mail[starttls]" class="select rounded">
+						<option value="" {:if $config['mail']['starttls']=='':}selected="selected"{:/if:}>NONE</option>
+						<option value="ssl" {:if $config['mail']['starttls']=='ssl':}selected="selected"{:/if:}>SSL</option>
+						<option value="tls" {:if $config['mail']['starttls']=='tls':}selected="selected"{:/if:}>TLS</option>
+					</select>
+				</td>
+				<td class="field">{:literal:}{:$config['mail']['starttls']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['mail']['test'][0]:}</td>
+				<td>
+					<input name="mail[istest]" type="checkbox" value="1" /> {:$lang['page']['mail']['test'][1]:}
+					<input type="text" name="mail[testaddress]" class="input rounded" value="{:$config['mail']['testaddress']:}" size="20" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['mail']['test'][2]:}">				
+				</td>
+				<td class="field"><em>NULL</em></td>				
+			</tr>
+<!-- ftp **********************************************************************************-->
+			<tr class="td_top_line">
+				<td class="name">{:$lang['page']['ftp']['enable'][0]:}</td>
+				<td>
+					<input name="ftp[enable]" type="radio" value="1" {:if $config['ftp']['enable'] == '1':}checked{:/if:} /> {:$lang['page']['ftp']['enable'][1]:} &nbsp;&nbsp;&nbsp; 
+					<input name="ftp[enable]" type="radio" value="0" {:if $config['ftp']['enable'] == '0':}checked{:/if:} /> {:$lang['page']['ftp']['enable'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['ftp']['title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$config['ftp']['enable']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['ftp']['host']:}</td>
+				<td>
+					<input type="text" name="ftp[host]" class="input rounded" value="{:$config['ftp']['host']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['ftp']['host']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['ftp']['port']:}</td>
+				<td>
+					<input type="text" name="ftp[port]" class="input rounded" value="{:$config['ftp']['port']:}" size="10" />
+				</td>
+				<td class="field">{:literal:}{:$config['ftp']['port']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['ftp']['user']:}</td>
+				<td>
+					<input type="text" name="ftp[user]" class="input rounded" value="{:$config['ftp']['user']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['ftp']['user']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['ftp']['pwd']:}</td>
+				<td>
+					<input type="password" name="ftp[pwd]" class="input rounded" value="{:$config['ftp']['pwd']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['ftp']['pwd']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['ftp']['root']:}</td>
+				<td>
+					<input type="text" name="ftp[root]" class="input rounded" value="{:$config['ftp']['root']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$config['ftp']['root']:}{:/literal:}</td>
+			</tr>			
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"></td>
+				<td><a class="submit reset" href="javascript:category.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+body,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,img,div,dd,dt{outline:0; margin:0; padding:0; list-style:none; border:0; font-family:"宋体"; color:#333; font-size:12px;}
+body{background:url(../images/body_bg.gif) repeat-y center center;}
+a{text-decoration:none; outline:none; color:#333; font-family:"宋体";}
+a:hover{color:#FF0000; text-decoration:underline;}
+
+.bottom_line{background:url(../images/dotted.gif) 0 bottom repeat-x;} /* 下线点线 */
+
+.number{font-family:georgia; font-weight:bold; color:#FF0000; font-size:14px;} /* 红色数字字体 */
+.red{color:#F00;}
+/* rounded */
+.rounded{-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
+
+.classify{clear:both; width:930px; padding:0 0 0 20px; height:25px; line-height:25px; margin:0 auto 10px auto; font-size:12px; background:#E4BA58; color:#333;}
+.classify a{color:#2E2E2E;}
+.classify a:hover{color:#F00; text-decoration:underline;}
+
+/* box */
+.box{width:950px; margin:0 auto;}
+.box .frame_side{float:left; width:280px; padding:0 10px; overflow:hidden;}
+.box .frame_main{float:left; width:640px; padding:0 10px 0 0; overflow:hidden;}
+.titlebar{width:610px; padding:0 0 0 30px; height:30px; margin:15px 0 10px 0; background:url(../images/title_line_bg.gif) left bottom no-repeat;}
+.titlebar .title{font-size:14px; font-weight:bold; float:left; overflow:hidden;}
+.titlebar .location{float:right; padding:0 10px 0 0; height:30px; line-height:25px; overflow:hidden;}
+
+/* component_product.tpl */
+.left_head{width:280px; height:92px; margin:10px 0 0 0; background:url(../images/left_head_bg.png) 0 0 no-repeat;}
+.menu_box{width:280px; background:url(../images/menu_box_bg.png) 0 0 repeat-y;}
+.menu_box .menu_top{width:235px; height:12px; background:url(../images/menu_top_bg.png) 0 0 no-repeat; margin:0 auto;}
+.menu_box .menu_middle{width:210px; padding:0 0 0 25px; height:32px; line-height:32px; overflow:hidden; margin:0 auto; font-size:14px; background:url(../images/menu_line.png) center 30px no-repeat #F3F5F9;}
+.menu_box .menu_bottom{width:235px; height:12px; background:url(../images/menu_bottom_bg.png) 0 0 no-repeat; margin:0 auto;}
+.menu_box .interval{height:30px;}
+.left_footer{width:280px; height:107px; background:url(../images/left_footer_bg.png) 0 0 no-repeat;}
+
+/* 渐变标题 */
+.caption{height:31px; overflow:hidden;}
+.heading{float:left; width:200px; padding:3px 0 0 5px; height:28px; font-size:14px; color:#FFF; background:url(../images/sprite.png) -88px -103px no-repeat;}
+.caption .more{float:right; width:40px; height:31px;}
+/* component_header */
+.header #has_login{display:none;}
+.header .top{clear:both;}
+.header .top .left{width:200px; height:95px; float:left; overflow:hidden;}
+.header .top .left .logo{width:200px; height:55px; padding:10px 0 0 0; overflow:hidden; text-align:center;}
+.header .top .left .weather{width:200px; height:30px; overflow:hidden; text-align:center;}
+.header .top .right{width:750px; height:95px; float:left; overflow:hidden;}
+.header .top .right .rtop{clear:both; overflow:hidden;}
+.header .top .right .rtop ul{padding:0 15px 0 30px; float:right; height:20px; overflow:hidden; background:url(../images/rtop_bg.gif) 0 0 no-repeat;}
+.header .top .right .rtop ul li{display:inline; color:#FFF; height:20px; line-height:20px; overflow:hidden;}
+.header .top .right .rtop ul li a{color:#FFF;}
+.header .top .right .rtop ul li a:hover{color:#CCC; text-decoration:none;}
+.header .top .right .rbottom{clear:both; overflow:hidden;}
+.header .top .right .rbottom .ad{float:left; width:450px; overflow:hidden; height:75px; padding:5px 0 0 0;}
+.header .top .right .rbottom .service{float:left; padding:12px 0 0 10px; overflow:hidden;}
+.header .top .right .rbottom .service .tel{overflow:hidden; color:#999; font-family:georgia,geneva,verdana,sans-serif; padding:2px 0 0 50px; font-size:18px; font-weight:bold;}
+.header .top .right .rbottom .service .people{position:absolute; margin:-10px auto auto 140px;}
+.header .navigation{clear:both; background:url(../images/sprite.png) 0 6px repeat-x; height:39px;}
+.header .navigation .button{}
+.header .navigation a{display:block; font-weight:bold; width:80px; height:21px; padding:14px 0 0 0; float:left; text-align:center; font-size:14px; color:#F1F1F1; background:url(../images/sprite.png) 0 -61px no-repeat;}
+.header .navigation a:hover,.header .navigation .active{background-position:0 -98px; color:#CC0; text-decoration:none;}
+
+/* component_page_style */
+.page_style{height:22px; clear:both; padding:20px 0 30px 0; overflow:hidden;}
+.page_style a{text-decoration:none;}
+.page_style ol{float:left; height:22px; line-height:22px; margin:0 5px 0 0;}
+.page_style .effective a{height:22px; line-height:22px; padding:0 8px; display:block; text-align:center; border:1px #DDD solid; background:#F9F9F9; width:40px;}
+.page_style .invalid{text-align:center; padding:0 8px; border:1px #DDD solid; color:#666; background:#F9F9F9; width:40px;}
+.page_style .numeric{font-family:arial,helvetica,sans-serif;}
+.page_style .numeric a{display:block; padding:0 8px; border:1px #DDD solid; background:#F9F9F9; font-family:arial,helvetica,sans-serif;}
+.page_style .numeric a:hover{color:#F00; border:1px #EE7700 solid; background:#FFEEDD; text-decoration:none;}
+.page_style .current,.page_style .effective a:hover{color:#F00; border:1px #EE7700 solid; background:#FFEEDD; padding:0 8px; text-decoration:none;}
+
+/* search */
+.search{width:280px; height:28px;}
+.search .left{width:30px; display:block; float:left; height:28px; background:url(../images/sprite.png) -172px -176px no-repeat;}
+.search .word{width:175px; float:left; padding:0 8px 0 0; height:28px; line-height:28px; border:0; outline:none; color:#999; font-size:14px; background:url(../images/search_bg_center.png) center center repeat-x;}
+.search .button{width:67px; float:left; height:28px; line-height:28px; outline:none; border:0; text-align:center; font-size:14px; background:url(../images/sprite.png) -384px -176px no-repeat;}
+.search .button:hover{cursor:pointer; background-position:-172px -204px;}
+
+/* 全局、内容页 */
+.content_common{font-size:14px; line-height:25px; clear:both; width:620px; padding:10px; height:auto; overflow:hidden;}
+.content_common p,.content_common div,.content_common ol,.content_common li{font-size:14px;}
+
+.footer{clear:both; width:950px; margin:0 auto; text-align:center; border-top:2px #F0180B solid; padding:5px 0 0 0; line-height:16px; color:#666;}
+.footer a{color:#666;}
+
+/* IE6 PNG透明化处理 */
+.heading,header .top .left .logo img,.header .top .right .float img,
+.header .top .left .logo img,
+.header .navigation a,.notice .speaker,.search .left,
+.form ul .rank_image,.menu_box,.header .top .right .rbottom .service .people img
+{_behavior:url('inc/tools/iepngfix/iepngfix.htc');}
+.header .top .right .login{_margin:0 auto 0 -50px} /* 受透明JS影响，背景错位调节 */

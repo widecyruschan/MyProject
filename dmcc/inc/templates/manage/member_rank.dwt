@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.keysubmit('level','submit',true);
+	mycms.title2div('title2div');
+	{:if $web['lang'] != 1:}
+	$('input[name="scores[]"]').add('input[name="money[]"]').add('input[name="discount[]"]').attr('readonly',true);
+	$('input[name="scores[]"]').add('input[name="money[]"]').add('input[name="discount[]"]').css('color','#8F8F8F');
+	{:/if:}
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		<form name="level" id="level" action="" method="post">
+		<table class="list td_align" cellpadding="0" cellspacing="1">
+			<tr>
+				<td class="field_head">{:$lang['page']['head'][0]:}</td>
+				<td class="field_head">{:$lang['page']['head'][1]:}</td>
+				<td class="field_head">{:$lang['page']['head'][2]:}</td>
+				<td class="field_head">{:$lang['page']['head'][3]:}</td>
+				<td class="field_head">{:$lang['page']['head'][4]:}</td>
+				<td class="field_head">{:$lang['page']['head'][5]:}</td>
+				<td class="field_head">{:$lang['page']['head'][6]:}</td>
+			</tr>
+			{:foreach $mycms['rank_list'] as $n:}
+			<tr>
+				<td width="20">{:$n['id']:}<input name="id[]" value="{:$n['id']:}" type="hidden" /></td>
+				<td>
+					<input name="rankname[]" value="{:$n['rankname']:}" type="text" class="input rounded" size="25" />
+					<input name="rankname_all[]" value="{:$n['rankname_all']:}" type="hidden" class="input rounded" size="10" />
+				</td>
+				<td><input name="discount[]" value="{:$n['discount']:}" type="text" class="input rounded" size="10" /></td>
+				<td><input name="scores[]" type="text" class="input rounded" value="{:$n['scores']:}" size="10" {:if $n['id'] == 1:}readonly="true" style="color:#8F8F8F;"{:/if:} /></td>
+				<td><input name="money[]" value="{:$n['money']:}" type="text" class="input rounded" size="10" {:if $n['id'] == 1:}readonly="true" style="color:#8F8F8F;"{:/if:} /></td>
+				<td>{:if $n['id'] == 1:}{:$lang['page']['system']:}{:else:}{:$lang['page']['user']:}{:/if:}</td>
+				<td class="operation">
+					{:if $n['id'] != 1:}<a href="member_rank.php?action=del&id={:$n['id']:}" onclick="return confirm('{:$lang['page']['op'][1]:}');"><img src="../inc/templates/manage/images/operation/delete.png" class="title2div" title="{:$lang['page']['op'][0]:}" /></a>
+					{:if $n['auto']:}<a href="member_rank.php?action=unauto&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/award.png" class="title2div" title="{:$lang['page']['op'][3]:}" /></a>
+					{:else:}<a href="member_rank.php?action=auto&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/cut.png" class="title2div" title="{:$lang['page']['op'][4]:}" /></a>{:/if:}
+					{:if $n['enable']:}<a href="member_rank.php?action=unenable&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/accept.png" class="title2div" title="{:$lang['page']['op'][5]:}" /></a>
+					{:else:}<a href="member_rank.php?action=enable&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/ban.png" class="title2div" title="{:$lang['page']['op'][6]:}" /></a>{:/if:}
+					{:else:}<a href="javascript:void(0)"><img src="../inc/templates/manage/images/operation/disabled.png" class="title2div" title="{:$lang['page']['op'][2]:}" /></a>{:/if:}
+				</td>
+			</tr>
+			{:/foreach:}
+			<tr>
+				<td width="20">N</td>
+				<td><input name="rankname_add" value="" type="text" class="input rounded" size="25" /></td>
+				<td><input name="discount_add" value="" type="text" class="input rounded" size="10" /></td>
+				<td><input name="scores_add" value="" type="text" class="input rounded" size="10" /></td>
+				<td><input name="money_add" value="" type="text" class="input rounded" size="10" /></td>
+				<td>{:if $n['id'] == 1:}{:$lang['page']['system']:}{:else:}{:$lang['page']['user']:}{:/if:}</td>
+				<td>{:$lang['page']['add']:}</td>
+			</tr>			
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80">&nbsp;</td>
+				<td><a class="submit reset" href="javascript:level.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+		{:if $admin['information']:}
+		<div class="information rounded"><ol></ol>
+			1、{:$lang['page']['notes'][0]:}<br />
+			2、{:$lang['page']['notes'][1]:}<br />
+			3、{:$lang['page']['notes'][2]:}<br />
+			4、{:$lang['page']['notes'][3]:}<br />
+			5、{:$lang['page']['notes'][4]:}
+		</div>
+		{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<style type="text/css">
+.center_top{border-bottom:1px #CCC solid; height:30px; padding:0 0 0 10px; font-weight:bold; background:url(../inc/templates/manage/images/content_box_bg.gif) #F6F6F6; width:100%;}
+.center{margin:10px auto;}
+.center .news{width:100%;}
+.center .news .news_top{border-bottom:1px #CCC solid; height:30px; padding:0 0 0 10px; font-weight:bold; background:url(../inc/templates/manage/images/content_box_bg.gif) #F6F6F6; width:100%;}
+.center .news .row{padding:5px 10px 15px 10px;}
+.center .news .row table{width:100%;}
+.center .news .row table td{height:30px; line-height:30px; background:url(../inc/templates/manage/images/0101.gif) repeat-x bottom;}
+.welcome{padding:0 10px;}
+.welcome td{word-break:break-all;} /* 防止禁用的函数过多导致表格变形 */
+.server td{height:30px; line-height:30px; padding:0 0 0 10px;}
+.attention,.information{margin:0 0 10px 0;}
+.attention a,.information a{text-decoration:underline; color:#F00;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<div class="error rounded top_error hide" id="client_security"></div>
+		<table class="table center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td valign="top">
+					<table cellpadding="0" cellspacing="1" border="0" width="100%" class="rounded">
+						<tr>
+						<tr>
+							<td class="center_top">{:$lang['page'][38]:}</td>
+						</tr>
+						<td class="welcome">
+								<table cellpadding="0" cellspacing="0" border="0" class="server" width="100%">
+									<tr><td>{:$lang['page'][12]|cat:$mycms['session']['admin']['login']['username']|cat:$lang['page'][13]:}<a href="login.php?action=logout">{:$lang['page'][14]:}</a></td></tr>
+									<tr><td>{:$lang['page'][15]:}{:if $mycms['session']['admin']['login']['level'] == 1:}{:$lang['page'][16]:}{:else:}{:$lang['page'][17]:}{:/if:} &nbsp;&nbsp;&nbsp; {:$lang['page'][18]:}<span class="red">{:$mycms['session']['admin']['login']['frequency']:}</span>{:$lang['page'][19]:}</td></tr>
+									{:if $mycms['session']['admin']['login']['logintime'][2] > 1:}<tr><td>
+									{:$lang['page'][42]:}{:'Y-m-d H:i:s'|date:$mycms['session']['admin']['login']['logintime'][2]:} , <span id="ip2">{:$mycms['session']['admin']['login']['loginip'][2]:}</span>
+									{:/if:}</td></tr>
+									{:if $mycms['session']['admin']['login']['logintime'][1] > 1:}<tr><td>
+									{:$lang['page'][20]:}{:'Y-m-d H:i:s'|date:$mycms['session']['admin']['login']['logintime'][1]:} , <span id="ip1">{:$mycms['session']['admin']['login']['loginip'][1]:}</span>
+									{:/if:}</td></tr>
+									{:if $mycms['session']['admin']['login']['logintime'][0] > 1:}<tr><td>
+									{:$lang['page'][20]:}{:'Y-m-d H:i:s'|date:$mycms['session']['admin']['login']['logintime'][0]:} , <span id="ip0">{:$mycms['session']['admin']['login']['loginip'][0]:}</span>
+									</td></tr>{:/if:}
+									<tr><td>Smarty Version：<a target="_blank" href="http://www.smarty.net/">{:$mycms['smarty_version']:}</a></td></tr>
+									<tr><td>jQuery Version：<a target="_blank" href="http://www.jquery.com/"><script type="text/javascript">document.write($.fn.jquery)</script></a></td></tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+					<script type="text/javascript">
+					mycms.ip("{:$mycms['session']['admin']['login']['loginip'][0]:}",'ip0',0);
+					mycms.ip("{:$mycms['session']['admin']['login']['loginip'][1]:}",'ip1',0);
+					mycms.ip("{:$mycms['session']['admin']['login']['loginip'][2]:}",'ip2',0);
+					setTimeout(function(){if($('#ip2').html() != $('#ip1').html()){$('#ip2').css({'color':'#F00'});}},3000);
+					</script>
+					<!-- //  -->
+					<table cellpadding="0" cellspacing="1" border="0" width="100%" class="rounded" style="margin:10px 0;">
+						<tr>
+							<td class="center_top">{:$lang['page'][25]:}</td>
+						</tr>
+						<tr>
+							<td class="welcome">
+								<table cellpadding="0" cellspacing="0" border="0" class="server" width="100%">
+									<tr></tr>
+									<tr><td>{:$lang['page'][26]:}{:$mycms['SERVER']['SERVER_SOFTWARE']:} &nbsp; <a target="_blank" href="app.php?a=phpinfo">{:$lang['page'][27]:}</a></td></tr>
+									<tr><td>{:$lang['page'][28]:}{:$mycms['PHP_VERSION']:}</td></tr>
+									<tr><td>{:$lang['page'][29]:}{:$mycms['MySQL_VERSION']:}</td></tr>
+									<tr><td>{:$lang['page'][30]:}{:$mycms['gd_info']:}</td></tr>
+									<tr><td>{:$lang['page'][32]:}{:$mycms['upload_max']:}</td></tr>
+									<tr><td>{:$lang['page'][33]:}{:$mycms['post_max']:}</td></tr>
+									<tr><td>{:$lang['page'][34]:}{:$mycms['script_file']:}</td></tr>
+									<tr><td>{:$lang['page'][35]:}{:$mycms['zend']:}</td></tr>
+									<tr><td>{:$lang['page'][36]:}{:$mycms['disable_functions']:}</td></tr>
+								</table>								
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="10"></td>
+				<td width="280" valign="top">
+					<table class="news rounded" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="news_top" colspan="2">{:$lang['page'][1]:}</td>
+						</tr>
+						<tr>
+							<td class="row">
+								<table cellpadding="0" cellspacing="0" border="0">
+									<tr>
+										<td>{:$lang['page'][3]:}</td>
+										<td class="red">{:$mycms['count']['members']:}</td>
+										<td width="60"></td>
+										<td>{:$lang['page'][4]:}</td>
+										<td class="red">{:$mycms['count']['article']:}</td>
+									</tr>
+									<tr>
+										<td>{:$lang['page'][5]:}</td>
+										<td class="red">{:$mycms['count']['product']:}</td>
+										<td></td>
+										<td>{:$lang['page'][6]:}</td>
+										<td class="red">{:$mycms['count']['picture']:}</td>
+									</tr>
+									<tr>
+										<td>{:$lang['page'][7]:}</td>
+										<td class="red">{:$mycms['count']['download']:}</td>
+										<td></td>
+										<td>{:$lang['page'][8]:}</td>
+										<td class="red">{:$mycms['count']['guestbook']:}</td>
+									</tr>
+									<tr>
+										<td colspan="5">
+											{:$lang['page'][9]:}<span class="red">{:$mycms['count']['un_log']:}</span>
+											{:if $mycms['count']['un_log'] > 1000:} &nbsp;&nbsp;&nbsp;<a href="index.php?action=unlog">{:$lang['page'][11]:}</a>{:/if:}
+										</td>
+									</tr>
+									<tr>
+										<td colspan="5">
+											<a href="index.php?action=clear">{:$lang['page'][40]:}</a>
+											<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page'][41]:}">
+										</td>
+									</tr>
+									<!--
+									<tr>
+										<td colspan="5">
+											{:$lang['page'][10]:}<span class="red">{:$mycms['count']['un_tmp']:}</span>
+											{:if $mycms['count']['un_tmp'] > 0:}&nbsp;&nbsp;&nbsp;<a href="index.php?action=untmp">{:$lang['page'][11]:}</a>{:/if:}
+										</td>
+									</tr>
+									-->
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+<script type="text/javascript">
+$('.server tr:odd').addClass('odd'); $('.server tr:even').addClass('even');
+mycms.title2div('title2div');	
+</script>
+</body>
+</html>

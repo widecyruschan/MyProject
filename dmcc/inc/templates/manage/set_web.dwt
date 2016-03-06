@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');	
+	mycms.keysubmit('form_globals','submit',true);
+});
+</script>
+<style type="text/css">
+.logo ol{float:left; padding:0 5px 0 0; height:30px;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		<form name="form_globals" id="form_globals" action="" method="post" enctype="multipart/form-data">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['name']:}</td>
+				<td>
+					<input type="text" name="name" class="input rounded" value="{:$web['name']:}" size="20" />
+				</td>
+				<td class="field">{:literal:}{:$web['name']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['dir']:}</td>
+				<td>
+					<select name="dir" class="select rounded">
+						{:foreach $mycms['lang_dir'] as $n:}
+						{:if $web['dir'] == $n:}<option selected="selected" value="{:$n:}">{:$n:}</option>
+						{:else:}<option value="{:$n:}">{:$n:}</option>{:/if:}
+						{:/foreach:}
+					</select>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['dir_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['dir']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['template']:}</td>
+				<td>
+					<select name="template" class="select rounded">
+						{:foreach $mycms['template_list'] as $n:}
+						<option {:if $web['template'] == $n['dir']:}selected="selected"{:/if:} value="{:$n['dir']:}">{:$n['name']:} - {:$n['dir']:}</option>
+						{:/foreach:}
+					</select>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['dir']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['static']:}</td>
+				<td>
+					<input type="text" name="static" class="input rounded" value="{:$web['static']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['static_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['static']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['webtitle']:}</td>
+				<td>
+					<input type="text" name="title" class="input rounded" value="{:$web['title']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$web['title']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['logo']:}</td>
+				<td>
+					<div class="logo">
+					<ol><img src="../inc/templates/manage/images/operation/picture.png" width="16" height="16" border="0" class="title2div" title="<img width='200' border='0' src='../{:$web['logo']:}' />"></ol>
+					<ol><input type="text" name="logo" id="logo" class="input rounded" value="{:$web['logo']:}" size="20" /></ol>
+					<ol><iframe src="upload.php?dir=other&preview=upload_preview&return_id=logo" width="183" height="30" border="0" scrolling="no" frameborder="0"></iframe></ol>
+					</div>				
+				</td>
+				<td class="field"><div id="upload_preview">{:literal:}{:$web['logo']:}{:/literal:}</div></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['keyword']:}</td>
+				<td>
+					<input type="text" name="keyword" class="input rounded" value="{:$web['keyword']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['keyword_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['keyword']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['description']:}</td>
+				<td>
+					<textarea name="description" class="rounded" style="padding:5px;" rows="3" cols="40">{:$web['description']:}</textarea>
+				</td>
+				<td class="field">{:literal:}{:$web['description']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['copyright']:}</td>
+				<td>
+					<textarea name="copyright" class="rounded" style="padding:5px;" rows="3" cols="40">{:$web['copyright']:}</textarea>
+				</td>
+				<td class="field">{:literal:}{:$web['copyright']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['email']:}</td>
+				<td>
+					<input type="text" name="email" class="input rounded" value="{:$web['all_data'][$web['lang']]['email']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['email_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['email'][n]:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['qq']:}</td>
+				<td>
+					<input type="text" name="qq" class="input rounded" value="{:$web['all_data'][$web['lang']]['qq']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['qq_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['qq'][n]:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['msn']:}</td>
+				<td>
+					<input type="text" name="msn" class="input rounded" value="{:$web['all_data'][$web['lang']]['msn']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['msn_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['msn'][n]:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['phone']:}</td>
+				<td>
+					<input type="text" name="phone" class="input rounded" value="{:$web['all_data'][$web['lang']]['phone']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['phone_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['phone'][n]:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['fax']:}</td>
+				<td>
+					<input type="text" name="fax" class="input rounded" value="{:$web['all_data'][$web['lang']]['fax']:}" size="40" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['fax_title']:}">					
+				</td>
+				<td class="field">{:literal:}{:$web['fax'][n]:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['address']:}</td>
+				<td>
+					<input type="text" name="address" class="input rounded" value="{:$web['address']:}" size="40" />
+				</td>
+				<td class="field">{:literal:}{:$web['address']:}{:/literal:}</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"></td>
+				<td><a class="submit reset" href="javascript:form_globals.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>
+		</form>		
+		{:if $admin['attention']:}<div class="attention rounded"><ol></ol>{:$lang['page']['attention'][0]:}</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

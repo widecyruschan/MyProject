@@ -1,0 +1,1 @@
+<?phprequire_once(dirname(__FILE__).'/inc/include/header.php');require_once(CMSINC.'/include/footer.php');if(HTML_MAKE_MODE){	$html = new html();	$static_path = misc::url('tag');	$content = $MYCMS->fetch($template_file); 	$html->make($content,$static_path);}

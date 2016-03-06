@@ -1,0 +1,1 @@
+<?php//数据库连接信息$DB_Host = 'localhost';$DB_Database = 'gzdifen_com';$DB_User = 'root';$DB_Password = 'oold4kc';$DB_dbprefix = 'df_';$PHP_cms_version='3.0.2';//@gzcgc.net?>

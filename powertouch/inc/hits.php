@@ -1,0 +1,1 @@
+<?phpinclude_once "config.php";include_once "config_db.php";$db->query("Update {$DB_dbprefix}content set hits=hits+1 where id=".verify_id($_GET["id"]));?>

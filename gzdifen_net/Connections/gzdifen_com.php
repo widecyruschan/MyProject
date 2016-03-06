@@ -1,0 +1,1 @@
+<?php# FileName="Connection_php_mysql.htm"# Type="MYSQL"# HTTP="true"$hostname_gzdifen_com = "www.gzcgc.net";$database_gzdifen_com = "gzdifen_net";$username_gzdifen_com = "root";$password_gzdifen_com = "oold4kc";$gzdifen_com = mysql_pconnect($hostname_gzdifen_com, $username_gzdifen_com, $password_gzdifen_com) or trigger_error(mysql_error(),E_USER_ERROR); ?>

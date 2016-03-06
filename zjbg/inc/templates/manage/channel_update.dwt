@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<style type="text/css">
+{:if $mycms['channel']['module'] == '0':}.internal{display:none;}{:/if:} /* 修改频道且该频道为外部链接时隐藏内部频道独有项 */
+{:if $mycms['action'] == 'add' || $mycms['channel']['module'] != '0':}.external{display:none;}{:/if:} /* 添加频道或当前修改的频道为内部频道时隐藏外部频道独有项 */
+</style>
+<script type="text/javascript">
+var top_error_isshow = false; //错误提示框是否已显示
+function detect(){
+	if($('#title').val() == ''){
+		mycms.top_error('{:$lang['page']['detect'][0]:}');
+		top_error_isshow = true;
+		return false;
+	}
+	if($('input[@name=tmp_px][checked]').val() != '1'){ //内部链接
+		if($('#module').val() == ''){
+			mycms.top_error('{:$lang['page']['detect'][1]:}');
+			top_error_isshow = true;
+			return false;			
+		}
+	} else {
+		if($('#url').val() == ''){
+			mycms.top_error('{:$lang['page']['detect'][3]:}');
+			top_error_isshow = true;
+			return false;			
+		}	
+	}
+		
+	return true;
+}
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('channel','submit','detect()');
+	$('input[name="tmp_px"]').click(function(){
+		if($(this).val() == 0){
+			$('.internal').fadeIn(600);
+			$('.external').fadeOut(600);
+		} else {
+			$('.internal').fadeOut(600);
+			$('.external').fadeIn(600);
+		}
+	});
+	
+	$('form input,form select,form textarea').change(function(){
+		if(top_error_isshow){
+			$('.top_error').fadeTo(400,0,function(){$(this).slideUp(400);});
+			top_error_isshow = false;
+		}
+	});
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		<div class="error rounded top_error hide"><ol></ol><span></span></div>
+		<form action="" method="post" name="channel" id="channel">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name" width="120">{:$lang['page']['UpChannelID']:}
+                
+                </td>
+				<td><select name="UpChannelID" id="UpChannelID" class="select rounded">{:$mycms['channel']['UpChannelID_text']:}</select> <span class="red">*</span></td>
+				<td class="field">{:literal:}{:$mycms['channel']['title']:}{:/literal:}</td>
+			</tr><tr>
+				<td class="name" width="120">{:$lang['page']['channel_name']:}</td>
+				<td><input name="title" id="title" class="input rounded" size="30" value="{:$mycms['channel']['title']:}" type="text" /> <span class="red">*</span></td>
+				<td class="field">{:literal:}{:$mycms['channel']['title']:}{:/literal:}</td>
+			</tr><tr>
+				<td class="name" width="120">{:$lang['page']['channel_nameEn']:}</td>
+				<td><input name="titleEn" id="titleEn" class="input rounded" size="30" value="{:$mycms['channel']['titleEn']:}" type="text" /> <span class="red">*</span></td>
+				<td class="field">{:literal:}{:$mycms['channel']['titleEn']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['type']:}</td>
+				<td>
+					<input name="tmp_px" type="radio" value="0" {:if $mycms['channel']['module'] != '0' || $mycms['action'] == 'add':}checked{:/if:} />{:$lang['page']['internal']:} &nbsp;
+					<input name="tmp_px" type="radio" value="1" {:if $mycms['channel']['module'] == '0':}checked{:/if:} />{:$lang['page']['external']:}
+					<img title="{:$lang['page']['external_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field"></td>
+			</tr>
+			<tr class="external">
+				<td class="name">{:$lang['page']['external_link']:}</td>
+				<td>
+					<input type="text" name="url" id="url" class="input rounded" size="30" value="{:$mycms['channel']['url']:}" /> 
+					<img title="{:$lang['page']['external_link_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['url']:}{:/literal:}</td>
+			</tr>
+			<tr class="external">
+				<td class="name">{:$lang['page']['target']:}</td>
+				<td>
+					<input name="target" type="radio" value="_blank" {:if $mycms['action'] == 'add' ||  $mycms['channel']['target']== '_blank':}checked{:/if:} />{:$lang['page']['blank']:} &nbsp;
+					<input name="target" type="radio" value="_self" {:if $mycms['channel']['target']== '_self':}checked{:/if:} />{:$lang['page']['self']:} 
+					<img title="{:$lang['page']['target_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['url']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['module']:}</td>
+				<td>
+					<select name="module" id="module" class="select rounded">{:$mycms['channel']['module_text']:}</select> <span class="red">*</span>
+					<img title="{:$lang['page']['select_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+					<a href="module_manage.php"><img src="../inc/templates/manage/images/operation/add.png" width="16" height="16" class="title2div" title="{:$lang['page']['add_module']:}"></a>
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['module']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['permission']:}</td>
+				<td>
+					<select name="permission[]" class="rounded" style="width:205px; height:80px;" multiple id="select">
+						{:$mycms['channel']['permission_text']:}
+					</select>
+					<img title="{:$lang['page']['permission_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+					<a href="member_rank.php"><img src="../inc/templates/manage/images/operation/add.png" width="16" height="16" class="title2div" title="{:$lang['page']['add_level']:}"></a>
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['permission']:}{:/literal:}</td>
+			</tr>			
+			<tr class="internal">
+				<td class="name">{:$lang['page']['pathhome']:}</td>
+				<td>
+					<input type="text" name="pathhome" value="{:$mycms['channel']['pathhome']:}" size="30" class="input rounded" /> 
+					<img title="{:$lang['page']['pathhome_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['pathhome']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['pathcategory']:}</td>
+				<td>
+					<input type="text" name="pathcategory" value="{:$mycms['channel']['pathcategory']:}" size="30" class="input rounded" /> 
+					<img title="{:$lang['page']['pathcategory_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['pathcategory']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['pathcontent']:}</td>
+				<td>
+					<input type="text" name="pathcontent" value="{:$mycms['channel']['pathcontent']:}" size="30" class="input rounded" /> 
+					<img title="{:$lang['page']['pathcontent_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['pathcontent']:}{:/literal:}</td>
+			</tr>			
+			<tr class="internal">
+				<td class="name">{:$lang['page']['seotitle']:}</td>
+				<td>
+					<input type="text" name="seotitle" value="{:$mycms['channel']['seotitle']:}" size="30" class="input rounded" style="width:300px;" /> 
+					<img title="{:$lang['page']['seotitle_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['seotitle']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['seokey']:}</td>
+				<td>
+					<input type="text" name="seokey" value="{:$mycms['channel']['seokey']:}" class="input rounded" style="width:300px;" /> 
+					<img title="{:$lang['page']['seokey_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['seokey']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['seodescr']:}</td>
+				<td>
+					<textarea name="seodescr" class="rounded" style="width:300px; height:60px; padding:5px;">{:$mycms['channel']['seodescr']:}</textarea> 
+					<img title="{:$lang['page']['seodescr_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['seodescr']:}{:/literal:}</td>
+			</tr>
+			<tr class="internal">
+				<td class="name">{:$lang['page']['template']:}</td>
+				<td>
+					<input type="text" name="template" id="template" value="{:$mycms['channel']['template']:}" class="input rounded" size="30" />
+					<img title="{:$lang['page']['template_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['template']:}{:/literal:}</td>
+			</tr>
+
+
+			<tr class="internal">
+				<td class="name">{:$lang['page']['templatecontent']:}</td>
+				<td>
+					<input type="text" name="templatecontent" id="templatecontent" value="{:$mycms['channel']['templatecontent']:}" class="input rounded" size="30" />
+					<img title="{:$lang['page']['template_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['templatecontent']:}{:/literal:}</td>
+			</tr>
+
+
+			<tr>
+				<td class="name">{:$lang['page']['show']:}</td>
+				<td>
+					<input name="show" type="radio" value="1" {:if $mycms['channel']['show'] == '1' || $mycms['action'] == 'add':}checked{:/if:} />{:$lang['page']['whether'][0]:} &nbsp;
+					<input name="show" type="radio" value="0" {:if $mycms['channel']['show'] == '0':}checked{:/if:} />{:$lang['page']['whether'][1]:}  
+					<img title="{:$lang['page']['hide_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['show']:}{:/literal:}</td>
+			</tr>			
+			<tr>
+				<td class="name">{:$lang['page']['sort']:}</td>
+				<td>
+					<input type="text" name="sort" value="{:$mycms['channel']['sort']:}" class="input rounded" size="10" />  
+					<img title="{:$lang['page']['sort_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['channel']['sort']:}{:/literal:}</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"><input type="hidden" name="action" value="{:$mycms['action']:}" /></td>
+				<td><a class="submit reset" href="javascript:channel.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page']['information']:}</div>{:/if:}
+
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

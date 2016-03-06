@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){mycms.alternately('list'); mycms.title2div('title2div'); mycms.keysubmit('form','submit',true);});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<form action="" method="post" name="form" id="form">
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title'][0]:}</td></tr>
+		</table>
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['alipay'][0]:}</td>
+				<td>
+					<input name="alipay[email]" type="text" value="{:$mycms['payment']['alipay']['email']:}" size="40" class="input rounded" />
+					<img title="{:$lang['page']['alipay'][6]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['alipay']['email']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['alipay'][1]:}</td>
+				<td>
+					<input name="alipay[id]" type="text" value="{:$mycms['payment']['alipay']['id']:}" size="40" class="input rounded" />
+					<img title="{:$lang['page']['alipay'][7]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['alipay']['id']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['alipay'][2]:}</td>
+				<td>
+					<input name="alipay[key]" type="text" value="{:$mycms['payment']['alipay']['key']:}" size="40" class="input rounded" />
+					<img title="{:$lang['page']['alipay'][8]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['alipay']['key']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['alipay'][3][0]:}</td>
+				<td>
+					<select name="alipay[service]" class="select rounded">
+						<option value="create_direct_pay_by_user"{:if $mycms['payment']['alipay']['service'] == 'create_direct_pay_by_user':} selected="selected"{:/if:}>{:$lang['page']['alipay'][3][1]:}</option>
+						<option value="create_partner_trade_by_buyer"{:if $mycms['payment']['alipay']['service'] == 'create_partner_trade_by_buyer':} selected="selected"{:/if:}>{:$lang['page']['alipay'][3][2]:}</option>
+						<option value="trade_create_by_buyer"{:if $mycms['payment']['alipay']['service'] == 'trade_create_by_buyer':} selected="selected"{:/if:}>{:$lang['page']['alipay'][3][3]:}</option>
+					</select>
+					<img title="{:$lang['page']['alipay'][9]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['alipay']['service']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['alipay'][4]:}</td>
+				<td>
+					<input name="alipay[transport]" type="radio" value="http"{:if $mycms['payment']['alipay']['transport'] == 'http':} checked="checked"{:/if:} /> http &nbsp;&nbsp;&nbsp;
+					<input name="alipay[transport]" type="radio" value="https"{:if $mycms['payment']['alipay']['transport'] == 'https':} checked="checked"{:/if:} /> https
+					<img title="{:$lang['page']['alipay'][10]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['alipay']['transport']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['alipay'][5][0]:}</td>
+				<td>
+					<input name="alipay[enable]" type="radio" value="1"{:if $mycms['payment']['alipay']['enable'] == '1':} checked="checked"{:/if:} /> {:$lang['page']['alipay'][5][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="alipay[enable]" type="radio" value="0"{:if $mycms['payment']['alipay']['enable'] == '0':} checked="checked"{:/if:} /> {:$lang['page']['alipay'][5][2]:}
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['alipay']['enable']:}{:/literal:}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="rounded table" style="margin:10px auto 0 auto;">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title'][1]:}</td></tr>
+		</table>
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['tenpay'][0]:}</td>
+				<td>
+					<input name="tenpay[id]" type="text" value="{:$mycms['payment']['tenpay']['id']:}" size="40" class="input rounded" />
+					<img title="{:$lang['page']['tenpay'][4]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['tenpay']['id']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['tenpay'][1]:}</td>
+				<td>
+					<input name="tenpay[key]" type="text" value="{:$mycms['payment']['tenpay']['key']:}" size="40" class="input rounded" />
+					<img title="{:$lang['page']['tenpay'][5]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['tenpay']['key']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['tenpay'][2][0]:}</td>
+				<td>
+					<input name="tenpay[service]" type="radio" value="1" checked="checked" /> {:$lang['page']['tenpay'][2][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="tenpay[service]" type="radio" disabled="disabled" value="2" /> {:$lang['page']['tenpay'][2][2]:}
+					<img title="{:$lang['page']['tenpay'][6]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['tenpay']['service']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['tenpay'][3][0]:}</td>
+				<td>
+					<input name="tenpay[enable]" type="radio" value="1"{:if $mycms['payment']['tenpay']['enable'] == '1':} checked="checked"{:/if:} /> {:$lang['page']['tenpay'][3][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="tenpay[enable]" type="radio" value="0"{:if $mycms['payment']['tenpay']['enable'] == '0':} checked="checked"{:/if:} /> {:$lang['page']['tenpay'][3][2]:}
+				</td>
+				<td class="field">{:literal:}{:$mycms['payment']['tenpay']['enable']:}{:/literal:}</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"></td>
+				<td><a class="submit reset" href="javascript:form.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>
+		{:$mycms['page']:}{:if $admin['attention']:}<div class="attention rounded"><ol></ol>{:$lang['page']['attention']:}</div>{:/if:}
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page']['information']:}</div>{:/if:}
+	</div>
+	</form>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

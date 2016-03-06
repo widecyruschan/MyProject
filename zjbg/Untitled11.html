@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jqyery+CSS折叠、合拢的多级菜单</title>
+
+<style type="text/css">
+*,body,ul,li,h1,h2{ margin:0; padding:0; list-style:none;} 
+body{font:12px "宋体";} 
+.tree_box{margin: 5px 0;width: 100px;overflow: hidden;}
+.tree_box h3,.tree_one h4,.tree_two li{cursor: pointer;}
+.tree_one,.tree_two{display: none;margin: 0 0 0 10px;overflow: hidden;}
+.tree_one li{margin: 5px 0;}
+</style>
+<script type="text/javascript" src="/inc/templates/frontend/default/script/jquery-1.4.2.min.js"></script>
+</head>
+
+<body>
+<div class="tree">
+    <div class="tree_box">
+        <h3>
+            我是一级菜单
+        </h3>
+        <ul class="tree_one" style="display: block;">
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="tree_box">
+        <h3>
+            我是一级菜单
+        </h3>
+        <ul class="tree_one">
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="tree_box">
+        <h3>
+            我是一级菜单
+        </h3>
+        <ul class="tree_one">
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+            <li>
+                <h4>
+                    我是二级菜单
+                </h4>
+                <ul class="tree_two">
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                    <li>
+                        我是三级菜单
+                    <li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var h3 = $(".tree_box").find("h3");
+        var tree_one = $(".tree_box").find(".tree_one");
+        var h4 = $(".tree_one").find("h4");
+        var tree_two = $(".tree_one").find(".tree_two");
+        h3.each(function(i){
+            $(this).click(function(){
+                tree_one.eq(i).slideToggle();
+                tree_one.eq(i).parent().siblings().find(".tree_one").slideUp();
+            })
+        })
+        h4.each(function(i){
+            $(this).click(function(){
+                tree_two.eq(i).slideToggle();
+                tree_two.eq(i).parent().siblings().find(".tree_two").slideUp();
+            })
+        })
+    })
+</script>
+</body>
+</html>

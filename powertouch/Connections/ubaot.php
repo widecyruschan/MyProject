@@ -1,0 +1,1 @@
+<?php# FileName="Connection_php_mysql.htm"# Type="MYSQL"# HTTP="true"$hostname_ubaot = "localhost";$database_ubaot = "uboatsql";$username_ubaot = "root";$password_ubaot = "123456";$ubaot = mysql_pconnect($hostname_ubaot, $username_ubaot, $password_ubaot) or trigger_error(mysql_error(),E_USER_ERROR); ?>

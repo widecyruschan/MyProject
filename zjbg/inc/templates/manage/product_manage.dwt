@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+function check(){
+	var key = $('#word').val();
+	if(key == '' || key == "{:$lang['page']['keyword']:}"){
+		alert("{:$lang['page']['enter_keywords']:}");
+		return false;		
+	} else {
+		return true;	
+	}
+}
+$(function(){
+	mycms.alternately('list');
+	mycms.keysubmit('search','search_button','check()');
+	mycms.acsubmit('manage','audit','{:$lang['page']['determine'][0]:}','audit',false);
+	mycms.acsubmit('manage','unaudit','{:$lang['page']['determine'][1]:}','unaudit',false);
+	mycms.acsubmit('manage','del','{:$lang['page']['determine'][2]:}','del',false);
+	mycms.acsubmit('manage','clear','{:$lang['page']['determine'][3]:}','clear',false);
+	mycms.acsubmit('manage','published','{:$lang['page']['determine'][5]:}','published',false);
+	mycms.acsubmit('manage','unpublished','{:$lang['page']['determine'][4]:}','unpublished',false);
+	mycms.acsubmit('manage','recom','{:$lang['page']['determine'][6]:}','recom',false);
+	mycms.acsubmit('manage','unrecom','{:$lang['page']['determine'][7]:}','unrecom',false);	
+	mycms.acsubmit('manage','restore','{:$lang['page']['determine'][8]:}','restore',false);
+	mycms.acsubmit('manage','status','{:$lang['page']['determine'][9]:}','status',false);
+	mycms.acsubmit('manage','unstatus','{:$lang['page']['determine'][10]:}','unstatus',false);
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="0" class="table">
+		<tr>
+			<td valign="top" align="right">
+				<form action="" method="get" name="search" id="search">
+				<table cellpadding="0" cellspacing="5" border="0">
+					<tr>
+						<td>{:if $mycms['channel_show']:}<select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['channel_text']:}</select>{:/if:}</td>
+						<td><select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['category_text']:}</select></td>
+						<td><select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['sort_text']:}</select></td>
+						<td><select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['filter_text']:}</select></td>
+						<td>
+							<input type="hidden" name="channel" value="{:$mycms['get']['channel']:}" />
+							<input type="hidden" name="category" value="{:$mycms['get']['category']:}" />
+							<input type="hidden" name="sort" value="{:$mycms['get']['sort']:}" />
+							<input type="hidden" name="trash" value="{:$mycms['get']['trash']:}" />
+							<input type="text" class="input rounded" name="word" id="word" size="15" onfocus="if(this.value=='{:$lang['page']['keyword']:}'){this.value='';}" onblur="if(this.value==''){this.value='{:$lang['page']['keyword']:}';}" value="{:if $mycms['get']['word']:}{:$mycms['get']['word']:}{:else:}{:$lang['page']['keyword']:}{:/if:}" />
+							<input type="text" style="display:none;" /> 
+						</td>
+						<td><a class="button_2" href="#" id="search_button">{:$lang['common']['search']:}</a></td>
+						<td><a class="button_2" href="product_manage.php?{:rand():}">{:$lang['common']['refresh']:}</a></td>	
+					</tr>
+				</table>			
+				</form>
+			</td>
+		</tr>
+	</table>
+
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:if $mycms['get']['trash'] == 1:}{:$lang['page']['recycle']:}{:else:}{:$lang['page']['title']:}{:/if:}{:$mycms['title_lang']:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td><a href="product_manage.php?trash=0" class="basic_button" {:if $mycms['get']['trash'] == 1:}style="background:none;"{:/if:}>{:$lang['page']['manage']:}</a></td>
+							<td><a href="product_manage.php?trash=1" class="advanced_button" {:if $mycms['get']['trash'] == 1:}style="background:url(../inc/templates/manage/images/switch_bg.png);"{:/if:}>{:$lang['page']['recycle']:}</a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<form action="" method="post" name="manage" id="manage">
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head" width="30">{:$lang['page']['head'][0]:}</td>
+				<td class="field_head" width="25">{:$lang['page']['head'][1]:}</td>
+				{:if $mycms['channel_show']:}<td class="field_head">{:$lang['page']['head'][2]:}</td>{:/if:}
+				<td class="field_head">{:$lang['page']['head'][3]:}</td>
+				<td class="field_head">{:$lang['page']['head'][4]:}</td>
+				<td class="field_head">{:$lang['page']['head'][5]:}</td>
+				<td class="field_head">{:$lang['page']['head'][6]:}</td>
+				<td class="field_head">{:$lang['page']['head'][7]:}</td>
+			</tr>
+			{:foreach $mycms['list'] as $n:}
+			<tr>
+				<td><input name="id[]" type="checkbox" value="{:$n['id']:}" /></td>
+				<td>{:$n['id']:}</td>
+				{:if $mycms['channel_show']:}<td><a href="product_manage.php?channel={:$n['channel']:}">{:$n['channel_title']:}</a></td>{:/if:}
+				<td><a href="product_manage.php?channel={:$n['channel']:}&category={:trim($n['category'],','):}">{:$n['category_title']:}</a></td>
+				<td style="text-align:left;">
+					<a target="_blank" href="../detail.php?id={:$n['id']:}">{:$n['title_format']:}</a>
+					{:if $n['permission'] != '0':} <img title="{:$lang['page']['title_img'][0]:}" src="../inc/templates/manage/images/operation/lock.png" width="16" height="16">{:/if:}
+					{:if $n['money'] > '0':} <img title="{:$lang['page']['title_img'][1]:}{:$n['money']:}" src="../inc/templates/manage/images/operation/money.png" width="16" height="16">{:/if:}
+					{:if $n['integral'] > '0':} <img title="{:$lang['page']['title_img'][2]:}{:$n['integral']:}" src="../inc/templates/manage/images/operation/license_key.png" width="16" height="16">{:/if:}							
+				</td>
+				<td>{:$n['addtime']:}</td>
+				<td><span class="blue">{:$n['click']:}</span>/<span class="green">{:$n['commenttotal']:}</span>/<span class="red">{:$n['sales']:}</span></td>
+				<td class="operation">
+					{:if $mycms['get']['trash'] != '1':}
+					{:if $n['audit']:}<a href="{:$mycms['op_url']:}&action=unaudit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page']['operation'][0]:}" /></a>{:else:}<a href="{:$mycms['op_url']:}&action=audit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page']['operation'][1]:}" /></a>{:/if:}
+					<a href="product_update.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/pencil.png" title="{:$lang['page']['operation'][2]:}" /></a>
+					<a href="{:$mycms['op_url']:}&action=del&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['operation'][3]:}" /></a>
+					{:if $n['published']:}<a href="{:$mycms['op_url']:}&action=unpublished&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/page_world.png" title="{:$lang['page']['operation'][4]:}" /></a>{:else:}<a href="{:$mycms['op_url']:}&action=published&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/page_delete.png" title="{:$lang['page']['operation'][5]:}" /></a>{:/if:}
+					{:if $n['recom']:}<a href="{:$mycms['op_url']:}&action=unrecom&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/featured.png" title="{:$lang['page']['operation'][6]:}" /></a>{:else:}<a href="{:$mycms['op_url']:}&action=recom&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/disabled.png" title="{:$lang['page']['operation'][7]:}" /></a>{:/if:}
+					{:if $n['status']:}<a href="{:$mycms['op_url']:}&action=unstatus&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/shopping.png" title="{:$lang['page']['operation'][10]:}" /></a>{:else:}<a href="{:$mycms['op_url']:}&action=status&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/cut.png" title="{:$lang['page']['operation'][11]:}" /></a>{:/if:}
+					{:else:}
+					<a href="{:$mycms['op_url']:}&action=restore&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/restore.png" title="{:$lang['page']['operation'][8]:}" /></a>
+					<a href="{:$mycms['op_url']:}&action=clear&id={:$n['id']:}" onclick="return confirm('{:$lang['page']['completely_clear']:}');"><img src="../inc/templates/manage/images/operation/trashcan_delete.png" title="{:$lang['page']['operation'][9]:}" /></a>
+					{:/if:}
+				</td>
+			</tr>
+			{:foreachelse:}<tr><td colspan="{:if $mycms['channel_show']:}8{:else:}7{:/if:}" class="field_head">{:$lang['page']['no_data']:}</td></tr>
+			{:/foreach:}
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="all_action"><input name="all" id="all" type="checkbox" onclick="mycms.select_all(this.form);" /></td>
+							<td> &nbsp{:$lang['page']['select_all']:} &nbsp;</td>
+							<td class="operation">
+								<input type="hidden" name="action" id="action" value="" />
+								{:if $mycms['get']['trash'] != '1':}
+								<a href="javascript:void(0);"><img id="audit" src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page']['volume'][0]:}" /></a>
+								<a href="javascript:void(0);"><img id="unaudit" src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page']['volume'][1]:}" /></a>
+								<a href="javascript:void(0);"><img id="del" src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['volume'][2]:}" /></a>
+								<a href="javascript:void(0);"><img id="clear" src="../inc/templates/manage/images/operation/trashcan_delete.png" title="{:$lang['page']['volume'][3]:}" /></a>
+								<a href="javascript:void(0);"><img id="published" src="../inc/templates/manage/images/operation/page_world.png" title="{:$lang['page']['volume'][5]:}" /></a>
+								<a href="javascript:void(0);"><img id="unpublished" src="../inc/templates/manage/images/operation/page_delete.png" title="{:$lang['page']['volume'][4]:}" /></a>
+								<a href="javascript:void(0);"><img id="recom" src="../inc/templates/manage/images/operation/featured.png" title="{:$lang['page']['volume'][6]:}" /></a>
+								<a href="javascript:void(0);"><img id="unrecom" src="../inc/templates/manage/images/operation/disabled.png" title="{:$lang['page']['volume'][7]:}" /></a>
+								<a href="javascript:void(0);"><img id="status" src="../inc/templates/manage/images/operation/shopping.png" title="{:$lang['page']['volume'][9]:}" /></a>
+								<a href="javascript:void(0);"><img id="unstatus" src="../inc/templates/manage/images/operation/cut.png" title="{:$lang['page']['volume'][10]:}" /></a>
+								{:else:}
+								<a href="javascript:void(0);"><img id="restore" src="../inc/templates/manage/images/operation/restore.png" title="{:$lang['page']['volume'][8]:}" /></a>
+								<a href="javascript:void(0);"><img id="clear" src="../inc/templates/manage/images/operation/trashcan_delete.png" title="{:$lang['page']['volume'][3]:}" /></a>
+								{:/if:}
+							</td>					
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>		
+		</form>
+		{:$mycms['page']:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

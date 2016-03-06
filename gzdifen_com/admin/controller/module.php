@@ -1,0 +1,1 @@
+<?phpout();$id=verify_id($_GET['id']);$db->query( "SELECT * FROM  `{$DB_dbprefix}module`");while ($db->next_record()){$module.= "<tr target=\"id\" rel=\"".$db->Record['id']."\">					<td>".$db->Record['id']."</td>					<td>".$db->Record['name']."</td>					<td>".$db->Record['alias']."</td>					<td>".date('Y-m-d　h:m:s',$db->Record['time'])."</td>					</tr>					";}?>

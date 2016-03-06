@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/datepicker.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript" src="../inc/script/color_select.js"></script>
+<script type="text/javascript" src="../inc/tools/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/datepicker.js"></script>
+<script type="text/javascript">
+var items = 2; //图片张数
+function sheets(val){
+	items = (val==1 && items > 1) ? items - 1 : ((val == 2 && items <= 30) ? items + 1 : items);
+}
+var top_error_isshow = false;
+
+function detect(){
+	if($('#fieldsname').val() == ''){
+		mycms.top_error('{:$lang['page']['detect'][1]:}');
+		top_error_isshow = true;
+		return false;
+	}
+	
+	if($('#title').val() == ''){
+		mycms.top_error('{:$lang['page']['detect'][0]:}');
+		top_error_isshow = true;
+		return false;
+	}
+		
+	return true;
+}
+
+
+$(function(){
+	sheets(0);
+	mycms.alternately('list');
+	mycms.keysubmit('form_fields','submit','detect()');
+	mycms.option();
+	$('form input,form select,form textarea').change(function(){
+		if(top_error_isshow){$('.top_error').fadeTo(400,0,function(){$(this).slideUp(400);}); top_error_isshow = false;	}
+	});		
+})
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		<div class="error rounded top_error hide"><ol></ol><span></span></div>
+		<form name="form_fields" id="form_fields" action="?id={:$mycms['id']:}&fid={:$mycms['fid']:}" method="post">
+		<div id="basic">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			{:if $mycms['channel_show']:}
+			{:/if:}
+			<tr>
+				<td class="name">{:$lang['page']['fieldsname']:}</td>
+				<td><input type="text" name="fieldsname" id="fieldsname" class="input rounded rule" value="{:$mycms['fields']['fieldsname']:}" size="58" maxlength="255" /> <span class="red">*</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['fields']:}</td>
+				<td><input type="hidden" name="oldfields" id="oldfields"  value="{:$mycms['fields']['fields']:}" />
+					<input type="text" name="fields" class="input rounded rule" value="{:$mycms['fields']['fields']:}" size="40" maxlength="50" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['fields_title']:}">
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['lists']:}</td>
+				<td>
+					<input {:if ($mycms['fields']['lists']==0 || $mycms['fields']['lists']==''):}checked="checked"{:/if:} name="lists" type="radio" value="0" />关闭 <input {:if $mycms['fields']['lists']==1:}checked="checked"{:/if:} name="lists" type="radio" value="1" />开启 <img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['lists_title']:}"></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['fieldstype']:}</td>
+				<td>
+					<table width="100%">
+        <tr>
+          <td><input {:if ($mycms['fields']['fieldstype']=='varchar'||$postgo=='add'):}checked="checked"{:/if:} type="radio" name="fieldstype" id="varchar" value="varchar" /><label for="varchar">中小型文本varchar</label>： 最大长度<input name="fieldslong" type="text" style="width:30px; padding:2px;"  value="{:if $mycms['fields']['fieldslong']!=0:}{:$mycms['fields']['fieldslong']:}{:else:}255{:/if:}" maxlength="5"/> 中小型文本，小于等于255显示单行输入框，大于255显示多行输入框</td>
+        </tr>
+      <tr>
+        <td><input {:if $mycms['fields']['fieldstype']=='text':}checked="checked"{:/if:} type="radio" name="fieldstype" id="text" value="text" /><label for="text">大型文本</label>：输入框带编辑器大型文本输入框，如文章内容等。</td>
+        </tr>
+      <tr>
+        <td><input {:if $mycms['fields']['fieldstype']=='int':}checked="checked"{:/if:} type="radio" name="fieldstype" id="int" value="int" /><label for="int">整数</label>：正负整数类型字段，不含小数部分。如123456789，如需要使用非货币小数类型，请选择小型文本。</td>
+        </tr>
+      <tr>
+        <td><input {:if $mycms['fields']['fieldstype']=='decimal':}checked="checked"{:/if:} type="radio" name="fieldstype" id="decimal" value="decimal" /><label for="decimal">货币</label>：价格类型字段。如1.02</td>
+        </tr>
+      <tr>
+        <td><input {:if $mycms['fields']['fieldstype']=='time':}checked="checked"{:/if:} type="radio" name="fieldstype" id="time" value="time" /><label for="time">日期格式</label>：使用日期选择框输入日期。</td>
+      </tr>
+        <?php }?>
+    </table>
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['fieldorder']:}</td>
+				<td><input name="fieldorder" id="fieldorder" type="text" class="input rounded" value="{:if isset($mycms['fields']['fieldorder']):}{:$mycms['fields']['fieldorder']:} {:else:}0{:/if:}" size="5"/></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['fieldshow']:}</td>
+				<td><input {:if (!isset($mycms['fields']['fieldshow']) || $mycms['fields']['fieldshow']!='0'):}checked="checked"{:/if:} name="fieldshow" type="radio" value="1" />启用 <input {:if $mycms['fields']['fieldshow']=='0':}checked="checked"{:/if:} name="fieldshow" type="radio" value="0" />禁用</td>
+			</tr>
+		</table>
+		</div>
+		
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"><input type="hidden" name="action" value="{:$mycms['action']:}" /></td>
+				<td><a class="submit reset" href="javascript:form_fields.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

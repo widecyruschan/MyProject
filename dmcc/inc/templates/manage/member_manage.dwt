@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/script/jquery.alerts.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<style type="text/css">
+#popup_content{background:url(../inc/templates/manage/images/alerts/money_bag.png) no-repeat 10px 40px;} /* 变更 Prompt 侧面图 */
+</style>
+<script type="text/javascript">
+function check(){
+	var key = $('#word').val();
+	if(key == '' || key == "{:$lang['page']['keyword']:}"){
+		alert("{:$lang['page']['enter_keywords']:}");
+		return false;		
+	} else {
+		return true;	
+	}
+}
+$(function(){
+	//绑定事件
+	mycms.alternately('list');
+	mycms.keysubmit('search_form','search','check()');
+	mycms.acsubmit('manage','allow','{:$lang['page']['determine_changes']:}','ban',false);
+	mycms.acsubmit('manage','ban','{:$lang['page']['determine_changes']:}','allow',false);
+	mycms.acsubmit('manage','del','{:$lang['page']['determine_delete']:}','del',false);
+	mycms.acsubmit('manage','audit','{:$lang['page']['audit'][6]:}','audit',false);
+	mycms.acsubmit('manage','unaudit','{:$lang['page']['audit'][5]:}','unaudit',false);
+	mycms.acsubmit('manage','change_level','{:$lang['page']['determine_mobile']:}','change_level',true);
+});
+
+// Prompt
+function recharge(usernamd,id){
+	jPrompt2({:$lang['page']['jPrompt']:}, function(r){
+		if(r){ 
+			var an = r.split('{$mycms}');
+			var amount = an[0];
+			var info = an[1];
+			if (isNaN(amount)){
+				alert('{:$lang['page']['determine_amount']:}');
+				recharge(usernamd);	
+			} else if (info == '' || info == '{:$lang['page']['recharge_info']:}'){
+				alert('{:$lang['page']['determine_info']:}');
+				recharge(usernamd);	
+			} else {
+				if(confirm({:$lang['page']['determine_recharge']:})){
+					location.href = '{:$mycms['ourl']:}&action=funds&id=' + id + '&amount=' + amount + '&info=' + info;
+				}
+			}
+		}
+	});	
+}
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<form action="" method="get" name="search_form" id="search_form">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td>
+								<input name="level" value="{:$mycms['level']:}" type="hidden" />
+								<select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">
+								<option {:if $mycms['level']==0:}selected="selected"{:/if:} value="member_manage.php">{:$lang['page']['all_levels']:}</option>
+								{:foreach $mycms['member_rank'] as $n:}
+								<option {:if $mycms['level']==$n['id']:}selected="selected"{:/if:} value="member_manage.php?level={:$n['id']:}">{:$n['rankname']:}</option>
+								{:/foreach:}
+								</select>
+							</td>
+							<td>
+								<input type="text" class="input rounded" name="word" id="word" size="20" onfocus="if(this.value=='{:$lang['page']['keyword']:}'){this.value='';}" onblur="if(this.value==''){this.value='{:$lang['page']['keyword']:}';}" value="{:if $mycms['get']['word']:}{:$mycms['get']['word']:}{:else:}{:$lang['page']['keyword']:}{:/if:}" />
+								<input type="text" style="display:none;" /> 
+							</td>
+							<td><a class="button_2" href="#" id="search">{:$lang['common']['search']:}</a></td>
+							<td><a class="button_2" href="member_manage.php?{:rand():}">{:$lang['common']['refresh']:}</a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		
+		<form action="" method="post" name="manage" id="manage">
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head" width="30">{:$lang['common']['select']:}</td>
+				<td class="field_head">{:$mycms['sort']['id']:}</td>
+				<td class="field_head">{:$mycms['sort']['name']:}</td>
+				<td class="field_head">{:$mycms['sort']['money']:}</td>
+				<td class="field_head">{:$mycms['sort']['scores']:}</td>
+				<td class="field_head">{:$mycms['sort']['mail']:}</td>
+				<td class="field_head">{:$mycms['sort']['join']:}</td>
+				<td class="field_head">{:$lang['page']['operating']:}</td>
+			</tr>
+			{:foreach $mycms['list'] as $n:}
+			{:$login_ip = explode(',',$n['loginip']):}
+			{:if $login_ip[1] == '':}{:$login_ip[1] = $login_ip[0]:}{:/if:}
+			<tr>
+				<td><input name="id[]" type="checkbox" value="{:$n['id']:}" /></td>
+				<td>{:$n['id']:}</td>
+				<td><a href="member_update.php?id={:$n['id']:}">{:$n['username']:}</a></td>
+				<td>{:$n['money']:} ({:$n['usemoney']:})</td>
+				<td>{:$n['scores']:}</td>
+				<td>{:$n['email']:}</td>
+				<td>{:date('Y-m-d',$n['jointime']):}</td>
+				<td class="operation">
+					<a href="member_update.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/pencil.png" title="{:$lang['page']['modify_data']:}" /></a>
+					{:if $n['audit'] == 0:}<a href="{:$mycms['ourl']:}&action=unaudit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/member.png" title="{:$lang['page']['audit'][0]:}" /></a>
+					{:elseif $n['audit'] == 1:}<a href="{:$mycms['ourl']:}&action=audit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/cut.png" title="{:$lang['page']['audit'][1]:}" /></a>
+					{:else:}<a href="{:$mycms['ourl']:}&action=audit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/cut.png" title="{:$lang['page']['audit'][2]:}" /></a>{:/if:}
+					{:if $n['effective'] == 0:}<a href="{:$mycms['ourl']:}&action=allow&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page']['state_ban']:}" /></a>
+					{:else:}<a href="{:$mycms['ourl']:}&action=ban&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page']['state_allows']:}" /></a>
+					{:/if:}<a href="{:$mycms['ourl']:}&del={:$n['id']:}" onclick="return confirm('{:$lang['page']['remove_member_data']:}');"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['delete_current']:}" /></a>
+					<a href="javascript:recharge('{:$n['username']:}','{:$n['id']:}');"><img src="../inc/templates/manage/images/operation/money.png" title="{:$lang['page']['online_recharge']:}" /></a>
+					<a href="member_transactions.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/shopping.png" title="{:$lang['page']['logs']:}" /></a>
+				</td>
+			</tr>
+			{:foreachelse:}<tr><td colspan="8" class="field_head">{:$lang['page']['no_data']:}</td></tr>
+			{:/foreach:}
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="all_action"><input name="all" id="all" type="checkbox" onclick="mycms.select_all(this.form);" /></td>
+							<td> &nbsp{:$lang['page']['select_all']:} &nbsp;</td>
+							<td class="operation">
+								<input type="hidden" name="action" id="action" value="" />
+								<a href="javascript:void(0);"><img id="ban" src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page']['allow_logon']:}" /></a>
+								<a href="javascript:void(0);"><img id="allow" src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page']['prohibition_sign']:}" /></a>
+								<a href="javascript:void(0);"><img id="del" src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['delete_member_data']:}" /></a>
+								<a href="javascript:void(0);"><img id="unaudit" src="../inc/templates/manage/images/operation/cut.png" title="{:$lang['page']['audit'][4]:}" /></a>
+								<a href="javascript:void(0);"><img id="audit" src="../inc/templates/manage/images/operation/member.png" title="{:$lang['page']['audit'][3]:}" /></a>
+							</td>					
+							<td> &nbsp;
+								<select class="select rounded" name="change_level" id="change_level">
+									<option value="" selected="selected">{:$lang['page']['mobile_rating']:}</option>
+									{:foreach $mycms['member_rank'] as $n:}
+									<option value="{:$n['id']:}">{:$n['rankname']:}</option>
+									{:/foreach:}
+								</select>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		{:$mycms['page']:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

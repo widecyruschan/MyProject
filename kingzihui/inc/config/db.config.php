@@ -1,0 +1,1 @@
+<?phpdefined('CMSROOT') or die('Access Denied.');$DB = array (  'host' => '127.0.0.1:3306',  'name' => 'a0329155823',  'user' => 'a0329155823',  'pass' => '52104516',  'prefix' => 'cms_',);

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+function detect(){
+	if(document.update.password.value != document.update.password_confirm.value){
+		alert('{:$lang['page']['password_inconsistency']:}');
+		return false;	
+	}
+	if(document.update.password.value != '' && document.update.password.value.length < 6 ){
+		alert('{:$lang['page']['password_short']:}');
+		return false;			
+	}
+	return true;
+}
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('update','submit','detect()');
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}</td>
+			</tr>
+		</table>	
+		<form action="" method="post" name="update" id="update">
+		<table class="list" cellpadding="0" cellspacing="1">
+			<tr>
+				<td class="name">{:$lang['page']['username']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="username" value="{:$mycms['user']['username']:}" /></td>
+				<td class="name">{:$lang['page']['type']:}</td>
+				<td>
+					<input name="type" type="radio" value="0" {:if $mycms['user']['type'] == 0:}checked{:/if:} />{:$lang['page']['personal']:} &nbsp;
+					<input name="type" type="radio" value="1" {:if $mycms['user']['type'] == 1:}checked{:/if:} />{:$lang['page']['enterprise']:}
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['password']:}</td>
+				<td>
+					<input type="password" class="input rounded" size="30" name="password" value="" onclick="this.select();" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" border="0" title="{:$lang['page']['password_title']:}" class="title2div" />
+				</td>
+				<td class="name">{:$lang['page']['sex']:}</td>
+				<td>
+					<input name="sex" type="radio" value="0" {:if $mycms['user']['sex'] == 0:}checked{:/if:} />{:$lang['page']['female']:} &nbsp;
+					<input name="sex" type="radio" value="1" {:if $mycms['user']['sex'] == 1:}checked{:/if:} />{:$lang['page']['male']:} &nbsp;
+					<input name="sex" type="radio" value="2" {:if $mycms['user']['sex'] == 2:}checked{:/if:} />{:$lang['page']['secrecy']:} 
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['password_confirm']:}</td>
+				<td>
+					<input type="password" class="input rounded" size="30" name="password_confirm" value="" onclick="this.select();" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" border="0" title="{:$lang['page']['password_title']:}" class="title2div" />
+				</td>
+				<td class="name">{:$lang['page']['money']:}</td>
+				<td>
+					<input type="text" class="input rounded" size="8" name="money" value="{:$mycms['user']['money']:}" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" border="0" title="{:$lang['page']['proposed_changes']:}" class="title2div" />
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="name">{:$lang['page']['email']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="email" value="{:$mycms['user']['email']:}" /></td>
+				<td class="name">{:$lang['page']['usemoney']:}</td>
+				<td><input type="text" class="input rounded" size="8" name="usemoney" value="{:$mycms['user']['usemoney']:}" /></td>
+			</tr><tr>
+				<td class="name">{:$lang['page']['qq']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="qq" value="{:$mycms['user']['qq']:}" /></td>
+				<td class="name">{:$lang['page']['scores']:}</td>
+				<td><input type="text" class="input rounded" size="8" name="scores" value="{:$mycms['user']['scores']:}" /></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['problem']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="problem" value="{:$mycms['user']['problem']:}" /></td>
+				<td class="name">{:$lang['page']['nickname']:}</td>
+				<td><input type="text" class="input rounded" size="16" name="nickname" value="{:$mycms['user']['nickname']:}" /></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['answer']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="answer" value="{:$mycms['user']['answer']:}" /></td>
+				<td class="name">{:$lang['page']['level']:}</td>
+				<td>
+					<select name="level" class="select rounded">
+					{:foreach $mycms['member_rank'] as $n:}
+					<option {:if $mycms['user']['level']==$n['id']:}selected="selected"{:/if:} value="{:$n['id']:}">{:$n['rankname']:}</option>
+					{:/foreach:}
+					</select>		
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['companyname']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="companyname" value="{:$mycms['user']['companyname']:}" /></td>
+				<td class="name">{:$lang['page']['phone']:}</td>
+				<td><input type="text" class="input rounded" size="16" name="phone" value="{:$mycms['user']['phone']:}" /></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['companyweb']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="companyweb" value="{:$mycms['user']['companyweb']:}" /></td>
+				<td class="name">{:$lang['page']['fax']:}</td>
+				<td><input type="text" class="input rounded" size="16" name="fax" value="{:$mycms['user']['fax']:}" /></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['companyaddress']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="companyaddress" value="{:$mycms['user']['companyaddress']:}" /></td>
+				<td class="name">{:$lang['page']['frequency']:}</td>
+				<td><input type="text" class="input rounded" size="8" name="frequency" value="{:$mycms['user']['frequency']:}" /></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['loginip']:}</td>
+				<td><input type="text" class="input rounded" size="30" name="loginip" value="{:$mycms['user']['loginip']:}" /></td>
+				<td class="name">{:$lang['page']['jointime']:}</td>
+				<td>{:$mycms['user']['jointime']:}</td>		
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['logintime']:}</td>
+				<td>{:$mycms['user']['logintime']:}</td>	
+				<td class="name">{:$lang['page']['joinip']:}</td>
+				<td><input type="text" class="input rounded" size="16" name="joinip" value="{:$mycms['user']['joinip']:}" /></td>	
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['register_audit'][0]:}</td>
+				<td>
+					<input name="audit" type="radio" value="0" {:if $mycms['user']['audit'] == 0:}checked{:/if:} />{:$lang['page']['register_audit'][1]:} &nbsp;
+					<input name="audit" type="radio" value="1" {:if $mycms['user']['audit'] == 1:}checked{:/if:} />{:$lang['page']['register_audit'][2]:} &nbsp;
+					<input name="audit" type="radio" value="2" {:if $mycms['user']['audit'] == 2:}checked{:/if:} />{:$lang['page']['register_audit'][3]:}
+				</td>
+				<td class="name">{:$lang['page']['effective']:}</td>
+				<td>
+					<input name="effective" type="radio" value="1" {:if $mycms['user']['effective'] == 1:}checked{:/if:} />{:$lang['page']['ban']:} &nbsp;
+					<input name="effective" type="radio" value="0" {:if $mycms['user']['effective'] == 0:}checked{:/if:} />{:$lang['page']['allow']:}
+				</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80">&nbsp;</td>
+				<td><a class="submit reset" href="javascript:update.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>
+		</form>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

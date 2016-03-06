@@ -1,0 +1,1 @@
+<?php$html_url_head = 'http://dmcc.CyrusChanHK.com/';$html_make_file = array (  0 => 'index.php',  1 => 'tag.php',  2 => 'member/login.php',  3 => 'member/register.php',  4 => 'links.php',  5 => 'guestbook.php',  6 => 'feedback.php',);

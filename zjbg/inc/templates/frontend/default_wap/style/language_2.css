@@ -1,0 +1,12 @@
+
+/* 
+	这是一个根据网站语言加载的样式文件
+	如第3种语言有局部样式需要调节，可以添加一个名为 language_3.css 的样式文件
+*/
+
+@charset "utf-8";
+body,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,img,div,dd,dt,input,textarea,a{font-family:verdana,geneva,sans-serif;} /* 改变全局字体 */
+.header .navigation a{height:22px; padding:13px 0 0 0;} /* 调节导航栏目文字位置 */
+.caption .heading{padding:1px 0 0 5px; height:30px;} /* 调节渐变标题文字位置 height:31px */
+.loginbox .captcha input{font-size:14px; text-transform:lowercase} /* 调节验证码字体大小 */
+.header .navigation a{letter-spacing:0; font-family:Tahoma,Geneva,sans-serif;} /* 导航栏字符间距 */

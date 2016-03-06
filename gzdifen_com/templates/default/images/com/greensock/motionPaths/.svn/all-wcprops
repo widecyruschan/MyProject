@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/as/!svn/ver/13743/ant/trunk/AntCoreLibrary/src/com/greensock/motionPaths
+END
+MotionPath.as
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/as/!svn/ver/7/ant/trunk/AntCoreLibrary/src/com/greensock/motionPaths/MotionPath.as
+END
+CirclePath2D.as
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/as/!svn/ver/7/ant/trunk/AntCoreLibrary/src/com/greensock/motionPaths/CirclePath2D.as
+END
+PathFollower.as
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/as/!svn/ver/7/ant/trunk/AntCoreLibrary/src/com/greensock/motionPaths/PathFollower.as
+END
+RectanglePath2D.as
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/as/!svn/ver/7/ant/trunk/AntCoreLibrary/src/com/greensock/motionPaths/RectanglePath2D.as
+END
+LinePath2D.as
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/as/!svn/ver/7/ant/trunk/AntCoreLibrary/src/com/greensock/motionPaths/LinePath2D.as
+END

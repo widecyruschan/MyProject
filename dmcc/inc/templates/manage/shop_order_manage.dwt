@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+function check(){
+	var key = $('#word').val();
+	if(key == '' || key == "{:$lang['page']['keyword']:}"){
+		alert("{:$lang['page']['enter_keywords']:}");
+		return false;		
+	} else {
+		return true;	
+	}
+}
+$(function(){
+	mycms.keysubmit('search','search_button','check()');
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.acsubmit('manage','del','{:$lang['page']['operation'][1]:}','del',false);
+	mycms.keysubmit('manage','submit',true);
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+				<td>
+					<form action="" method="get" name="search" id="search">
+					<table cellpadding="0" cellspacing="5" border="0">
+						<tr>
+							<td><select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['sort_text']:}</select></td>
+							<td><select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['filter_text']:}</select></td>
+							<td>
+								<input type="hidden" name="channel" value="{:$mycms['get']['channel']:}" />
+								<input type="hidden" name="category" value="{:$mycms['get']['category']:}" />
+								<input type="hidden" name="sort" value="{:$mycms['get']['sort']:}" />
+								<input type="hidden" name="trash" value="{:$mycms['get']['trash']:}" />
+								<input type="text" class="input rounded" name="word" id="word" size="15" onfocus="if(this.value=='{:$lang['page']['keyword']:}'){this.value='';}" onblur="if(this.value==''){this.value='{:$lang['page']['keyword']:}';}" value="{:if $mycms['get']['word']:}{:$mycms['get']['word']:}{:else:}{:$lang['page']['keyword']:}{:/if:}" />
+							</td>
+							<td><a class="button_2" href="#" id="search_button">{:$lang['common']['search']:}</a></td>
+							<td><a class="button_2" href="shop_order_manage.php?{:rand():}">{:$lang['common']['refresh']:}</a></td>	
+						</tr>
+					</table>			
+					</form>
+				</td>
+			</tr>
+		</table>
+		
+		<form action="" method="post" name="manage" id="manage">
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head" width="30">{:$lang['page']['head'][0]:}</td>
+				<td class="field_head">{:$lang['page']['head'][1]:}</td>
+				<td class="field_head">{:$lang['page']['head'][2]:}</td>
+				<td class="field_head">{:$lang['page']['head'][3]:}</td>
+				<td class="field_head">{:$lang['page']['head'][4]:}</td>
+				<td class="field_head">{:$lang['page']['head'][5]:}</td>
+				<td class="field_head">{:$lang['page']['head'][6]:}</td>
+			</tr>
+			{:foreach $mycms['list'] as $n:}
+			<tr>
+				<td><input name="del[]" type="checkbox" value="{:$n['id']:}" /></td>
+				<td>{:$n['oid']:}</td>
+				<td><a href="member_update.php?id={:$n['uid']:}" title="{:$lang['page']['operation'][6]:}">{:$n['username']|cat:'</a> ('|cat:date('Y-m-d',$n['addtime']):})</td>
+				<td>{:$n['consignee']:}{:if !empty($n['tel']):} ({:$n['tel']:}){:elseif !empty($n['mobile']):} ({:$n['mobile']:}){:/if:}</td>
+				<td>{:$n['amount']:}</td>
+				<td{:if $n['status'] == 4:} class="blue"{:/if:}>{:$lang['page']['status'][$n['status']]:}</td>
+				<td class="operation">
+					<a href="shop_order_update.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/edit.png" title="{:$lang['page']['operation'][2]:}" /></a>
+					<a href="shop_order_manage.php?page={:$mycms['get']['page']:}&sort={:$mycms['get']['sort']:}&filter={:$mycms['get']['filter']:}&del={:$n['id']:}" onclick="return confirm('{:$lang['page']['operation'][4]:}');"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['operation'][3]:}" /></a>				
+				</td>
+			</tr>
+			{:/foreach:}
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="all_action"><input name="all" id="all" type="checkbox" onclick="mycms.select_all(this.form);" /></td>
+							<td> &nbsp{:$lang['page']['select_all']:} &nbsp;</td>
+							<td class="operation">
+								<input type="hidden" name="action" id="action" value="" />
+								<a href="javascript:void(0);"><img id="del" src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['operation'][0]:}" /></a>
+							</td>					
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>			
+		</form>
+		{:$mycms['page']:}
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page']['operation'][5]:}</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

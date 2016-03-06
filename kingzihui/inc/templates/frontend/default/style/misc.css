@@ -1,0 +1,73 @@
+@charset "utf-8";
+@import url("common.css");
+
+/* 右侧提交表单 - 留言、友情链接申请 */
+.box .frame_main{padding:0 0 0 10px;}
+.box .frame_side{padding:10px;}
+.box .frame_side .form{overflow:hidden; clear:both;}
+.box .frame_side .form ol{margin:10px 0; overflow:hidden; clear:both;}
+.box .frame_side .form .input{width:260px; height:27px; line-height:27px; color:#999; border:1px #C8C8FF solid; padding:0 3px; outline:none; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+.box .frame_side .form textarea{width:260px; height:100px; color:#999; border:1px #C8C8FF solid; padding:5px 3px; outline:none; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+.box .frame_side .form ul{height:30px; padding:12px 0 0 0; overflow:hidden; background:url(../images/menu_line.png) 0 0  repeat-x; width:268px;}
+.box .frame_side .form ul li{float:left;}
+.box .frame_side .form ul .submit{}
+.box .frame_side .form ul .captcha{width:150px;}
+.box .frame_side .form ul .captcha input{width:100px; text-transform:uppercase;}
+.box .frame_side .form .submit input{width:86px; height:28px; line-height:28px; border:0; background:url(../images/sprite.png) 0 -176px no-repeat; color:#FFF; font-weight:bold;}
+.box .frame_side .form .submit input:hover{background-position:0 -204px; cursor:pointer;}
+.box .frame_side .form .error{border-color:#F60; background-color:#FFF2F2; color:#F33;}
+
+/* 留言验证码 */
+#siimage{border:1px #DFDFDF solid;}
+#siimage_div{display:none;}
+#siimage_div img{position:absolute; margin:3px auto auto 0;}
+
+/* guestbook.php 留言数据样式 */
+.box .frame_main .data{width:638px; margin:0 0 20px 0; overflow:hidden; border:1px #999 solid;}
+.box .frame_main .data ul{clear:both; padding:1px; background:url(../images/dotted.gif) 0 0 repeat-x;}
+.box .frame_main .data .content{height:auto;}
+.box .frame_main .data .content .text{height:auto; line-height:25px; width:600px; padding:5px; font-size:13px;}
+.box .frame_main .data ul li{float:left; height:30px; line-height:30px; padding:0 5px; overflow:hidden;}
+.box .frame_main .data ul .icon{line-height:normal; height:24px; padding:7px 0 0 5px; width:16px;}
+.box .frame_main .data ul .title{font-weight:bold; width:455px; font-size:13px; padding:0 0 0 10px;}
+.box .frame_main .data ul .time{width:140px;}
+.box .frame_main .data ul .name{width:130px;}
+.box .frame_main .data ul .qq{width:100px;}
+.box .frame_main .data ul .mail{width:141px;}
+.box .frame_main .data ul .verdana{font-family:Verdana,Geneva,sans-serif;}
+.box .frame_main .data ul em{color:#666; font-family:Verdana,Geneva,sans-serif;}
+.box .frame_main .data .notbg{background:none;}
+.box .frame_main .data .reply{color:#F60; font-size:13px;}
+.box .frame_main .data .reply a{text-decoration:underline; color:#F60;}
+.box .frame_main .notdata{height:200px; line-height:200px; text-align:center; font-weight:bold;}
+
+/* feedback.tpl 在线反馈 */
+.feedback{overflow:hidden;}
+.feedback .input{clear:both; height:40px; overflow:hidden; background:url(../images/dotted.gif) 0 bottom repeat-x;}
+.feedback .input .b{height:30px; padding:5px 0 0 0;}
+.feedback .input .b input{height:22px; line-height:22px; padding:2px 5px; width:280px; overflow:hidden; border:1px #999 solid; outline:none; margin:0;}
+.feedback .input .b select{border:1px #999 solid; outline:none; height:28px; line-height:28px; padding:3px 5px;}
+.feedback ul li{float:left; overflow:hidden;}
+.feedback ul .a{padding:0 5px 0 20px; width:150px; text-align:right; height:40px; line-height:40px;}
+.feedback .textarea{clear:both; height:140px; overflow:hidden; padding:5px 0 0 0; background:url(../images/dotted.gif) 0 bottom repeat-x;}
+.feedback .textarea textarea{height:120px; width:280px; padding:5px; overflow:hidden; border:1px #999 solid; outline:none; margin:0;}
+.feedback .input .b .captcha{width:60px; text-transform:uppercase;}
+.feedback .submit{height:35px; clear:both; overflow:hidden; padding:10px 0 10px 175px;}
+.feedback .submit a{display:block; width:120px; height:33px; text-align:center; line-height:33px; font-size:14px; color:#FFF; font-weight:bold; text-decoration:none; background:url(../images/sprite.png) -152px -234px no-repeat;}
+.feedback .submit a:hover{background-position:-152px -269px;}
+#siimage{border:1px #DFDFDF solid;}/* 验证码 */
+#captcha_box{display:none; overflow:hidden;}
+#captcha_box img{position:absolute; margin:-35px auto auto 90px;}
+
+/* 友情链接数据 */
+.logo_link,.text_link{width:640px; overflow:hidden; clear:both;}
+.logo_link ol{float:left; width:128px; height:60px; overflow:hidden; text-align:center; line-height:20px;}
+.text_link{line-height:25px; background:url(../images/menu_line.png) 0 2px repeat-x; padding:10px 0;}
+.text_link a{text-decoration:underline; font-size:14px;}
+.notdata{padding:20px; text-align:center; width:600px;}
+
+/* tag.tpl 自定义页面 */
+.m_tag{width:930px; padding:10px; overflow:hidden;}
+.m_tag .m_title{padding:0 0 0 30px; height:30px; font-size:14px; font-weight:bold; overflow:hidden; background:url(../images/title_line_bg.gif) left bottom no-repeat;}
+.m_tag .m_list{padding:10px; overflow:hidden; line-height:25px;}
+.m_tag .m_list a{text-decoration:underline; font-size:14px;}

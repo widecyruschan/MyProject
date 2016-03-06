@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<style type="text/css">
+.underline{background:url(../inc/templates/manage/images/0101.gif) bottom repeat-x;}
+.underline table td{padding:2px; margin:0; height:25px;}
+.list{margin:0 auto 20px auto;}
+.list .info{line-height:19px; word-break:break-all;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}</td>
+			</tr>
+		</table>
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head underline">{:$lang['page'][1]:}</td>
+				<td class="underline"><b>{:$lang['page'][2]:}</b></td>
+				<td class="field_head underline" width="100">{:$lang['page'][3]:}</td>
+			</tr>
+		{:foreach $mycms['template_list'] as $n:}
+			<tr>
+				<td align="center" class="underline"><img src="{:$mycms['template_path']|cat:$n['dir']|cat:'/'|cat:$n['thumbnail']:}" width="120" height="160" border="0" style="padding:2px; margin:10px 0; border:1px #CCC solid;" /></td>
+				<td class="info underline">
+					{:'<b>'|cat:$lang['page'][4]|cat:'</b>'|cat:$n['name']:}<br />
+					{:'<b>'|cat:$lang['page'][5]|cat:'</b>'|cat:$n['version']:}<br />
+					<b>{:$lang['page'][6]:}</b><a target="_blank" href="{:$n['website']:}">{:$n['production']:}</a><br />
+					{:'<b>'|cat:$lang['page'][7]|cat:'</b>'|cat:$n['date']:}<br />
+					{:'<b>'|cat:$lang['page'][8]|cat:'</b>'|cat:$n['module']:}<br />
+					<b>{:$lang['page'][9]:}</b>{:$n['use_web']:}<br />
+					<b>{:$lang['page'][16]:}</b>{:$mycms['template_path']|cat:$n['dir']:}<br />
+					{:'<b>'|cat:$lang['page'][10]|cat:'</b>'|cat:$n['other']:}
+				</td>
+				<td class="underline" align="center">
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							{:if $n['dlang_use']:}<!-- 当前语言站点已经启用该模板，"启用模板"按钮灰度变化 -->
+							<td><img src="../inc/templates/manage/images/operation/disabled.png" width="16" height="16" border="0"></td>
+							<td><font color="#999999">{:$lang['page'][19]:}</font></td>
+							{:else:}
+							<td><img src="../inc/templates/manage/images/operation/accept.png" width="16" height="16" border="0"></td>
+							<td><a href="template_manag.php?enable={:$n['dir']:}">{:$lang['page'][18]:}</a></td>
+							{:/if:}
+						</tr>
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/edit.png" width="16" height="16" border="0"></td>
+							<td><a href="template_update.php?dir={:$n['dir']:}">{:$lang['page'][11]:}</a></td>
+						</tr>
+						<tr>
+							{:if $n['is_use']:}<!-- 有语言站点正在使用该模板，不可以删除 -->
+							<td><img src="../inc/templates/manage/images/operation/disabled.png" width="16" height="16" border="0"></td>
+							<td><font color="#999999">{:$lang['page'][15]:}</font></td>
+							{:else:}
+							<td><img src="../inc/templates/manage/images/operation/delete.png" width="16" height="16" border="0"></td>
+							<td><a onclick="return confirm('{:$lang['page'][14]:}');" href="template_manag.php?del={:$n['dir']:}">{:$lang['page'][12]:}</a></td>
+							{:/if:}
+						</tr>
+					</table>
+				</td>
+			</tr>
+		{:/foreach:}
+		</table>
+		{:$mycms['page']:}
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page'][13]:}</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

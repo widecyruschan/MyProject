@@ -1,0 +1,1 @@
+<?phpinclude_once "config.php";include_once "config_db.php";$strSql="SELECT hits FROM {$DB_dbprefix}content WHERE id =".verify_id($_GET["id"]);$db->query($strSql);	if($db->next_record())		{		echo $db->Record["hits"];		}?>

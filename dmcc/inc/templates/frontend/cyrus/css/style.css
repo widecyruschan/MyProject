@@ -1,0 +1,8 @@
+.navbar .container .nav{
+	margin: 5px;
+	height: 65px;
+	color: red;
+}
+.navbar .container .collapse{
+	margin-top: 5px;
+}

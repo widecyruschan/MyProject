@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.acsubmit('form','audit','{:$lang['page'][15]:}','audit',false);
+	mycms.acsubmit('form','unaudit','{:$lang['page'][16]:}','unaudit',false);
+	mycms.acsubmit('form','del','{:$lang['page'][17]:}','del',false);	
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		
+		
+		<form action="" method="post" name="form" id="form">
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head" width="30">{:$lang['page'][1]:}</td>
+				<td class="field_head">{:$lang['page'][2]:}</td>
+				<td class="field_head">{:$lang['page'][3]:}</td>
+				<td class="field_head">{:$lang['page'][4]:}</td>
+				<td class="field_head">{:$lang['page'][5]:}</td>
+			</tr>
+			{:foreach $mycms['guestbook_list'] as $n:}
+			<tr>
+				<td><input name="id[]" type="checkbox" value="{:$n['id']:}" /></td>
+				<td>{:$n['title']:}</td>
+				<td>{:$n['nickname']:}{:if $n['username'] != '':} ({:$lang['page'][8]|cat:$n['username']:}){:/if:}</td>
+				<td>{:date('Y-m-d H:i:s',$n['addtime']):}</td>
+				<td class="operation">
+					{:if $n['audit']:}<a href="guestbook_manage.php?page={:$mycms['dpage']:}&action=unaudit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page'][9]:}" /></a>{:else:}<a href="guestbook_manage.php?page={:$mycms['dpage']:}&action=audit&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page'][10]:}" /></a>{:/if:}
+					{:if $n['reply'] == '':}<a href="guestbook_reply.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/dot_red.png" title="{:$lang['page'][11]:}" /></a>{:else:}<a href="guestbook_reply.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/dot_green.png" title="{:$lang['page'][12]:}" /></a>{:/if:}
+					<a onclick="return confirm('{:$lang['page'][14]:}');" href="guestbook_manage.php?page={:$mycms['dpage']:}&action=del&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page'][13]:}" /></a>
+				</td>
+			</tr>
+			{:foreachelse:}
+			<tr><td colspan="5" class="field_head">{:$lang['page'][7]:}</td></tr>
+			{:/foreach:}
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td class="all_action"><input name="all" id="all" type="checkbox" onclick="mycms.select_all(this.form);" /></td>
+							<td> &nbsp{:$lang['page']['select_all']:} &nbsp;</td>
+							<td class="operation">
+								<input type="hidden" name="action" id="action" value="" />
+								<a href="javascript:void(0);"><img id="audit" src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page'][18]:}" /></a>
+								<a href="javascript:void(0);"><img id="unaudit" src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page'][19]:}" /></a>
+								<a href="javascript:void(0);"><img id="del" src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page'][20]:}" /></a>
+							</td>					
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>			
+		</form>
+		{:$mycms['page']:}
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page'][6]:}</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

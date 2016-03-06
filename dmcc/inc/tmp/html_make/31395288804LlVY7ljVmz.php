@@ -1,0 +1,1 @@
+<?php$html_url_head = 'http://dmcc.CyrusChanHK.com/';$html_make_file = array (  0 => 'slide.php?cid=20',  1 => 'slide.php?cid=21',  2 => 'slide.php?cid=28',);

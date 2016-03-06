@@ -1,0 +1,1 @@
+<?phpout();$dir=str_check($_GET['dir']);$db->query( "UPDATE  `{$DB_dbprefix}config` SET  `skin_dir` =  '$dir' WHERE  `id` =$web_id;");addlog( "修改幻灯片",$_SESSION['admin_user'] );done('操作成功','','');?>

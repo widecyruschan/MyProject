@@ -1,0 +1,37 @@
+body,ul,ol,li,form,img,div{outline:0; margin:0; padding:0; list-style:none; border:0;}
+body{background:url(body.png) 0 12px repeat-x #EDF5FA; font-size:13px; font-family:"微软雅黑";}
+a{color:#066;}
+a:hover{color:#F60;}
+
+.header{height:12px; background:url(bg-navigation.png); font-size:1px;}
+.box{width:900px; margin:0 auto; overflow:hidden;}
+.box .sidebar{float:left; width:230px; overflow:hidden;}
+.box .sidebar .logo{background:url(logo.gif) 30px 30px no-repeat; height:150px;}
+.box .sidebar .step{}
+.box .sidebar .step ul{clear:both; overflow:hidden;}
+.box .sidebar .step ul li{float:left; height:30px; line-height:30px;}
+.box .sidebar .step ul .imge{width:30px;}
+.box .sidebar .step ul .name{color:#333;}
+.box .sidebar .step .ok .imge{background:url(watchdog-ok.png) 5px 6px no-repeat;}
+.box .sidebar .step .ok .name{color:#093;}
+.box .sidebar .step .current .imge{background:url(task-list.png) 10px 11px no-repeat;}
+.box .sidebar .step .current .name{font-weight:bold; color:#000;}
+.box .main{float:left; width:670px; padding:80px 0 0 0;}
+.box .main .bg_left{background:url(bg-content-left.png) 0 0 no-repeat;}
+.box .main .bg_center{background:url(bg-content.png) 0 0 repeat-x;}
+.box .main .bg_right{background:url(bg-content-right.png) right 0 no-repeat; padding:42px 10px 10px 10px;}
+.box .main .content{background:url(bg-content.png) 0 -42px repeat-x #FFF; border-bottom:1px #DDD solid; padding:6px 15px; min-height:400px; _height:400px;}
+/* 协议 */
+.agre_title{font-size:15px; text-align:center; font-weight:bold; font-family:"宋体"; height:50px; line-height:50px;}
+.agre_content{font-size:12px; font-family:"宋体"; line-height:22px; border:1px #DDD solid; padding:10px; overflow:scroll; height:450px; overflow-x:hidden;}
+
+.input{outline:0; font-size:13px; border:1px #CCC solid; padding:3px; height:17px; line-height:17px; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+.remark{color:#666} /* 备注，灰色字体 */
+
+/* 数据表创建信息显示 */
+#notice{padding:10px 20px; height:400px; overflow:scroll; overflow-x:hidden; margin:20px 0 0 0; border:1px #DDD solid;}
+#notice ol{height:30px; line-height:30px; color:#093;}
+
+/* 7 */
+.unresult{padding:30px 0 0 120px; line-height:30px;}
+.hide{display:none;}

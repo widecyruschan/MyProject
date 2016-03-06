@@ -1,0 +1,1 @@
+<?phprequire_once('../inc/include/header.php');$MYCMS->caching = false; USER_LOGIN or msgbox('',$config['url'].'member/login.php?goto='.base64_encode($_SERVER['REQUEST_URI']));require_once(CMSINC.'/include/footer.php');

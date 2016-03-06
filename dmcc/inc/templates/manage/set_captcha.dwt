@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript" src="../inc/script/color_select.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.keysubmit('form_captcha','submit',true);
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}</td>
+			</tr>
+		</table>
+		
+		<form name="form_captcha" id="form_captcha" action="" method="post">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page'][1]:}</td>
+				<td colspan="2">
+					<input name="open[]" type="checkbox" value="1" {:if in_array(1,$mycms['captcha']['open']):}checked{:/if:} /> {:$lang['page'][2]:}&nbsp;&nbsp;&nbsp;
+					<input name="open[]" type="checkbox" value="2" {:if in_array(2,$mycms['captcha']['open']):}checked{:/if:} /> {:$lang['page'][3]:}&nbsp;&nbsp;&nbsp;
+					<input name="open[]" type="checkbox" value="3" {:if in_array(3,$mycms['captcha']['open']):}checked{:/if:} /> {:$lang['page'][4]:}&nbsp;&nbsp;&nbsp;
+					<input name="open[]" type="checkbox" value="4" {:if in_array(4,$mycms['captcha']['open']):}checked{:/if:} /> {:$lang['page'][5]:}&nbsp;&nbsp;&nbsp;
+					<input name="open[]" type="checkbox" value="5" {:if in_array(5,$mycms['captcha']['open']):}checked{:/if:} /> {:$lang['page'][6]:}&nbsp;&nbsp;&nbsp;
+					<input name="open[]" type="checkbox" value="6" {:if in_array(6,$mycms['captcha']['open']):}checked{:/if:} /> {:$lang['page'][7]:}
+				</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][8]:}</td>
+				<td>
+					{:$lang['page'][9]:} <input type="text" size="5" class="input rounded" name="image_width" value="{:$mycms['captcha']['image_width']:}" />  × 
+					{:$lang['page'][10]:} <input type="text" size="5" class="input rounded" name="image_height" value="{:$mycms['captcha']['image_height']:}" /> Px
+				</td>
+				<td class="field">{:$lang['page'][11]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][12]:}</td>
+				<td><input type="text" size="10" class="input rounded" name="perturbation" value="{:$mycms['captcha']['perturbation']:}" /></td>
+				<td class="field">{:$lang['page'][13]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][14]:}</td>
+				<td>
+					{:$lang['page'][15]:} <input type="text" size="5" class="input rounded" name="text_angle_minimum" value="{:$mycms['captcha']['text_angle_minimum']:}" /> 
+					{:$lang['page'][16]:} <input type="text" size="5" class="input rounded" name="text_angle_maximum" value="{:$mycms['captcha']['text_angle_maximum']:}" /> {:$lang['page'][17]:}
+				</td>
+				<td class="field">{:$lang['page'][18]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][19]:}</td>
+				<td><input type="text" size="10" class="input rounded" name="text_x_start" value="{:$mycms['captcha']['text_x_start']:}" /></td>
+				<td class="field">{:$lang['page'][20]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][21]:}</td>
+				<td>
+					<input name="image_bg_imgae" type="radio" value="1" {:if $mycms['captcha']['image_bg_imgae'] == '1':}checked{:/if:} /> {:$lang['page'][22]:}&nbsp;&nbsp;&nbsp;&nbsp;
+					<input name="image_bg_imgae" type="radio" value="0" {:if $mycms['captcha']['image_bg_imgae'] == '0':}checked{:/if:} /> {:$lang['page'][23]:}
+				</td>
+				<td class="field">{:$lang['page'][24]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][25]:}</td>
+				<td><input type="text" size="10" class="input rounded iColorPicker" id="image_bg_color" name="image_bg_color" value="{:$mycms['captcha']['image_bg_color']:}" /></td>
+				<td class="field">{:$lang['page'][26]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][27]:}</td>
+				<td>
+					<input name="use_multi_text" type="radio" value="1" {:if $mycms['captcha']['use_multi_text'] == '1':}checked{:/if:} /> {:$lang['page'][28]:}&nbsp;&nbsp;&nbsp;&nbsp;
+					<input name="use_multi_text" type="radio" value="0" {:if $mycms['captcha']['use_multi_text'] == '0':}checked{:/if:} /> {:$lang['page'][29]:}
+				</td>
+				<td class="field">{:$lang['page'][30]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][31]:}</td>
+				<td><input type="text" size="10" class="input rounded iColorPicker" name="text_color" id="text_color" value="{:$mycms['captcha']['text_color']:}" /></td>
+				<td class="field">{:$lang['page'][32]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][33]:}</td>
+				<td><input type="text" size="10" class="input rounded" name="code_length" value="{:$mycms['captcha']['code_length']:}" /></td>
+				<td class="field">{:$lang['page'][34]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][35]:}</td>
+				<td>
+					<input name="charset[]" type="checkbox" {:if in_array(1,$mycms['captcha']['charset']):}checked{:/if:} value="1" /> {:$lang['page'][36]:}&nbsp;&nbsp;&nbsp;&nbsp;
+					<input name="charset[]" type="checkbox" {:if in_array(2,$mycms['captcha']['charset']):}checked{:/if:} value="2" /> {:$lang['page'][37]:}
+				</td>
+				<td class="field">{:$lang['page'][38]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][39]:}</td>
+				<td><input type="text" size="10" class="input rounded" name="num_lines" value="{:$mycms['captcha']['num_lines']:}" /></td>
+				<td class="field">{:$lang['page'][40]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][41]:}</td>
+				<td><input type="text" size="10" class="input rounded iColorPicker" name="line_color" id="line_color" value="{:$mycms['captcha']['line_color']:}" /></td>
+				<td class="field">{:$lang['page'][42]:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][43]:}</td>
+				<td><a href="#" onClick="document.getElementById('siimage').src = '../inc/include/captcha.php?sid=' + Math.random(); return false;"><img id="siimage" src="../inc/include/captcha.php?sid={:time():}" /></a></td>
+				<td class="field"></td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"></td>
+				<td><a class="submit reset" href="javascript:form_captcha.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>		
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

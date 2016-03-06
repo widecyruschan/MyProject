@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<style type="text/css">
+.update{margin:0 auto; padding:0; width:98%;}
+.update td{margin:0; height:30px; padding:5px;}
+.update .name{text-align:right;}
+.title_div{width:350px;}
+</style>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('form','submit',true);
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']['update']:}{:$mycms['title_lang']:}</td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<div class="error rounded top_error hide"><ol></ol><span></span></div>
+		<form action="" method="post" name="form" id="form">
+		<table class="update" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['field'][0]:}</td>
+				<td><input name="title" type="text" value="{:$mycms['sp']['title']:}" size="30" maxlength="100" class="input rounded" /></td>
+				<td class="name">{:$lang['page']['field'][1][0]:}</td>
+				<td>
+					<input name="freight" type="text" value="{:$mycms['sp']['freight']:}" size="10" maxlength="8" class="input rounded" /> {:$lang['page']['field'][1][1]:}
+					<img title="{:$lang['page']['field'][1][2]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+			</tr>
+			
+			<tr class="odd">
+				<td class="name">{:$lang['page']['field'][2][0]:}</td>
+				<td>
+					<input name="topay" type="radio" value="1" {:if $mycms['sp']['topay'] == '1':}checked{:/if:} /> {:$lang['page']['field'][2][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="topay" type="radio" value="0" {:if $mycms['sp']['topay'] == '0':}checked{:/if:} /> {:$lang['page']['field'][2][2]:}
+					<img title="{:$lang['page']['field'][2][3]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="name">{:$lang['page']['field'][3][0]:}</td>
+				<td>
+					<input name="insure" type="text" value="{:$mycms['sp']['insure']:}" size="10" maxlength="8" class="input rounded" />
+					<img title="{:$lang['page']['field'][3][1]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][4][0]:}</td>
+				<td>
+					<input name="description" type="text" value="{:$mycms['sp']['description']:}" size="40" maxlength="255" class="input rounded" />
+					<img title="{:$lang['page']['field'][4][1]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="name">{:$lang['page']['field'][5][0]:}</td>
+				<td>
+					<input name="enable" type="radio" value="1" {:if $mycms['sp']['enable'] == '1':}checked{:/if:} /> {:$lang['page']['field'][5][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="enable" type="radio" value="0" {:if $mycms['sp']['enable'] == '0':}checked{:/if:} /> {:$lang['page']['field'][5][2]:}
+					<img title="{:$lang['page']['field'][5][3]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+			</tr>
+		</table>
+		
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['page']['submit']:} [Ctrl+Enter]</a></td>
+				<td width="80"></td>
+				<td>
+					{:if is_numeric($mycms['get']['id']):}<a class="submit reset" href="shop_shipping.php">{:$lang['page']['other'][7]:}</a>
+					{:else:}<a class="submit reset" href="javascript:form.reset();">{:$lang['common']['reset']:}</a>{:/if:}
+				</td>
+			</tr>
+		</table>		
+		</form>
+	</div>
+	
+	<!--/////////////////////////////////////////////////////////-->
+	<br /><br />
+
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']['manage']:}{:$mycms['title_lang']:}</td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head">{:$lang['page']['head'][0]:}</td>
+				<td class="field_head">{:$lang['page']['head'][1]:}</td>
+				<td class="field_head">{:$lang['page']['head'][2]:}</td>
+				<td class="field_head">{:$lang['page']['head'][3]:}</td>
+				<td class="field_head">{:$lang['page']['head'][4]:}</td>
+				<td class="field_head">{:$lang['page']['head'][5]:}</td>
+			</tr>
+			{:foreach shopping::get_shipping(0) as $sp:}
+			<tr>
+				<td>{:$sp['title']:}</td>
+				<td>{:$sp['freight']:}</td>
+				<td>{:if $sp['topay']:}{:$lang['page']['head'][6]:}{:else:}{:$lang['page']['head'][7]:}{:/if:}</td>
+				<td>{:$sp['insure']:}</td>
+				<td><a href="javascript:void(0)" title="{:$sp['description']:}" class="title2div">{:cut_str($sp['description'],50):}</a></td>
+				<td class="operation">
+					<a href="shop_shipping.php?id={:$sp['id']:}"><img src="../inc/templates/manage/images/operation/pencil.png" title="{:$lang['page']['other'][1]:}" /></a>
+					<a href="shop_shipping.php?del={:$sp['id']:}" onclick="return confirm('{:$lang['page']['other'][3]:}');"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['other'][2]:}" /></a>
+					{:if $sp['enable'] != 1:}<a href="shop_shipping.php?enable={:$sp['id']:}"><img src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page']['other'][4]:}" /></a>
+					{:else:}<a href="shop_shipping.php?disable={:$sp['id']:}"><img src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page']['other'][5]:}" /></a>{:/if:}
+				</td>
+			</tr>
+			{:foreachelse:}
+			<tr>
+				<td colspan="6" class="field_head">{:$lang['page']['other'][6]:}</td>
+			</tr>
+			{:/foreach:}
+		</table>
+	</div>	
+	
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

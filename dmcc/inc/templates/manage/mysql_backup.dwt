@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+// 进度条预加载
+var img = new Image;
+img.src = '../inc/templates/manage/images/progress.gif';
+
+function progress(){
+	$('#progress_box').html('<img src="../inc/templates/manage/images/progress.gif" width="280" height="13" border="0" /><br /><br />{:$lang['page'][25]:}');
+	$('#progress_box').css({'padding':'100px 0','text-align':'center'});
+	return true;
+}
+$(function(){mycms.alternately('list');});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table" id="progress_box">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td>{:if $mycms['operation'] != false:}<a class="button_2" href="mysql_backup.php">{:$lang['page'][14]:}</a>{:/if:}</td>
+						</tr>
+					</table>
+				</td>				
+			</tr>
+		</table>
+		
+		{:if $mycms['operation'] === false:}
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head">{:$lang['page'][1]:}</td>
+				<td class="field_head">{:$lang['page'][2]:}</td>
+				<td class="field_head">{:$lang['page'][3]:}</td>
+				<td class="field_head">{:$lang['page'][4]:}</td>
+			</tr>
+			{:foreach $mycms['backup_files'] as $n:}
+			<tr>
+				<td>{:$n['name']:}</td>
+				<td>{:$n['time']:}</td>
+				<td>{:$n['size']:}</td>
+				<td class="operation">
+					<a href="mysql_backup.php?action=download&file={:$n['name']:}"><img src="../inc/templates/manage/images/operation/download.png" title="{:$lang['page'][21]:}" /></a>
+					<a href="mysql_backup.php?action=recover&file={:$n['name']:}" onclick="return confirm('{:$lang['page'][19]:}');"><img src="../inc/templates/manage/images/operation/cog_go.png" title="{:$lang['page'][22]:}" /></a>
+					<a href="mysql_backup.php?action=del&file={:$n['name']:}" onclick="return confirm('{:$lang['page'][20]:}');"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page'][23]:}" /></a>
+				</td>
+			</tr>
+			{:foreachelse:}<tr><td colspan="4" class="field_head">{:$lang['page'][5]:}</td></tr>
+			{:/foreach:}
+		</table>
+		{:else:}
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head">Table</td>
+				<td class="field_head">Op</td>
+				<td class="field_head">Msg_type</td>
+				<td class="field_head">Msg_text</td>
+			</tr>
+			{:foreach $mycms['operation'] as $n:}
+			<tr>
+				<td>{:$n[0]:}</td>
+				<td>{:$n[1]:}</td>
+				<td>{:$n[2]:}</td>
+				<td>{:$n[3]:}</td>
+			</tr>
+			{:/foreach:}
+		</table>
+		{:/if:}
+		<table class="table top_line">
+			<tr>
+				<td>
+					<table style="margin:0 auto;" cellpadding="10" cellspacing="0" border="0">
+						<tr>
+							<td><a class="submit" onclick="progress();" href="mysql_backup.php?action=backup">{:$lang['page'][6]:}</a></td>
+							<td><a class="submit" href="mysql_backup.php?action=check">{:$lang['page'][10]:}</a></td>
+							<td><a class="submit" href="mysql_backup.php?action=optimize">{:$lang['page'][11]:}</a></td>
+							<td><a class="submit" href="mysql_backup.php?action=repair">{:$lang['page'][12]:}</a></td>
+							<td><a class="submit" href="mysql_backup.php?action=analyze">{:$lang['page'][13]:}</a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>		
+		{:if $admin['information']:}
+		<div class="information rounded"><ol></ol>
+			1、{:$lang['page'][16]:}<br />
+			2、{:$lang['page'][17]:}<br />
+			3、{:$lang['page'][18]:}<br />
+			4、{:$lang['page'][24]:}<br />
+			5、{:$lang['page'][26]:}<br />
+		</div>
+		{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

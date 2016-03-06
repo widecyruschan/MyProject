@@ -1,0 +1,1 @@
+<?php/** * 开启短消息中心的  * 使用到的接口函数： * uc_pm()		必须，跳转到短消息中心的 URL * uc_pm_checknew()	可选，用于全局判断是否有新短消息，返回 $newpm 变量 */include( "./inc/header.php" );login_check();if ($uc_switch==0){	echo "此功能需开启UCenter功能";	exit();}//打开短消息中心的窗口uc_pm_location($tun2_id, $newpm);exit;?>

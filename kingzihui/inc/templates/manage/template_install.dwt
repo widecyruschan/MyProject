@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+var top_error_isshow = false;
+// 模板安装
+function install(zipurl,di){
+	scroll(0,0);
+	$('.top_error').hide();
+	top_error_isshow = false;
+	$('.top_information span').html('{:$lang['page'][20]:}');
+	$('.top_information').css({'opacity':'1','background-image':'url(../inc/templates/manage/images/wait.gif)'});
+	$('.top_information').show();
+	
+	$.ajax({
+		type : 'POST',
+		url: 'app.php',
+		data : 'a=install&zipurl=' + zipurl,
+		dataType : 'script',
+		complete : function(){
+			
+			
+			if(typeof(result) != 'undefined' && result == 9){ // 安装成功
+				$('#' + di).css('display','inline'); // 显示已经安装
+				$('.top_information').css({'opacity':'1','background-image':'url(../inc/templates/manage/images/operation/accept.png)'}); // 显示消息图标
+				$('.top_information span').html('{:$lang['page'][21]:}'); // 显示消息
+			} else {
+				$('.top_information').hide();
+				mycms.top_error('{:$lang['page'][22]:}');
+				top_error_isshow = true;
+			}
+		}
+	});	
+}
+</script>
+<style type="text/css">
+.free,.vip,.business{display:block; width:80px; height:27px; line-height:27px; padding:3px 0 0 0; color:#333; text-align:center; position:absolute;}
+.free{margin:-9px auto auto -230px;}
+.vip{margin:-9px auto auto -160px; }
+.business{margin:-9px auto auto -90px;}
+.vip:hover,.free:hover,.business:hover{color:#333;}
+.now{background:url(../inc/templates/manage/images/switch_bg.png) 0 0 no-repeat;}
+.underline{background:url(../inc/templates/manage/images/0101.gif) bottom repeat-x; word-break:break-all;}
+.underline table td{padding:2px; margin:0; height:25px;}
+.list{margin:0 auto 20px auto;}
+.price{color:#F00;}
+{:if $mycms['type'] == 3:}
+.list .info{line-height:21px;}
+{:else:}
+.list .info{line-height:25px;}
+{:/if:}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td><a href="template_install.php?type=1" class="free {:if $mycms['type'] == 1:}now{:/if:}">{:$lang['page'][1]:}</a></td>
+							<td><a href="template_install.php?type=2" class="vip {:if $mycms['type'] == '2':}now{:/if:}">{:$lang['page'][2]:}</a></td>
+							<td><a href="template_install.php?type=3" class="business {:if $mycms['type'] == 3:}now{:/if:}">{:$lang['page'][3]:}</a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+
+		<div class="error rounded top_error hide"><ol></ol><span></span></div>
+		<div class="information rounded top_information hide"><ol></ol><span></span></div>
+		
+		{:if $mycms['xml_status'] == true:}
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head underline">{:$lang['page'][4]:}</td>
+				<td class="underline"><b>{:$lang['page'][5]:}</b></td>
+				<td class="field_head underline" width="100">{:$lang['page'][6]:}</td>
+			</tr>
+		{:foreach $mycms['template_list'] as $i => $n:}
+			<tr>
+				<td align="center" class="underline"><img src="{:$n['img']:}" width="120" height="160" border="0" style="padding:2px; margin:10px 0; border:1px #CCC solid;" /></td>
+				<td class="info underline">
+					{:'<b>'|cat:$lang['page'][7]|cat:'</b>'|cat:$n['name']:}<span id="di_{:$i:}" {:if in_array($n['tid'],$mycms['template_tid']):}style="display:inline;"{:else:}style="display:none;"{:/if:}> &nbsp;&nbsp; <img src="../inc/templates/manage/images/operation/accept.png" width="16" height="16" border="0"> <span class="b red">{:$lang['page'][24]:}</span></span><br />
+					{:'<b>'|cat:$lang['page'][8]|cat:'</b>'|cat:$n['version']:}<br />
+					<b>{:$lang['page'][9]:}</b><a target="_blank" href="{:$n['website']:}">{:$n['production']:}</a><br />
+					{:'<b>'|cat:$lang['page'][10]|cat:'</b>'|cat:$n['date']:}<br />
+					{:'<b>'|cat:$lang['page'][11]|cat:'</b>'|cat:$n['module']:}<br />
+					{:if $mycms['type'] == 3:}{:'<b>'|cat:$lang['page'][12]|cat:'</b><span class="price">'|cat:$n['price']:}</span><br />{:/if:}
+					{:'<b>'|cat:$lang['page'][13]|cat:'</b>'|cat:$n['introduction']:}
+				</td>
+				<td class="underline" align="center">
+					<table cellpadding="0" cellspacing="0" border="0">
+						{:if $mycms['type'] == 1:}
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/cog_go.png" width="16" height="16" border="0"></td>
+							<td><a href="javascript:install('{:$n['zipurl']:}','di_{:$i:}');">{:$lang['page'][14]:}</a></td>
+						</tr>
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/download.png" width="16" height="16" border="0"></td>
+							<td><a target="_blank" href="{:$n['zipurl']:}">{:$lang['page'][15]:}</a></td>
+						</tr>
+						{:/if:}
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/page_world.png" width="16" height="16" border="0"></td>
+							<td><a target="_blank" href="{:$n['demo']:}">{:$lang['page'][16]:}</a></td>
+						</tr>
+						{:if $mycms['type'] == 2:}
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/award.png" width="16" height="16" border="0"></td>
+							<td><a target="_blank" href="http://www.CyrusChanHK.com">{:$lang['page'][18]:}</a></td>
+						</tr>
+						{:/if:}						
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/edit.png" width="16" height="16" border="0"></td>
+							<td><a target="_blank" href="{:$n['download']:}">{:$lang['page'][17]:}</a></td>
+						</tr>
+						{:if $mycms['type'] == 3:}
+						<tr>
+							<td><img src="../inc/templates/manage/images/operation/shopping.png" width="16" height="16" border="0"></td>
+							<td><a target="_blank" href="http://www.CyrusChanHK.com">{:$lang['page'][19]:}</a></td>
+						</tr>
+						{:/if:}
+					</table>
+				</td>
+			</tr>
+		{:/foreach:}
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td>{:$mycms['page']:}</td>
+			</tr>
+		</table>
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page'][25]:}</div>{:/if:}
+		{:else:} <!--  //// 获取XML失败 -->
+		<div class="error rounded"><ol></ol><span>{:$lang['page'][23]:}</span></div>
+		{:/if:}	
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

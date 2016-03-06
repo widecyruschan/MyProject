@@ -1,0 +1,1 @@
+<?phpout();$name=$_GET['name'];?>

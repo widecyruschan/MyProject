@@ -1,0 +1,57 @@
+<?phprequire("../../inc/header.php");/*		SoftName : EmpireBak Version 2010		Author   : wm_chief		Copyright: Powered by www.phome.net*/DoSetDbChar('utf8');
+E_D("DROP TABLE IF EXISTS `cms_article`;");
+E_C("CREATE TABLE `cms_article` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `lang` tinyint(3) unsigned NOT NULL default '1',
+  `channel` int(10) unsigned NOT NULL default '0',
+  `category` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `brief` varchar(50) NOT NULL,
+  `color` varchar(7) NOT NULL,
+  `bold` tinyint(1) unsigned NOT NULL default '0',
+  `tag` varchar(100) NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `source` varchar(50) NOT NULL,
+  `sourceurl` varchar(50) NOT NULL,
+  `keyword` varchar(100) NOT NULL,
+  `introduction` text NOT NULL,
+  `content` mediumtext NOT NULL,
+  `template` varchar(50) NOT NULL,
+  `comment` tinyint(1) unsigned NOT NULL default '0',
+  `commenttotal` int(10) unsigned NOT NULL default '0',
+  `picture` text NOT NULL,
+  `recom` tinyint(1) unsigned NOT NULL default '0',
+  `published` tinyint(1) unsigned NOT NULL default '0',
+  `audit` tinyint(1) unsigned NOT NULL default '0',
+  `recycle` tinyint(1) unsigned NOT NULL default '0',
+  `permission` varchar(255) NOT NULL,
+  `filename` varchar(50) NOT NULL,
+  `click` int(10) unsigned NOT NULL default '0',
+  `money` decimal(8,2) unsigned NOT NULL default '0.00',
+  `integral` int(10) unsigned NOT NULL default '0',
+  `buyuser` text NOT NULL,
+  `page` int(5) unsigned NOT NULL default '0',
+  `agree` int(10) unsigned NOT NULL default '0',
+  `disagree` int(10) unsigned NOT NULL default '0',
+  `sort` int(10) unsigned NOT NULL default '0',
+  `publisher` varchar(20) NOT NULL,
+  `addtime` int(10) unsigned NOT NULL default '0',
+  `backgroudColour` varchar(45) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `lang` (`lang`,`channel`,`category`,`published`,`audit`,`recycle`),
+  KEY `title` (`title`)
+) ENGINE=MyISAM AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC");
+E_D("replace into `cms_article` values('62','1','6','','业务简介','Business','','0','Business','','','',' 业务范围',' 业务范围','<img alt=\"\" src=\"http://www.tfronthk.com/inc/uploads/ckeditor/20140513121218565.png\" />','','1','0','inc/uploads/article/201307/20130713001022941.jpg','1','1','1','0','0','','963','0.00','0','','0','0','0','0','cyruschan','1373385600','');");
+E_D("replace into `cms_article` values('84','1','37','','香港保险','','','0','','','','','','•	AIA重疾推广活动，4月17日-5月31日投保可免费获365天意外住院津贴保障\r\n•	裕满人生保费优惠至8月31日，最高优惠3个月保费\r\n','&bull; AIA重疾推广活动，4月17日-5月31日投保可免费获365天意外住院津贴保障<br />\r\n&bull; 裕满人生保费优惠至8月31日，最高优惠3个月保费<br />\r\n<img alt=\"\" src=\"/inc/uploads/ckeditor/index.png\" style=\"width: 297px; height: 417px;\" />','','1','0',',','0','1','1','0','0','','744','0.00','0','','0','0','0','0','cyruschan','1399996800','');");
+E_D("replace into `cms_article` values('65','1','2','','公司简介','About Us','','0','公司简介','','','','公司简介','','<p>\r\n	<img alt=\"\" src=\"/inc/uploads/ckeditor/about(1).png\" style=\"width: 346px; height: 219px; float: right; \" />&nbsp; &nbsp; &nbsp; &nbsp; 鼎豐財富十几年的业务经验2013年正式在香港注册成立鼎豐投資咨詢有限公司。</p>\r\n<div>\r\n	<p>\r\n		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2014年，鼎豐財富与广州善众移民咨询公司合并，优化资源配置和增强投资实力。鼎豐財富三大业务板块为不同业务需求的客户量身设计专属的项目方案，协助客人真正地做到&ldquo;财富管理的私人订制&rdquo;。鼎豐財富致力为客户提供高质量服务，无论是个人的保险规划，还是家族的资产配置，甚至想移民海外，我们都能悉心地为你服务。<br />\r\n		&nbsp;</p>\r\n	<div id=\"xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd\">\r\n		<strong><span style=\"font-size:22px;\">公司架构：</span></strong></div>\r\n	<div>\r\n		<br />\r\n		<strong>姚慧雯：</strong>鼎豐財富CEO，鼎豐財富创始人，硕士毕业，曾于各大型金融机构担任高管职位，透彻了解各种金融产品，业绩量惊人，曾获得多个金融奖项。拥有香港保险经纪牌照，以专才身份获得香港移民资格。<br />\r\n		<br />\r\n		<strong>苏琸傛：</strong>鼎豐財富CFO，曾从事政府公务员及国有企业十几年，对政府部门及国家政策深入了解。丰富的工作经验和独特的思维方式，成功转型为企业的首席财务官。现主要负责300万美元以上的大额资产配置及家族信托等高端业务，与国内外多家银行及金融机构有良好的合作关系，让大企业家们的资产可持续发展及传承。<br />\r\n		<br />\r\n		<strong>李彦芝： </strong>鼎豐財富COO，十几年外企工作经验，有多国的地方政府、上市公司、太平绅士、会计师事务所及律师事务所的权威支持。洞悉各国移民法例，以及当地政府需求，与每年移民政策的变动同步。善众移民咨询公司创始人，成功帮助多个家庭投资移民香港、新加坡、澳洲、美洲、欧洲、等地。<br />\r\n		&nbsp;</div>\r\n</div>\r\n','','1','0','inc/uploads/article/201307/20130716112058339.jpg','1','1','1','0','0','','356','0.00','0','','0','0','0','0','admin','1310745600','');");
+E_D("replace into `cms_article` values('66','1','33','','整体形象设计师培训','。','','0','《世界》杂志APP','','','','整体形象设计师培训','整体形象设计师年收入已经达到10万、20万、30万、50万、100万以上！\r\n英皇国际形象礼仪学院、英皇子慧形象设计学院不但培养最优秀的人才，更提供最成功的就业模式和创业系统！唯一拥有最完善、最系统的培训教程，最实用的教学模式，让您在短时间内成为优秀的整体形象设计师，帮助您实现美丽梦想，让您的人生更精彩。\r\n','<div class=\"main\" style=\"padding-bottom:40px;\">\r\n	整体形象设计师年收入已经达到10万、20万、30万、50万、100万以上！</div>\r\n<div class=\"main\" style=\"padding-bottom:40px;\">\r\n	英皇国际形象礼仪学院、英皇子慧形象设计学院不但培养最优秀的人才，更提供最成功的就业模式和创业系统！唯一拥有最完善、最系统的培训教程，最实用的教学模式，让您在短时间内成为优秀的整体形象设计师，帮助您实现美丽梦想，让您的人生更精彩。</div>\r\n<p>\r\n	<span style=\"color:#7d6936;\"><strong>【学习对象】</strong></span></p>\r\n<p>\r\n	<br />\r\n	&middot; 想进一步提升综合形象素质, 渴望从事整体形象设计事业的女性或男性<br />\r\n	&nbsp;<br />\r\n	<span style=\"color:#7d6936;\"><strong>【学习成果】</strong></span></p>\r\n<p>\r\n	<br />\r\n	&middot; 掌握服饰、配饰等各种形象打造技能<br />\r\n	&middot; 了解服装的语言、极大提高着装品位<br />\r\n	&middot; 掌握优雅的肢体语言<br />\r\n	&middot; 掌握各种场合的礼仪礼节<br />\r\n	&middot; 掌握优美的动听语气、语言<br />\r\n	&middot; 掌握女性魅力的本质以及修炼女性魅力的技巧<br />\r\n	&middot; 掌握风格、色彩定位方法<br />\r\n	&middot; 掌握化妆、发型与脸形、风格造型定位与方法技巧<br />\r\n	&middot; 掌握体现形象、气质的心理学科方法<br />\r\n	&middot; 掌握演讲技巧、建立自信心态的方法<br />\r\n	&middot; 成为优秀自信的整体形象设计师并颁发英皇国际形象礼仪学院毕业证书</p>\r\n','Portfolio_view','1','0','inc/uploads/article/201307/20130720100532042.jpg,inc/uploads/article/201307/20130720100640541.jpg,inc/uploads/article/201307/20130720100828134.jpg,inc/uploads/article/201307/20130720100938934.jpg','0','1','1','1','0','','351','0.00','0','','0','0','0','0','cyruschan','1374249600','#194982');");
+E_D("replace into `cms_article` values('67','1','25','','我们的环境','我们的环境','','0','我们的环境','','','','我们的环境','双晖传媒主张拥有自由、舒适、专业、易交流的开放式办公环境。分享设计的快乐，享受创新所带来的无限可能！期待你的加入！','双晖传媒主张拥有自由、舒适、专业、易交流的开放式办公环境。分享设计的快乐，享受创新所带来的无限可能！期待你的加入！<br />\r\n<br />\r\n<span style=\"color: #ff6600\"><strong><span style=\"color: #ff6600\"><a href=\"http://tg-vision.com/#aboutjob\"><span style=\"color: #ff6600\">了解招聘职位详情</span></a></span></strong></span><span style=\"color: #ff6600\"><strong><br />\r\n</strong><br />\r\n<img alt=\"tgvision.jpg\" height=\"2431\" src=\"http://tg-vision.com/d/file/news/shuanghui/201306/79e877a194ca26a5740e51f9ba8b1564.jpg\" width=\"700\" /></span>','','1','0','inc/uploads/article/201307/20130720164117655.jpg,inc/uploads/article/201307/20130720164014531.jpg,inc/uploads/article/201307/20130720163736768.jpg','1','1','1','1','0','','746','0.00','0','','0','0','0','0','admin','1374249600','');");
+E_D("replace into `cms_article` values('68','1','22','','第一步旅游APP','第一步旅游APP','','0','第一步旅游APP','','','','第一步旅游APP','双晖传媒合作第一步旅游，为旗下官方网站及APP客户端打造全新视觉体验。采用简约扁平的设计风格和鲜亮明快的色彩搭配，呈现轻松愉快的个人定制旅行氛围的同时去掉冗余的元素来增强内容的展示比重。最大的优化了界面交互流程和页面浏览体验。友好的界面为用户带来高品质的旅行定制享受。','<div class=\"main\" id=\"conpicDiv\" style=\"padding-bottom:40px;\">\r\n	<p>\r\n		<img alt=\"diyibu_p1.jpg\" height=\"557\" src=\"http://tg-vision.com/d/file/portfolio/app/201305/2fb96bdbbeb3ed141b54a6bf33823558.jpg\" width=\"1000\" /><img alt=\"diyibu_p2.jpg\" height=\"1001\" src=\"http://tg-vision.com/d/file/portfolio/app/201305/c245800030bc015f97fd601460ecafbb.jpg\" width=\"1000\" /><img alt=\"diyibu_p3.jpg\" height=\"951\" src=\"http://tg-vision.com/d/file/portfolio/app/201305/0a29c78a63e13edfce2058144a28bb37.jpg\" width=\"1000\" /><img alt=\"diyibu_p4.jpg\" height=\"951\" src=\"http://tg-vision.com/d/file/portfolio/app/201305/3fe28915bf977c9bd70b164fe708953d.jpg\" width=\"1000\" /><img alt=\"diyibu_p5.jpg\" height=\"951\" src=\"http://tg-vision.com/d/file/portfolio/app/201305/7860fab413655aa175ffd940d73e66d9.jpg\" width=\"1000\" /></p>\r\n</div>','','1','0','http://tg-vision.com/d/file/portfolio/app/201305/d45b9dd30bad8f9ea4f7579aede5a7b8.jpg,http://tg-vision.com/d/file/MobileApp/201306/160b446cdb18ecbabcc4efffd474f4f5.jpg,http://tg-vision.com/d/file/portfolio/app/201305/319256e0c2f9e42b6d3a0056ee7ce9d9.jpg,http://tg-vision.com/d/file/portfolio/app/201305/319256e0c2f9e42b6d3a0056ee7ce9d9.jpg,http://tg-vision.com/d/file/portfolio/app/201305/5cf7586420b58d4b19271320687b87eb.jpg','0','1','1','1','0','','693','0.00','0','','0','0','0','0','admin','1374768000','#FFFFFF');");
+E_D("replace into `cms_article` values('70','1','29','','实习设计师助理','','','0','','','','','','','<ul>\r\n	<li>\r\n		岗位职责：</li>\r\n	<li>\r\n		参与项目设计执行流程，了解产品开发全过程。辅助设计师完成重大项目。参与一定的产品分析，交互设计，产品界面视觉设计及规范文档整理工作；</li>\r\n	<li>\r\n		任职要求：</li>\r\n	<li>\r\n		精通设计类相关软件，热衷于界面设计与交互设计；具有一定的交互分析以及理解能力；优秀的视觉设计感觉与潜力；有完整独立作品可供参考。</li>\r\n	<li>\r\n		招聘人数：1</li>\r\n	<li>\r\n		工作地点：北京</li>\r\n	<li>\r\n		请发简历到：hr@tg-vision.com</li>\r\n</ul>\r\n','','1','0',',','0','1','1','1','0','','769','0.00','0','','0','0','0','0','admin','1374854400','');");
+E_D("replace into `cms_article` values('79','1','33','','商务礼仪','Business etiquette','','0','Business etiquette','','','','商务礼仪','Business etiquette','商务礼仪','','1','0',',','0','1','1','1','0','','884','0.00','0','','0','0','0','0','cyruschan','1397318400','');");
+E_D("replace into `cms_article` values('80','1','33','','职场礼仪','Workplace etiquette','','0','职场礼仪','','','','职场礼仪','Workplace etiquette','职场礼仪','','1','0',',','0','1','1','1','0','','902','0.00','0','','0','0','0','0','cyruschan','1397318400','');");
+E_D("replace into `cms_article` values('81','1','34','','贵格订制系列课程','Quaker custom series course','','0','贵格订制系列课程','','','','贵格订制系列课程','想进一步提升综合形象素质的女性\r\n· 在婚姻危机中为爱情困惑，渴望解读爱的秘密的女性\r\n· 事业有成，但尚未把女人做到极致优雅美好境界的女性\r\n· 爱美却盲目投入，尽管大量购买名牌，然而收效甚微的女性','【学习对象】<br />\r\n&middot; 想进一步提升综合形象素质的女性<br />\r\n&middot; 在婚姻危机中为爱情困惑，渴望解读爱的秘密的女性<br />\r\n&middot; 事业有成，但尚未把女人做到极致优雅美好境界的女性<br />\r\n&middot; 爱美却盲目投入，尽管大量购买名牌，然而收效甚微的女性<br />\r\n&middot; 希望美丽与智慧集于一身的女性<br />\r\n&middot; 希望家庭幸福的女性<br />\r\n&middot; 希望事业、爱情完美结合的女性<br />\r\n&middot; 希望改变命运的女性<br />\r\n&middot; 希望得到更多人关注和得到更多真心尊重的女性<br />\r\n&middot; 希望自己成为一位优雅淑女<br />\r\n<br />\r\n【学习成果】<br />\r\n&middot; 掌握服饰、妆容、配饰等各种形象打造技能<br />\r\n&middot; 了解服装的语言、极大提高着装品位<br />\r\n&middot; 掌握优雅的肢体语言<br />\r\n&middot; 掌握各种场合的礼仪礼节<br />\r\n&middot; 掌握优美的动听语气、语言<br />\r\n&middot; 掌握女性魅力的本质以及修炼女性魅力的技巧<br />\r\n&middot; 成为一个美丽与智慧并重的幸福女性<br />\r\n&middot; 认识男性的性格特性、获得与男性愉悦相处技巧<br />\r\n&middot; 建立自信心态的方法，成为一个人人羡慕的精致女人<br />\r\n<br />\r\n','','1','0',',','0','1','1','1','0','','83','0.00','0','','0','0','0','0','cyruschan','1397318400','');");
+E_D("replace into `cms_article` values('82','1','25','','专题讲座','Lecture','','0','专题讲座','','','','专题讲座','主题：家族信托讲座\r\n时间：4月29日2:00PM\r\n内容：財富传承，合理规划巨额财富\r\n讲师：Ada Su\r\n地址：广州市天河区珠江新城华强路2号富力盈丰大厦1013室','主题：家族信托讲座<br />\r\n时间：4月29日2:00PM<br />\r\n内容：財富传承，合理规划巨额财富<br />\r\n讲师：Ada Su<br />\r\n地址：广州市天河区珠江新城华强路2号富力盈丰大厦1013室 ','','1','0',',','0','1','1','0','0','','506','0.00','0','','0','0','0','0','cyruschan','1397318400','');");
+E_D("replace into `cms_article` values('83','1','29','','联系方式','Contact','','0','联系方式','','','','Contact','Contact','电话：020-37304859<br />\r\n邮箱：teamfront@163.com<br />\r\n地址：广州市天河区珠江新城华强路2号富力盈丰大厦1013室<br />\r\n<br />\r\n<img alt=\"\" src=\"/inc/uploads/ckeditor/map.png\" style=\"width: 600px; height: 551px;\" /><br />','','1','0',',','0','1','1','0','0','','314','0.00','0','','0','0','0','0','cyruschan','1397318400','');");
+E_D("replace into `cms_article` values('85','1','41','','qqq','qqqq','','0','qq','','','','qq','','qqq','','1','0',',','0','1','1','1','0','','794','0.00','0','','0','0','0','0','admin','1402070400','');");
+require("../../inc/footer.php");?>

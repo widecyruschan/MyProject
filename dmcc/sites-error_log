@@ -1,0 +1,8 @@
+[Sun Mar 06 20:28:03.332883 2016] [authz_core:error] [pid 11066] [client 127.0.0.1:61703] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/
+[Sun Mar 06 20:29:20.675284 2016] [authz_core:error] [pid 11072] [client 127.0.0.1:61747] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/
+[Sun Mar 06 20:40:48.782155 2016] [authz_core:error] [pid 11173] [client 127.0.0.1:62199] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/index.html
+[Sun Mar 06 20:41:05.325392 2016] [authz_core:error] [pid 11170] [client 127.0.0.1:62218] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/index.php
+[Sun Mar 06 20:42:28.356944 2016] [authz_core:error] [pid 11174] [client 127.0.0.1:62278] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/
+[Sun Mar 06 20:46:04.091685 2016] [authz_core:error] [pid 11167] [client 127.0.0.1:62397] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/
+[Sun Mar 06 20:46:14.873978 2016] [authz_core:error] [pid 11205] [client 127.0.0.1:62411] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/
+[Sun Mar 06 20:48:57.046979 2016] [authz_core:error] [pid 11206] [client 127.0.0.1:62497] AH01630: client denied by server configuration: /Volumes/Macintosh SEA_1TD/Users/cyrus/Sites/dmcc/

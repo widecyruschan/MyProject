@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('file_list');
+	mycms.keysubmit('form','submit',true);
+});
+</script>
+<style type="text/css">
+textarea{width:96%; height:800px; border:1px #999 solid; color:#093; padding:5px; font-size:13px; font-family:'新宋体','宋体';}
+.frame{margin:10px auto; width:98%;}
+.frame_right{border-right:1px solid #666;}
+.file_list td{height:25px;}
+.file_list a{color:#F60;}
+.file_list a:hover{color:#000;}
+.field_head{border-bottom:1px solid #666;}
+.path{color:#090; font-size:13px;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td>{:$lang['page'][1]:}</td>
+							<td>
+								<select class="select rounded" onChange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">
+								{:foreach $mycms['lang_dir'] as $n:}
+								<option value="template_language.php?dir={:$n:}" {:if $mycms['dir'] == $n:}selected="selected"{:/if:}>{:$n:}</option>
+								{:/foreach:}
+								</select>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+		<form action="" method="post" name="form" id="form">
+		<table cellpadding="0" class="frame" cellspacing="0" border="0">
+			<tr>
+				<td class="field_head frame_right" height="30">{:$mycms['dir']:} - {:$lang['page'][4]:}</td>
+				<td class="field_head">{:if $mycms['file_title'] != '':}{:$mycms['file_title']:}{:else:}{:$lang['page'][5]:}{:/if:} - {:$mycms['file_name']:}</td>
+			</tr>
+			<tr><td height="10" class="frame_right"></td><td>&nbsp;</td></tr>
+			<tr>
+				<td rowspan="3" class="frame_right" valign="top" width="300">
+					<table class="file_list" cellpadding="0" width="290" cellspacing="0" border="0">
+					{:foreach $mycms['file_list'] as $n:}
+					<tr>
+						<td align="right" {:if $mycms['file_name'] == $n[0]:}class="b red"{:/if:}>{:if $n[1] != '':}{:$n[1]:}{:else:}{:$lang['page'][5]:}{:/if:}：</td>
+						<td><a href="template_language.php?dir={:$mycms['dir']:}&file={:$n[0]:}">{:$n[0]:}</a></td>
+					</tr>					
+					{:/foreach:}
+					</table>
+				</td>
+				<td align="center">
+					<table cellpadding="0" cellspacing="0" border="0" width="96%">
+						<tr>
+							<td></td>
+							<td align="right">{:$lang['page'][6]:}<span class="path">inc/templates/frontend/{:$mycms['dir']:}/{:$mycms['file_name']:}</span></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top"><textarea name="code" wrap="off" class="rounded">{:$mycms['file_code']:}</textarea></td>
+			</tr>
+			<tr>
+				<td valign="top">
+					<table class="table">
+						<tr>
+							<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+							<td width="80"></td>
+							<td><a class="submit reset" href="javascript:form.reset();">{:$lang['common']['reset']:}</a></td>
+						</tr>
+					</table>				
+				</td>
+			</tr>
+		</table>
+		</form>
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page'][8]:}</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿<?php//数据库连接信息$DB_Host = 'www.gzcgc.net';$DB_Database = 'huadong';$DB_User = 'root';$DB_Password = 'oold4kc';$DB_dbprefix = 'hd_';?>

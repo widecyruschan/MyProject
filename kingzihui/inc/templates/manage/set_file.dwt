@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+function showrow(i){
+	if($('.son'+i).css('display') == 'none'){
+		$('.list tr').not($('.father,.nothide')).hide();
+		$('.son'+i).fadeIn(800);
+	} else {
+		$('.son'+i).hide();
+	}
+}
+$(function(){
+	mycms.title2div('title2div');
+	mycms.alternately('list');
+	mycms.keysubmit('afc','keysubmit',true);
+	$('.list .son0').fadeIn(800);
+	$('.father,.nothide').show();
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['page_setup']:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td>{:* 搜索 *:}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>	
+	
+		<form name="afc" action="" id="afc" method="post">
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr class="nothide">
+				<td class="field_head">{:$lang['page']['template_name']:}</td>
+				<td class="field_head">{:$lang['page']['is_open']:}<img src="../inc/templates/manage/images/operation/help.png" class="title2div" title="{:$lang['page']['title'][0]:}" width="16" height="16" /></td>
+				<td class="field_head">{:$lang['page']['icon_file']:}<img src="../inc/templates/manage/images/operation/help.png" class="title2div" title="{:$lang['page']['title'][2]:}" width="16" height="16" /></td>
+				<td class="field_head">{:$lang['page']['file_name']:}<img src="../inc/templates/manage/images/operation/help.png" class="title2div" title="{:$lang['page']['title'][3]:}" width="16" height="16" /></td>
+				<td class="field_head">{:$lang['page']['menu_display']:}<img src="../inc/templates/manage/images/operation/help.png" class="title2div" title="{:$lang['page']['title'][4]:}" width="16" height="16" /></td>
+				<td class="field_head">{:$lang['page']['purviews']:}<img src="../inc/templates/manage/images/operation/help.png" class="title2div" title="{:$lang['page']['title'][5]:}" width="16" height="16" /></td>
+				<td class="field_head">{:$lang['page']['sort']:}<img src="../inc/templates/manage/images/operation/help.png" class="title2div" title="{:$lang['page']['title'][6]:}" width="16" height="16" /></td>
+			</tr>
+			{:foreach $mycms['afc'] as $i => $n:}
+			<tr class="father">
+				<td style="text-align:left;"><input name="afcs[{:$i:}][attribute][1]" size="15" type="text" class="input rounded" value="{:$n['attribute'][1]:}" /> <a href="javascript:showrow({:$i:});"><img src="../inc/templates/manage/images/go_down.png" class="title2div" title="{:$lang['page']['title'][7]:}" border="0" width="16" height="16" /></a></td>
+				<td><input name="afcs[{:$i:}][attribute][0]" type="checkbox" value="1" {:if $n['attribute'][0]==1:}checked="checked"{:/if:} /></td>
+				<td><input name="afcs[{:$i:}][attribute][2]" size="10" type="text" class="input rounded" value="{:$n['attribute'][2]:}" /></td>
+				<td><img src="../inc/templates/manage/images/operation/disabled.png" /></td>
+				<td><img src="../inc/templates/manage/images/operation/disabled.png" /></td>
+				<td><img src="../inc/templates/manage/images/operation/disabled.png" /></td>
+				<td><input name="afcs[{:$i:}][attribute][3]" size="2" type="text" class="input rounded" value="{:$n['attribute'][3]:}" /></td>
+			</tr>
+			{:foreach $n['submenu'] as $i2 => $n2:}
+			<tr class="son{:$i:}" style="display:none;">
+				<td style="padding:0 0 0 80px; text-align:left;"><input name="afcs[{:$i:}][submenu][{:$i2:}][1]" size="15" type="text" class="input rounded" value="{:$n2[1]:}" /></td>
+				<td><input name="afcs[{:$i:}][submenu][{:$i2:}][0]" type="checkbox" value="1" {:if $n2[0]==1:}checked="checked"{:/if:} /></td>
+				<td><input name="afcs[{:$i:}][submenu][{:$i2:}][2]" size="10" type="text" class="input rounded" value="{:$n2[2]:}" /></td>
+				<td><input name="afcs[{:$i:}][submenu][{:$i2:}][3]" size="15" type="text" class="input rounded" value="{:$n2[3]:}" /></td>
+				<td><input name="afcs[{:$i:}][submenu][{:$i2:}][4]" size="2" type="text" class="input rounded" value="{:$n2[4]:}" /></td>
+				<td><input name="afcs[{:$i:}][submenu][{:$i2:}][5]" size="2" type="text" class="input rounded" value="{:$n2[5]:}" /></td>
+				<td><input name="afcs[{:$i:}][submenu][{:$i2:}][6]" size="2" type="text" class="input rounded" value="{:$n2[6]:}" /></td>
+			</tr>	
+			{:/foreach:}{:/foreach:}
+		</table>
+		<table class="table">
+			<tr>
+				<td align="right" height="60"><a id="keysubmit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"></td>
+				<td><a class="submit reset" href="javascript:afc.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>
+		</form>
+		{:$mycms['page']:}
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>{:$lang['page']['notes']:}</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<?phpout();unset($_SESSION['admin_user']);unset($_SESSION['admin_hits']);?>

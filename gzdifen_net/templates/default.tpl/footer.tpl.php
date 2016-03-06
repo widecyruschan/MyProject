@@ -1,0 +1,1 @@
+<? if(!defined('IN')) exit('Access Denied');?></div><div id="footer">                      <div class="copyright"><span>Powered by <a href="http://www.gzcgc.net">PHP CMS</a></span>CopyRight © 2009-2011 PHPCMS Technology. |  <?=$icp?></div>      </div></body></html>

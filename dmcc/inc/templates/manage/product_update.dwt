@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/datepicker.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript" src="../inc/script/color_select.js"></script>
+<script type="text/javascript" src="../inc/tools/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/datepicker.js"></script>
+<script type="text/javascript">
+var items = {:$mycms['product']['items_']:}; //图片张数
+//图片配置缺省值，PHP字串转Js数组
+var picture = new Array({:$mycms['product']['picture_config_js']:}); 
+//修改时，多图片URL转成js数组
+var picture_url = new Array({:$mycms['product']['picture_js']:});
+// 多图上传及裁切设置
+// var ,1减，2加，其它参数没有变化
+function sheets(val){
+	items = (val==1 && items > 1) ? items - 1 : ((val == 2 && items <= 30) ? items + 1 : items);
+	var upload = '';
+	var cut = '';
+	for(i=0; i<items; i++){
+		upload += '<div class="upload"><ul>';
+		//添加图片上传数量时保留原上传的表单数据
+		if($('#picture'+i).val() != undefined) picture_url[i] = $('#picture'+i).val();
+
+		{:if $mycms['action'] == 'update':}
+		if (picture_url[i] != ''){
+			upload += '<li class="upload_pre"><img src="../inc/templates/manage/images/operation/picture.png" width="16" height="16" class="title2div" title="<img width=180 src=../'+  picture_url[i] +' />" /></li>';
+		} else {
+			upload += '<li class="upload_pre"><img src="../inc/templates/manage/images/operation/disabled.png" width="16" height="16" /></li>';
+		}
+		{:/if:}
+		
+		upload += '<li><input type="text" title="" class="input rounded" name="picture_url[]" id="picture'+ i +'" size="20" value="'+ picture_url[i] +'" /></li>';
+		upload += '<li><iframe src="upload.php?dir=product&preview=upload_preview&return_id=picture'+ i +'" width="183" height="30" border="0" scrolling="no" frameborder="0"></iframe></li><li>';
+		if(i == 0){
+			upload += '<a href="javascript:sheets(2);"><img src="../inc/templates/manage/images/operation/add_2.png" width="16" height="16" title="{:$lang['page']['add_upload']:}" /></a>&nbsp;';
+			upload += '<a href="javascript:sheets(1);"><img src="../inc/templates/manage/images/operation/cut_2.png" width="16" height="16" title="{:$lang['page']['del_upload']:}" /></a>';
+		}
+		upload += '</li></ul></div>';
+		
+		//裁切及水印参数
+		cut += '<div class="upload"><ul><li>{:$lang['page']['section'][0]:} '+ (i+1) +' {:$lang['page']['section'][1]:}&nbsp;</li>';
+		cut += picture[i][0] == 1 ? '<li><input name="picture_cut['+i+']" type="checkbox" checked value="1" /> ' : '<li><input name="picture_cut['+i+']" type="checkbox" value="1" /> ';
+		cut += '{:$lang['page']['section'][2]:} <input name="picture_width['+i+']" type="text" value="'+ picture[i][1] +'" size="5" /> {:$lang['page']['section'][3]:} <input name="picture_height['+i+']" type="text" value="'+ picture[i][2] +'" size="5" /> Px&nbsp;</li>';
+		cut += picture[i][3] == 1 ? '<li><input name="picture_watermark['+i+']" type="checkbox" checked value="1" /> ' : '<li><input name="picture_watermark['+i+']" type="checkbox" value="1" /> ';
+		cut += '{:$lang['page']['section'][4]:}&nbsp;</li><li>';
+		if(i == 0) cut += '<a target="_blank" href="set_picture.php"><img src="../inc/templates/manage/images/operation/hammer_screwdriver.png" width="16" height="16" title="{:$lang['page']['section'][5]:}" /></a>';
+		cut += '</li></ul></div>';
+	}
+	$('#items').html(upload);
+	$('#cut').html(cut);
+	if(val != 0) $('.upload_pre').hide(); //点击增、减按钮隐藏图片预览图标
+}
+var top_error_isshow = false;
+function detect(){
+	if($('#category').val() == ''){
+		mycms.top_error('{:$lang['page']['detect'][0]:}');
+		top_error_isshow = true;
+		return false;
+	}
+	
+	if($('#title').val() == ''){
+		mycms.top_error('{:$lang['page']['detect'][1]:}');
+		top_error_isshow = true;
+		return false;
+	}
+		
+	return true;
+}
+$(function(){
+	sheets(0);
+	mycms.alternately('list');
+	mycms.keysubmit('form_product','submit','detect()');
+	mycms.title2div('title2div');	
+	{:if $mycms['action'] == 'add':}$('#tag').change(function(){$('#keyword').val($(this).val())	});{:/if:}
+	mycms.option();
+	CKEDITOR.replace('content');
+	$("#addtime").datepicker();
+	$('form input,form select,form textarea').change(function(){
+		if(top_error_isshow){
+			$('.top_error').fadeTo(400,0,function(){$(this).slideUp(400);});
+			top_error_isshow = false;
+		}
+	});		
+})
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+				<td>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td><a href="javascript:void(0);" class="basic_button">{:$lang['page']['basic']:}</a></td>
+							<td><a href="javascript:void(0);" class="advanced_button">{:$lang['page']['advanced']:}</a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<div class="error rounded top_error hide"><ol></ol><span></span></div>
+		<form name="form_product" id="form_product" action="" method="post">
+		<div id="basic">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			{:if $mycms['channel_show']:}
+			<tr>
+				<td class="name">{:$lang['page']['channel']:}</td>
+				<td>
+					<select class="select rounded" onchange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['product']['channel_text']:}</select> <span class="red">*</span>
+					<a href="channel_update.php"><img src="../inc/templates/manage/images/operation/add.png" width="16" height="16" class="title2div" title="{:$lang['page']['channel_add']:}"></a>								
+				</td>
+				<td class="field">{:literal:}{:$p['channel']:}、{:$p['channel_id']:}{:/literal:}</td>			
+			</tr>
+			{:/if:}
+			<tr>
+				<td class="name">{:$lang['page']['category']:}</td>
+				<td>
+					<select name="category" id="category" class="select rounded" style="font-family:'Courier New',Courier,monospace;">{:$mycms['product']['nexus_text']:}</select> <span class="red">*</span>
+					<a href="category_update.php?channel={:$mycms['get']['channel']:}"><img src="../inc/templates/manage/images/operation/add.png" width="16" height="16" class="title2div" title="{:$lang['page']['category_add']:}"></a>
+				</td>
+				<td class="field">{:literal:}{:$p['category']:}、{:$p['category_id']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['full_title']:}</td>
+				<td>
+					<input type="text" name="title" id="title" class="input rounded rule" value="{:$mycms['product']['title']:}" size="58" maxlength="255" /> <span class="red">*</span>
+				</td>
+				<td class="field">{:literal:}{:$p['title']:}、{:$p['title_format']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['brief']:}</td>
+				<td>
+					<input type="text" name="brief" class="input rounded rule" value="{:$mycms['product']['brief']:}" size="40" maxlength="50" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['brief_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['brief']:}、{:$p['brief_format']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['virtual'][0]:}</td>
+				<td>
+					<input name="virtual" type="radio" value="0"  {:if $mycms['product']['virtual'] == '0':}checked{:/if:} />{:$lang['page']['virtual'][1]:} &nbsp;&nbsp;  
+					<input name="virtual" type="radio" value="1" {:if $mycms['product']['virtual'] == '1':}checked{:/if:} />{:$lang['page']['virtual'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['virtual_title']:}">				
+				</td>
+				<td class="field">{:literal:}{:$p['virtual']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['attribute']:}</td>
+				<td>
+					{:$lang['page']['color']:} <input id="mycolor" name="color" type="text" value="{:$mycms['product']['color']:}" size="7" maxlength="7" class="input rounded iColorPicker" style="text-transform:uppercase;" /> &nbsp;&nbsp;&nbsp;
+					<input name="bold" type="checkbox" value="1" {:if $mycms['product']['bold']:}checked="checked"{:/if:} /> {:$lang['page']['bold']:} &nbsp;
+				</td>
+				<td class="field">{:literal:}{:$p['color']:}、{:$p['bold']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['model']:}</td>
+				<td><input name="model" type="text" class="input rounded" value="{:$mycms['product']['model']:}" size="40"  maxlength="50" /></td>
+				<td class="field">{:literal:}{:$p['model']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['market']:}</td>
+				<td><input name="market" type="text" class="input rounded" value="{:$mycms['product']['market']:}" size="7"  maxlength="10" /> {:$lang['page']['yuan']:}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:$lang['page']['price']:}
+					<input name="price" type="text" class="input rounded" value="{:$mycms['product']['price']:}" size="7"  maxlength="10" /> {:$lang['page']['yuan']:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['price_title']:}">				</td>
+				<td class="field">{:literal:}{:$p['market']:}、{:$p['price']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['inventory']:}</td>
+				<td><input name="inventory" type="text" class="input rounded" value="{:$mycms['product']['inventory']:}" size="7" maxlength="10" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:$lang['page']['sales']:}
+			    <input name="sales" type="text" class="input rounded" value="{:$mycms['product']['sales']:}" size="7" /></td>
+				<td class="field">{:literal:}{:$p['inventory']:}、{:$p['sales']:}{:/literal:}</td>			
+			</tr>			
+			<tr>
+				<td class="name">{:$lang['page']['units']:}</td>
+				<td>
+					<input name="units" id="units" type="text" class="input rounded" value="{:$mycms['product']['units']:}" size="7" maxlength="20" /> 
+					<select name="units_often" size="0" class="select rounded" onChange="document.getElementById('units').value=this.value; this.selectedIndex=0;">
+						<option value="" selected="selected">{:$lang['page']['select']:}</option>
+						{:foreach $mycms['units_often'] as $n:}
+						<option value="{:$n['units']:}">{:$n['units']:}</option>
+						{:/foreach:}
+					</select>
+				</td>
+				<td class="field">{:literal:}{:$p['units']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['tag']:}</td>
+				<td>
+					<input name="tag" id="tag" type="text" class="input rounded" value="{:$mycms['product']['tag']:}" size="40"  maxlength="100" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['tag_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['tag']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['upload']:}</td>
+				<td id="items"></td>
+				<td class="field"><div id="upload_preview">{:literal:}{:$p['picture'][n]:}{:/literal:} {:$lang['page']['upload_title']:}</div></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['cut']:}</td>
+				<td id="cut"></td>
+				<td class="field"><em>NULL</em></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['keyword']:}</td>
+				<td><input name="keyword" id="keyword" type="text" class="input rounded" value="{:$mycms['product']['keyword']:}" size="40" maxlength="100" /></td>
+				<td class="field">{:literal:}{:$p['keyword']:}{:/literal:}</td>			
+			</tr>			
+			<tr>
+				<td class="name">{:$lang['page']['introduction']:}</td>
+				<td>
+					<textarea class="rounded" name="introduction" style="width:300px; height:50px; padding:5px;">{:$mycms['product']['introduction']:}</textarea>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['introduction_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['introduction']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['make'][0]:}</td>
+				<td><input name="make_html" type="checkbox" value="1" {:if $config['static'] == 2:}checked{:else:}disabled="disabled"{:/if:} /> {:$lang['page']['make'][1]:}</td>
+				<td class="field">{:literal:}{:$a['make_html']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['page'][0]:}</td>
+				<td>
+					<input name="page" type="radio" value="0"  {:if $mycms['product']['page'] == '0':}checked{:/if:} />{:$lang['page']['page'][1]:} &nbsp;&nbsp;  
+					<input name="page" type="radio" value="1" {:if $mycms['product']['page'] == '1':}checked{:/if:} />{:$lang['page']['page'][2]:} &nbsp;&nbsp;
+					<input name="page" type="radio" value="2" {:if $mycms['product']['page'] > 1:}checked{:/if:} id="auto_page" />{:$lang['page']['page'][3]:}
+					<input name="page_size" type="text" maxlength="5" onclick="$('#auto_page').attr('checked','checked')" value="{:if $mycms['product']['page'] > 1:}{:$mycms['product']['page']:}{:else:}2000{:/if:}" size="5" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['page_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$a['page']:}{:/literal:}</td>			
+			</tr> {:fieldsinfo():}	
+			<tr>
+				<td colspan="3" style="height:540px;">
+					&nbsp;&nbsp;&nbsp;{:$lang['page']['content']:} <span class="field">{:literal:}{:$p['content']:}{:/literal:}</span><br /><br />
+					<textarea id="content" name="content">{:$mycms['product']['content']:}</textarea><br />
+				</td>
+			</tr>
+		</table>
+		</div>
+		<div id="advanced" style="display:none;">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['brand']:}</td>
+				<td colspan="3"><input name="brand" type="text" value="{:$mycms['product']['brand']:}" size="40" class="input rounded" maxlength="50" /></td>
+				<td class="field">{:literal:}{:$p['brand']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['coding']:}</td>
+				<td colspan="3"><input name="coding" type="text" value="{:$mycms['product']['coding']:}" size="40" class="input rounded" maxlength="50" /></td>
+				<td class="field">{:literal:}{:$p['coding']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['speci']:}</td>
+				<td colspan="3"><input name="speci" type="text" value="{:$mycms['product']['speci']:}" size="40" class="input rounded" maxlength="50" /></td>
+				<td class="field">{:literal:}{:$p['speci']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['optional']:}</td>
+				<td colspan="3">
+					<input name="optional" type="text" value="{:$mycms['product']['optional']:}" size="40" class="input rounded" maxlength="255" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['optional_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['optional']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['template']:}</td>
+				<td colspan="3">
+					<input name="template" type="text" value="{:$mycms['product']['template']:}" size="20" class="input rounded" maxlength="50" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['template_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['template']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['comment'][0]:}</td>
+				<td colspan="3">
+					<input name="comment" type="radio" value="1" {:if $mycms['product']['comment'] == '1':}checked{:/if:} /> {:$lang['page']['comment'][1]:} &nbsp;&nbsp;  
+					<input name="comment" type="radio" value="0" {:if $mycms['product']['comment'] == '0':}checked{:/if:} /> {:$lang['page']['comment'][2]:}
+				</td>
+				<td class="field">{:literal:}{:$p['comment']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['recom'][0]:}</td>
+				<td colspan="3">
+					<input name="recom" type="radio" value="1" {:if $mycms['product']['recom'] == '1':}checked{:/if:} /> {:$lang['page']['recom'][1]:} &nbsp;&nbsp;  
+					<input name="recom" type="radio" value="0" {:if $mycms['product']['recom'] == '0':}checked{:/if:} /> {:$lang['page']['recom'][2]:}				
+				</td>
+				<td class="field">{:literal:}{:$p['recom']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['published'][0]:}</td>
+				<td colspan="3">
+					<input name="published" type="radio" value="1" {:if $mycms['product']['published'] == '1':}checked{:/if:} /> {:$lang['page']['published'][1]:} &nbsp;&nbsp;  
+					<input name="published" type="radio" value="0" {:if $mycms['product']['published'] == '0':}checked{:/if:} /> {:$lang['page']['published'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['published_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['published']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['status'][0]:}</td>
+				<td colspan="3">
+					<input name="status" type="radio" value="1" {:if $mycms['product']['status'] == '1':}checked{:/if:} /> {:$lang['page']['status'][1]:} &nbsp;&nbsp;  
+					<input name="status" type="radio" value="0" {:if $mycms['product']['status'] == '0':}checked{:/if:} /> {:$lang['page']['status'][2]:}
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['status_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['status']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['audit'][0]:}</td>
+				<td colspan="3">
+					<input name="audit" type="radio" value="1" {:if $mycms['product']['audit'] == '1':}checked{:/if:} /> {:$lang['page']['audit'][1]:} &nbsp;&nbsp;  
+					<input name="audit" type="radio" value="0" {:if $mycms['product']['audit'] == '0':}checked{:/if:} /> {:$lang['page']['audit'][2]:}				
+				</td>
+				<td class="field">{:literal:}{:$p['audit']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['permission']:}</td>
+				<td colspan="3">
+					<select name="permission[]" class="rounded" style="width:205px; height:80px;" multiple id="select">{:$mycms['product']['permission_text']:}</select>				
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['permission_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['permission']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['filename']:}</td>
+				<td colspan="3">
+					<input name="filename" class="input rounded" type="text" value="{:$mycms['product']['filename']:}" size="20" maxlength="50" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['filename_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['filename']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['click']:}</td>
+				<td><input name="click" class="input rounded" type="text" value="{:$mycms['product']['click']:}" size="7" maxlength="10" /></td>
+				<td class="name">{:$lang['page']['favorite']:}</td>
+				<td><input name="favorite" class="input rounded" type="text" value="{:$mycms['product']['favorite']:}" size="7" maxlength="10" /></td>
+				<td class="field">{:literal:}{:$p['click']:}、{:$p['favorite']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['money']:}</td>
+				<td>
+					<input name="money" class="input rounded" type="text" value="{:$mycms['product']['money']:}" size="7" maxlength="10" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['money_title']:}">
+				</td>
+				<td class="name">{:$lang['page']['integral']:}</td>
+				<td>
+					<input name="integral" class="input rounded" type="text" value="{:$mycms['product']['integral']:}" size="7" maxlength="10" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['integral_title']:}">
+				</td>				
+				<td class="field">{:literal:}{:$p['money']:}、{:$p['integral']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['buyuser']:}</td>
+				<td colspan="3">
+					<textarea name="buyuser" style="width:300px; height:40px; padding:5px;" class="rounded">{:$mycms['product']['buyuser']:}</textarea>
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['buyuser_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['buyuser']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['sort']:}</td>
+				<td colspan="3">
+					<input name="sort" class="input rounded" type="text" value="{:$mycms['product']['sort']:}" size="20" maxlength="10" />
+					<img src="../inc/templates/manage/images/operation/help.png" width="16" height="16" class="title2div" title="{:$lang['page']['sort_title']:}">
+				</td>
+				<td class="field">{:literal:}{:$p['sort']:}{:/literal:}</td>			
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['addtime']:}</td>
+				<td colspan="3"><input name="addtime" type="text" class="input rounded" id="addtime" value="{:$mycms['product']['addtime']:}" size="20" maxlength="10" readonly="readonly" /></td>
+				<td class="field">{:literal:}{:$p['addtime']:}{:/literal:}</td>			
+			</tr>
+		</table>
+		</div>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"><input type="hidden" name="action" value="{:$mycms['action']:}" /></td>
+				<td><a class="submit reset" href="javascript:form_product.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+		{:if $admin['information']:}
+			<div class="information rounded"><ol></ol>
+				1、{:$lang['page']['notes'][0]:}<br />
+				2、{:$lang['page']['notes'][1]:}
+			</div>
+		{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

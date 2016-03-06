@@ -1,0 +1,1 @@
+<?php//数据库连接信息$DB_Host = '~dbhost~';$DB_Database = '~dbname~';$DB_User = '~dbuser~';$DB_Password = '~dbpwd~';$DB_dbprefix = '~dbprefix~';$PHP_cms_version='~version~';//@gzcgc.net?>

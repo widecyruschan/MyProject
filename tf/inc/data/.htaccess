@@ -1,0 +1,28 @@
+﻿# 启用重写
+RewriteEngine On
+
+# ElinkCMS 网站目录，如果网站不是在根目录下时需要修改ElinkCMS
+RewriteBase /ElinkCMS
+
+# 404 错误文件
+# ErrorDocument 404 /ElinkCMS/404.html
+
+# Rewrite 系统规则请勿修改
+# 无参数单页
+RewriteRule ^(article|product|photo|download|cart|tag|guestbook|feedback|search|app)\.html$ $1.php
+
+# 频道首页
+RewriteRule ^(article|product|photo|download)-([0-9]+)-([0-9]+)\.html$ $1.php?pid=$2&page=$3
+RewriteRule ^(article|product|photo|download)-([0-9]+)\.html$ $1.php?pid=$2
+RewriteRule ^(article|product|photo|download)--([0-9]+)\.html$ $1.php?page=$2
+
+# 栏目列表页
+RewriteRule ^(list|category|slide|soft)-([0-9]+)-([0-9]+)\.html$ $1.php?cid=$2&page=$3
+RewriteRule ^(list|category|slide|soft)-([0-9]+)\.html$ $1.php?cid=$2
+
+# 内容内页
+RewriteRule ^(view|detail|show|down)-([0-9]+)-([0-9]+)\.html$ $1.php?id=$2&page=$3
+RewriteRule ^(view|detail|show|down)-([0-9]+)\.html$ $1.php?id=$2
+
+# 会员中心页面
+RewriteRule ^member\/(.*)\.html$ member/$1.php

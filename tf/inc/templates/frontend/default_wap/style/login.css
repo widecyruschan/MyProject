@@ -1,0 +1,26 @@
+@charset "utf-8";
+@import url("common.css");
+
+.list{width:930px; overflow:hidden; padding:0 0 20px 0; background:url(../images/lock.png) 90px 120px no-repeat;}
+.list .titlebar{width:900px;}
+
+.box .head{line-height:25px; height:auto; margin:20px 0 0 320px; padding:0 0 0 22px; font-size:12px; background:url(../images/tips.png) 0 5px no-repeat; color:#F60;}
+.box .head a{text-decoration:underline;}
+.box .loginbox{float:left; width:280px; height:260px; padding:20px 0 10px 250px; margin:20px 0 0 100px; _margin:20px 0 0 50px; background:url(../images/home_login_bg.gif) 240px 0 no-repeat;}
+.box .loginbox .text{font-size:14px; padding:0 0 2px 12px; clear:both;}
+.box .loginbox .xuname{height:40px; line-height:40px; color:#F00;} /* 重置密码提交表单中的用户帐号 */
+.box .loginbox .field{height:35px; line-height:35px; padding:0 0 0 10px;}
+.box .loginbox .field input{border:0; outline:none; width:175px; padding:3px 10px 3px 25px; height:25px; line-height:25px; font-size:14px; background:url(../images/sprite.png) no-repeat;} /* 210 * 31px */
+.box .loginbox .field .left{width:25px; height:31px; display:block; float:left; background:url(../images/sprite.png) no-repeat 0 -140px;}
+.box .loginbox .field .username{background:url(../images/login_bg_center.png) 0 0 repeat-x; color:#999; float:left; padding:3px 0;}
+.box .loginbox .field .right{width:10px; height:31px; display:block; float:left; background:url(../images/sprite.png) no-repeat -200px -140px;}
+.box .loginbox .field .password{background-position:-214px -140px;}
+.box .loginbox .signinbutton{float:left; padding:10px 0 0 10px;}
+.box .loginbox .signinbutton input{width:86px; height:28px; line-height:28px; border:0; background:url(../images/sprite.png) 0 -176px no-repeat; color:#FFF; font-weight:bold;}
+.box .loginbox .signinbutton input:hover{background-position:0 -204px; cursor:pointer;}
+.box .loginbox .register{float:left; padding:10px 0 0 35px;}
+.box .loginbox .register a{display:block; width:86px; height:28px; color:#333; text-decoration:none; line-height:28px; background:url(../images/sprite.png) -86px -176px no-repeat; text-align:center;}
+.box .loginbox .register a:hover{background-position:-86px -204px;}
+#siimage{border:1px #DFDFDF solid;}
+#siimage_div{display:none;}
+#siimage_div img{position:absolute; margin:-30px auto auto 210px;}

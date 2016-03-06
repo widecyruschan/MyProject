@@ -1,0 +1,1 @@
+<?phpout();$title=str_check($_POST['title']);if($action=="edit"){$str= 'abc';$needle= 'a';if (strpos($_GET['editfile'],$skin_dir)){wfile( iconv('UTF-8','GB2312',$_GET['editfile']),stripcslashes( str_replace("textarea＞","textarea>",$_POST['content']) ) );addlog( "修改模板".$_GET['editfile'],$_SESSION['admin_user'] );done('修改模板','navNewsLi','closeCurrent');}exit();}?>

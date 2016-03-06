@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('form','submit',true);
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		
+		<form action="" method="post" name="form" id="form">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page'][2]:}</td>
+				<td>{:$mycms['guestbook']['title']:}</td>
+				<td class="name">{:$lang['page'][3]:}</td>
+				<td>{:$mycms['guestbook']['nickname']:}</td>
+				<td class="field">{:literal:}{:$msg['title']:}、{:$msg['nickname']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][4]:}</td>
+				<td>{:$mycms['guestbook']['email']:}</td>
+				<td class="name">{:$lang['page'][5]:}</td>
+				<td>{:$mycms['guestbook']['phone']:}</td>
+				<td class="field">{:literal:}{:$msg['email']:}、{:$msg['phone']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][6]:}</td>
+				<td>{:$mycms['guestbook']['fax']:}</td>
+				<td class="name">{:$lang['page'][7]:}</td>
+				<td>{:$mycms['guestbook']['qq']:}</td>
+				<td class="field">{:literal:}{:$msg['fax']:}、{:$msg['qq']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][8]:}</td>
+				<td>{:if $mycms['guestbook']['sex'] == '0':}{:$lang['page'][9]:}{:elseif $mycms['guestbook']['sex'] == '1':}{:$lang['page'][10]:}{:else:}{:$lang['page'][11]:}{:/if:}</td>
+				<td class="name">{:$lang['page'][12]:}</td>
+				<td>{:if $mycms['guestbook']['username'] == '':}<em>NULL</em>{:else:}{:$mycms['guestbook']['username']:}{:/if:}</td>
+				<td class="field">{:literal:}{:$msg['sex']:}、{:$msg['username']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][13]:}</td>
+				<td colspan="3">{:$mycms['guestbook']['title']:}</td>
+				<td class="field">{:literal:}{:$msg['title']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][14]:}</td>
+				<td colspan="3">{:$mycms['guestbook']['content']:}</td>
+				<td class="field">{:literal:}{:$msg['content']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][15]:}</td>
+				<td>{:date('Y-m-d H:i:s',$mycms['guestbook']['addtime']):}</td>
+				<td class="name">{:$lang['page'][16]:}</td>
+				<td>{:$mycms['guestbook']['ip']:}</td>
+				<td class="field">{:literal:}{:$msg['addtime']:}、{:$msg['ip']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][17]:}</td>
+				<td>{:if $mycms['guestbook']['visible']:}{:$lang['page'][19]:}{:else:}{:$lang['page'][18]:}{:/if:}</td>
+				<td class="name">{:$lang['page'][20]:}</td>
+				<td>{:if $mycms['guestbook']['audit']:}{:$lang['page'][21]:}{:else:}{:$lang['page'][22]:}{:/if:}</td>
+				<td class="field">{:literal:}{:$msg['visible']:}、{:$msg['audit']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][23]:}</td>
+				<td colspan="3"><textarea name="reply" class="rounded" style="padding:5px;" rows="3" cols="40">{:$mycms['guestbook']['reply']:}</textarea></td>
+				<td class="field">{:literal:}{:$msg['reply']:}{:/literal:}</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"></td>
+				<td><a class="submit reset" href="javascript:form.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

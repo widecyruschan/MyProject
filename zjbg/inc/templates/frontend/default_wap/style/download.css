@@ -1,0 +1,60 @@
+@charset "utf-8";
+@import url("common.css");
+
+/* download.tpl 主体 */
+.main{float:left; width:640px; overflow:hidden; margin:0 0 0 10px; _margin:0 0 0 5px;}
+.main .data{width:640px; padding:10px 0; clear:both; overflow:hidden; background:url(../images/dotted.gif) 0 bottom repeat-x;}
+.main .data ul{float:left; overflow:hidden;}
+.main .data .image{width:135px; padding:0 10px; overflow:hidden;} /* ul */
+.main .data .image li{width:135px; height:90px; padding:1px; border:1px #CCC solid;}
+.main .data .image li:hover{border:1px #F90 solid;}
+.main .data .image li a{width:135px; height:90px; overflow:hidden; display:inline-block;}
+.main .data .image li img{width:135px; height:90px;}
+.main .data .content{width:480px;}
+.main .data .content .title{height:18px; overflow:hidden; white-space:nowrap;}
+.main .data .content .title a{font-size:14px; color:#03C; font-weight:bold;}
+.main .data .content .title a:hover{color:#F00;}
+.main .data .content .misc{color:#666; height:20px; line-height:20px;}
+.main .data .content .abstract{line-height:20px; height:60px; overflow:hidden;}
+.main .notdata{font-weight:bold; text-align:center; padding:50px 0;}
+.page{padding:30px 0 30px 120px;} /* 分页位置调节 */
+
+/* download.tpl 左边栏 */
+.sidebar{float:left; width:280px; margin:0 0 0 10px; padding:0 0 10px 0;}
+.sidebar .tag{width:278px; height:100px; overflow:hidden; line-height:25px;} /* TAG */
+.sidebar .tag .gen{color:#575757;}
+.sidebar .tag .hot1{font-size:14px; color:#F00; font-weight:bold;}
+.sidebar .tag .hot2{font-size:14px; color:#06F; font-weight:bold;}
+.sidebar .tag .hot3{font-size:14px; color:#039; font-weight:bold;}
+.sidebar .tag .top1{font-size:13px; color:#F93; font-weight:bold;}
+.sidebar .tag .top2{font-size:13px; color:#090; font-weight:bold;}
+.sidebar .tag .top3{font-size:13px; color:#69F; font-weight:bold;}
+.sidebar .caption{margin:10px 0 0 0;}
+.sidebar .well{overflow:hidden; clear:both} /*  */
+.sidebar .well ul{height:27px; background:url(../images/dotted.gif) 0 bottom repeat-x; overflow:hidden;}
+.sidebar .well ul li{float:left; height:27px; line-height:27px; overflow:hidden; margin:0; padding:0}
+.sidebar .well ul .num{background:url(../images/num_bg.gif) center center no-repeat; width:20px; text-align:center; font-family:arial; font-weight:bold; color:#fff;}
+.sidebar .well ul .title{width:250px; padding:0 0 0 5px;}
+
+/* down.tpl */
+.down_titlebar ol{clear:both;}
+.down_titlebar .down_location{width:610px; padding:0 0 0 30px; height:30px; margin:10px 0; background:url(../images/title_line_bg.gif) left bottom no-repeat;}
+.down_titlebar .down_title{width:640px; height:35px; line-height:35px; text-align:center; font-size:14px; font-weight:bold; overflow:hidden;}
+.main{}
+.main .basic{clear:both; width:640px; overflow:hidden; margin:0 0 10px 0;}
+.main .basic .misc{float:left; width:400px; overflow:hidden;}
+.main .basic .misc ul{clear:both; height:30px; overflow:hidden; background:url(../images/dotted.gif) 0 bottom repeat-x;}
+.main .basic .misc ul li{float:left; height:30px; line-height:30px; width:180px; padding:0 0 0 10px; overflow:hidden;}
+.main .basic .misc ul li a{color:#39C; font-family:Verdana,Geneva,sans-serif;}
+.main .basic .photo{width:230px; margin:0 0 0 10px; float:left;}
+.main .basic .photo .img{height:176px; width:226px; padding:1px; border:1px #CCC solid; overflow:hidden;}
+.main .basic .photo .img:hover{border:1px #F90 solid;}
+.main .basic .photo .img a{width:226px; height:176px; display:block; overflow:hidden;}
+.main .basic .photo .txt{padding:5px 0 0 0; text-align:center; color:#999;}
+.main .down_url{clear:both; overflow:hidden; width:630px; padding:0 0 10px 10px;}
+.main .down_url ol{height:27px; text-align:center; margin:5px; padding:0 0 0 28px; overflow:hidden; line-height:27px; float:left; background:url(../images/downurl-bg.gif) 0 0 no-repeat;}
+.main .down_url ol a{display:block; float:left; overflow:hidden; height:27px; overflow:hidden; padding:0 10px 0 0; background:url(../images/downurl-bg.gif) right 0 no-repeat;}
+.main .down_url ol a:hover{color:#F63; text-decoration:none;}
+.main .down_content{line-height:25px; padding:0 0 10px 10px; width:630px; overflow:hidden;}
+
+.right_lines{float:right; padding:0 10px 0 0; height:30px; line-height:25px; width:420px; overflow:hidden; background:url(../images/left_gradient.png) 0 12px no-repeat;}

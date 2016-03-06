@@ -1,0 +1,11 @@
+<div id="frame_side">
+	<div class="welcome">{:$lang['common']['welcome']:}<a href="admin_password.php" class="left_url">{:$mycms['session']['admin']['login']['username']:}</a> , <a target="_blank" href="../?{:time():}" class="left_url">{:$lang['common']['front']:}</a> | <a href="login.php?action=logout" class="left_url">{:$lang['common']['exit']:}</a></div>
+	<div id="menu">
+		{:foreach $mycms['menu'] as $n:}
+		<ol>
+			<a href="javascript:void(0);" onfocus="this.blur();" class="item">{:$n['attribute'][1]:}</a>
+			<ul>{:foreach $n['submenu'] as $x:}<li><a href="{:$x[3]:}" onfocus="this.blur();" {:if $x['current']:}id="current"{:/if:}>{:$x[1]:}</a></li>{:/foreach:}</ul>
+		</ol>
+		{:/foreach:}
+	</div>
+</div>

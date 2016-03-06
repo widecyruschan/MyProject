@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	$('.go_down').click(function(){
+		$('.part').not($(this).parents('table').nextAll('div').first()).slideUp('slow'); //隐藏全部(排除当前)
+		$(this).parents('table').nextAll('div').first().slideToggle('slow'); // 显示当前
+	});
+	
+	//显示第一个 div
+	//$('.part').first().slideDown('slow');
+});
+</script>
+<style type="text/css">
+.list td{padding:0; margin:0; height:40px;}
+.list .cont{background:#F0FFFC;} /* #F0FFFC */
+.list .cont td{border-bottom:1px #999 solid;}
+.list .l1{background:url(../inc/templates/manage/images/sprite_green.png) -35px -34px no-repeat; width:24px;}
+.list .l2{float:left; width:100px; height:40px; line-height:40px; background:url(../inc/templates/manage/images/0101.gif) 0 19px repeat-x;}
+.list .l3{float:left; height:40px; padding:0 0 0 5px; line-height:40px;}
+.part{display:none;}
+.go_down{cursor:pointer;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr><td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td></tr>
+		</table>
+		<br />
+		{:foreach $mycms['channel'] as $n:}
+		<table class="list" cellpadding="0" cellspacing="0" border="0">
+			<tr class="cont go_down">	
+				<td width="36px" align="center"><img src="../inc/templates/manage/images/go_down.png" width="16" height="16" /></td>
+				<td>{:$n['title']:} （ID：{:$n['id']:}） {:if $n['permission'] != '0':} <img title="{:$lang['page']['restricted']:}" src="../inc/templates/manage/images/operation/lock.png" width="16" height="16">{:/if:}</td>
+				<td align="right" style="padding:0 20px 0 0;" class="operation">
+					<a href="category_update.php?channel={:$n['id']:}"><img src="../inc/templates/manage/images/operation/folder.png" title="{:$lang['page']['add_root']:}"></a>
+					<a href="category_update.php?id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/pencil.png" title="{:$lang['page']['modify_channel']:}"></a>
+					<a href="category_manage.php?module={:$n['module']:}&del={:$n['id']:}" onclick="return confirm('{:$lang['page']['ok_delete']:}');"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['delete_channel']:}"></a>
+					{:if $n['module'] == 'MO001x':}<a href="article_update.php?channel={:$n['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][0]:}"></a>
+					{:elseif $n['module'] == 'MO002x':}<a href="product_update.php?channel={:$n['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][1]:}"></a>
+					{:elseif $n['module'] == 'MO003x':}<a href="picture_update.php?channel={:$n['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][2]:}"></a>
+					{:elseif $n['module'] == 'MO004x':}<a href="download_update.php?channel={:$n['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][3]:}"></a>
+					{:else:}<img src="../inc/templates/manage/images/operation/disabled.png">{:/if:}	
+				</td>
+			</tr>
+		</table>
+		<div class="part" style="height:{:$n['div_height']:}px;">
+		<table class="list" cellpadding="0" cellspacing="0" border="0">
+			{:foreach $mycms['category'][$n['id']] as $m:}
+			<tr>
+				<td class="l1"></td>
+				<td><div style="width:{:$m['div_indentation']:}px;" class="l2"></div><div class="l3">{:$m['title']:} （ID：{:$m['id']:}） {:if $m['permission'] != '0':} <img title="{:$lang['page']['restricted']:}" src="../inc/templates/manage/images/operation/lock.png" width="16" height="16">{:/if:}</div></td>
+				<td align="right" style="padding:0 20px 0 0;" class="operation">
+					<a href="category_update.php?channel={:$n['id']:}&category={:$m['id']:}"><img src="../inc/templates/manage/images/operation/folder.png" title="{:$lang['page']['add_category']:}"></a>
+					<a href="category_update.php?id={:$m['id']:}"><img src="../inc/templates/manage/images/operation/pencil.png" title="{:$lang['page']['modify_columns']:}"></a>
+					<a href="category_manage.php?module={:$m['module']:}&del={:$m['id']:}" onclick="return confirm('{:$lang['page']['ok_delete_category']:}');"><img src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page']['delete_category']:}"></a>
+					{:if $m['module'] == 'MO001x':}<a href="article_update.php?channel={:$n['id']:}&category={:$m['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][0]:}"></a>
+					{:elseif $m['module'] == 'MO002x':}<a href="product_update.php?channel={:$n['id']:}&category={:$m['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][1]:}"></a>
+					{:elseif $m['module'] == 'MO003x':}<a href="picture_update.php?channel={:$n['id']:}&category={:$m['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][2]:}"></a>
+					{:elseif $m['module'] == 'MO004x':}<a href="download_update.php?channel={:$n['id']:}&category={:$m['id']:}"><img src="../inc/templates/manage/images/operation/page_add.png" title="{:$lang['page']['operation'][3]:}"></a>
+					{:else:}<img src="../inc/templates/manage/images/operation/disabled.png">{:/if:}					
+				</td>
+			</tr>
+			{:/foreach:}
+		</table>
+		</div>
+		{:/foreach:}
+		{:if $admin['information']:}
+		<div class="information rounded"><ol></ol>{:$lang['page']['information']:}</div>
+		{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

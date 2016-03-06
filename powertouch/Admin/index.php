@@ -1,0 +1,1 @@
+<?php	echo "<script language=javascript>parent.location.href='Admin_Index.php'</script>";?>

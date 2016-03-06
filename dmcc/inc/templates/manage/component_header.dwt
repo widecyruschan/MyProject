@@ -1,0 +1,30 @@
+<div style="height:60px; overflow:hidden">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="header">
+	<tr>
+		<td width="5"></td>
+		<td>
+			<a href="javascript:mycms.switchbar();" onfocus="this.blur();" class="button" id="switch">{:$lang['common']['close_menu']:}</a>
+			<a href="javascript:void(0);" onfocus="this.blur();" class="button" id="menu_option">{:$lang['common']['down_menu']:}</a>
+			{:if $config['lang_total'] > 1:}<a href="javascript:void(0);" onfocus="this.blur();" class="button" id="lang_button">{:if $web['name']!='':}{:$web['name']:}{:else:}{:$lang['common']['not_set']:}{:/if:}</a>{:/if:}
+
+			<span class="top_menu options">
+				<a href="../" target="_blank">{:$lang['common']['front_page']:}</a>
+				<a href="./">{:$lang['common']['back_home']:}</a>
+				<a href="app.php?a=cache">{:$lang['common']['empty_cache']:}</a>
+				<a href="app.php?a=compile">{:$lang['common']['empty_compile']:}</a>
+				<a href="admin_password.php">{:$lang['common']['change_password']:}</a>
+				<a href="login.php?action=logout">{:$lang['common']['logout']:}</a>
+			</span>
+			<span class="top_menu" id="lang_menu">
+				{:for $i=1; $i<=$config['lang_total']; $i++:}<a href="app.php?a=lang&i={:$i:}">{:if $web['all_data'][$i]['name']!='':}{:$web['all_data'][$i]['name']:}{:else:}{:$lang['common']['not_set']:}{:/if:}</a>{:/for:}
+			</span>		</td>
+		<td class="right">
+			<a href="app.php?a=switch&theme=blue" title="{:$lang['common']['switch_theme']:}" class="{:if $admin['theme']!='blue':}blue_a{:else:}blue_b{:/if:}"></a>
+			<a href="app.php?a=switch&theme=gray" title="{:$lang['common']['switch_theme']:}" class="{:if $admin['theme']!='gray':}gray_a{:else:}gray_b{:/if:}"></a>
+			<a href="app.php?a=switch&theme=red" title="{:$lang['common']['switch_theme']:}" class="{:if $admin['theme']!='red':}red_a{:else:}red_b{:/if:}"></a>
+			<a href="app.php?a=switch&theme=green" title="{:$lang['common']['switch_theme']:}" class="{:if $admin['theme']!='green':}green_a{:else:}green_b{:/if:}"></a>
+		</td>
+	</tr>
+</table>
+</div>
+{:include file='component_menu.dwt':}

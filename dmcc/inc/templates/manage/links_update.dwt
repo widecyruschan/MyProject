@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript" src="../inc/script/color_select.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('form','submit','detect()');
+	$('form input,form select,form textarea').change(function(){
+		if(top_error_isshow){
+			$('.top_error').fadeTo(400,0,function(){$(this).slideUp(400);});
+			top_error_isshow = false;
+		}
+	});		
+});
+var top_error_isshow = false;
+function detect(){
+	if($('#webname').val() == ''){
+		mycms.top_error('{:$lang['page'][23]:}');
+		top_error_isshow = true;
+		return false;
+	}
+	
+	if($('#weburl').val() == '' || $('#weburl').val() == 'http://'){
+		mycms.top_error('{:$lang['page'][24]:}');
+		top_error_isshow = true;
+		return false;
+	}
+		
+	return true;
+}
+</script>
+<style type="text/css">
+.logo ol{float:left; padding:0 5px 0 0; height:30px;}
+.upload_preview{width:auto; height:auto;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		
+		<div class="error rounded top_error hide"><ol></ol><span></span></div>
+		<form action="" method="post" name="form" id="form">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page'][2]:}</td>
+				<td>
+					<input name="type" type="radio" value="0" {:if $mycms['links']['type'] == '0':}checked{:/if:} /> {:$lang['page'][3]:} &nbsp;&nbsp;&nbsp;&nbsp;
+					<input name="type" type="radio" value="1" {:if $mycms['links']['type'] == '1':}checked{:/if:} /> {:$lang['page'][4]:}
+					<img title="{:$lang['page'][5]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$links['type']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][6]:}</td>
+				<td><input name="webname" id="webname" type="text" value="{:$mycms['links']['webname']:}" size="40" class="input rounded" /> <span class="red">*</span></td>
+				<td class="field">{:literal:}{:$links['webname']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][18]:}</td>
+				<td>
+					<input name="color" id="color" type="text" value="{:$mycms['links']['color']:}" size="10" class="input rounded iColorPicker" />
+					<img title="{:$lang['page'][19]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$links['color']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][7]:}</td>
+				<td><input name="weburl" id="weburl" type="text" value="{:$mycms['links']['weburl']:}" size="40" class="input rounded" /> <span class="red">*</span></td>
+				<td class="field">{:literal:}{:$links['weburl']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][8]:}</td>
+				<td>
+					<div class="logo">
+					{:if $mycms['links']['preview_logo_url'] != '':}
+					<ol><img src="../inc/templates/manage/images/operation/picture.png" width="16" height="16" border="0" class="title2div" title="<img width='auto' border='0' src='{:$mycms['links']['preview_logo_url']:}' />"></ol>
+					{:/if:}
+					<ol><input type="text" name="logourl" id="logourl" class="input rounded" value="{:$mycms['links']['logourl']:}" size="20" /></ol>
+					<ol><iframe src="upload.php?dir=links&preview=upload_preview&return_id=logourl" width="183" height="30" border="0" scrolling="no" frameborder="0"></iframe></ol>
+					<ol><img title="{:$lang['page'][9]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" /></ol>
+					</div>					
+				</td>
+				<td class="field"><div id="upload_preview">{:literal:}{:$links['logourl']:}{:/literal:}</div></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][20]:}</td>
+				<td><input name="webmaster" type="text" value="{:$mycms['links']['webmaster']:}" size="40" class="input rounded" /></td>
+				<td class="field">{:literal:}{:$links['webmaster']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][21]:}</td>
+				<td>
+					<input name="contact" type="text" value="{:$mycms['links']['contact']:}" size="40" class="input rounded" />
+					<img title="{:$lang['page'][22]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$links['contact']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][10]:}</td>
+				<td><textarea name="info"  class="rounded" style="padding:5px;" rows="3" cols="40">{:$mycms['links']['info']:}</textarea></td>
+				<td class="field">{:literal:}{:$links['info']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][12]:}</td>
+				<td>
+					<input name="sort" type="text" value="{:$mycms['links']['sort']:}" size="10" class="input rounded" />
+					<img title="{:$lang['page'][13]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$links['sort']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page'][14]:}</td>
+				<td>
+					<input name="audit" type="radio" value="1" {:if $mycms['links']['audit'] == '1':}checked{:/if:} /> {:$lang['page'][15]:} &nbsp;&nbsp;&nbsp;&nbsp;
+					<input name="audit" type="radio" value="0" {:if $mycms['links']['audit'] == '0':}checked{:/if:} /> {:$lang['page'][16]:}
+					<img title="{:$lang['page'][17]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$links['audit']:}{:/literal:}</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"><input type="hidden" name="action" value="{:$mycms['action']:}" /></td>
+				<td><a class="submit reset" href="javascript:form.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script><script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<style type="text/css">
+.product{background:#CCC; width:98%; margin:10px auto;}
+.product td{background:#FFF; padding:2px; height:30px; text-align:center;}
+.product td input{height:15px; padding:2px;}
+.product .statistics{text-align:right; height:auto; line-height:25px; padding:5px 10px 5px 0;}
+.product .field_head{background:#EEE;}
+.list{border-bottom:1px #999 solid;}
+</style>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('form','submit',true);
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		
+		<form action="" method="post" name="form" id="form">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="name">{:$lang['page']['field'][0]:}</td>
+				<td>
+					<input name="oid" type="text" value="{:$mycms['order']['oid']:}" size="25" maxlength="20" class="input rounded" />
+					<img title="{:$lang['page']['field'][1]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="name">{:$lang['page']['field'][2]:}</td>
+				<td>
+					<select name="status" class="select rounded">
+					{:foreach $lang['page']['status'] as $v => $su:}
+					<option value="{:$v:}" {:if $v == $mycms['order']['status']:}selected="selected"{:/if:}>{:$su:}</option>
+					{:/foreach:}
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][3]:}</td>
+				<td>{:$mycms['order']['username']:} [<a href="member_update.php?id={:$mycms['order']['uid']:}">{:$lang['page']['field'][4]:}</a>] [<a href="mailto:{:$mycms['order']['uemail']:}">{:$lang['page']['field'][5]:}</a>]</td>
+				<td class="name">{:$lang['page']['field'][6]:}</td>
+				<td>
+					<select name="dispatching" class="select rounded">
+					<option value="0" {:if $mycms['order']['dispatching'] == '0':}selected="selected"{:/if:}>{:$lang['page']['field'][33]:}</option>
+					{:foreach shopping::get_shipping(1) as $e:}
+					<option value="{:$e['id']:}" {:if $e['id'] == $mycms['order']['dispatching']:}selected="selected"{:/if:}>{:$e['title']:}</option>
+					{:/foreach:}
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][34][0]:}</td>
+				<td>
+					<input name="vouch" type="radio" value="0" {:if $mycms['order']['vouch'] == '0':}checked{:/if:} /> {:$lang['page']['field'][34][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="vouch" type="radio" value="1" {:if $mycms['order']['vouch'] == '1':}checked{:/if:} /> {:$lang['page']['field'][34][2]:}
+				</td>
+				<td class="name">{:$lang['page']['field'][35][0]:}</td>
+				<td>
+					<input name="customer" type="radio" value="0" {:if $mycms['order']['customer'] == '0':}checked{:/if:} /> {:$lang['page']['field'][35][1]:} &nbsp;&nbsp;&nbsp;
+					<input name="customer" type="radio" value="1" {:if $mycms['order']['customer'] == '1':}checked{:/if:} /> {:$lang['page']['field'][35][2]:}
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][7]:}</td>
+				<td>
+					<input name="waybill" type="text" value="{:$mycms['order']['waybill']:}" size="40" maxlength="50" class="input rounded" />
+					<img title="{:$lang['page']['field'][8]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="name">{:$lang['page']['field'][9]:}</td>
+				<td>
+					<input name="freight" type="text" value="{:$mycms['order']['freight']:}" size="10" maxlength="8" class="input rounded" />
+					<img title="{:$lang['page']['field'][10]:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+			</tr>
+			
+			<!-- 收货人信息 -->
+			<tr class="td_top_line">
+				<td class="name">{:$lang['page']['field'][11]:}</td>
+				<td>
+					<input name="consignee" type="text" value="{:$mycms['order']['consignee']:}" size="20" maxlength="30" class="input rounded" />
+				</td>
+				<td class="name">{:$lang['page']['field'][12]:}</td>
+				<td>
+					<input name="email" type="text" value="{:$mycms['order']['email']:}" size="20" maxlength="50" class="input rounded" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][13]:}</td>
+				<td>
+					<input name="address" type="text" value="{:$mycms['order']['address']:}" size="40" maxlength="255" class="input rounded" />
+				</td>
+				<td class="name">{:$lang['page']['field'][14]:}</td>
+				<td>
+					<input name="building" type="text" value="{:$mycms['order']['building']:}" size="20" maxlength="50" class="input rounded" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][15]:}</td>
+				<td>
+					<input name="tel" type="text" value="{:$mycms['order']['tel']:}" size="20" maxlength="30" class="input rounded" />
+				</td>
+				<td class="name">{:$lang['page']['field'][16]:}</td>
+				<td>
+					<input name="mobile" type="text" value="{:$mycms['order']['mobile']:}" size="20" maxlength="30" class="input rounded" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][17]:}</td>
+				<td>
+					<input name="zipcode" type="text" value="{:$mycms['order']['zipcode']:}" size="20" maxlength="20" class="input rounded" />
+				</td>
+				<td class="name">{:$lang['page']['field'][18]:}</td>
+				<td>
+					<input name="besttime" type="text" value="{:$mycms['order']['besttime']:}" size="20" maxlength="100" class="input rounded" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['field'][19]:}</td>
+				<td>
+					<textarea name="message" onkeyup="if(value.length>255){value=value.substr(0,255);}" class="rounded" style="padding:4px; width:260px; height:50px;">{:$mycms['order']['message']:}</textarea>
+				</td>
+				<td class="name">{:$lang['page']['field'][20]:}</td>
+				<td>
+					<textarea name="reply" onkeyup="if(value.length>255){value=value.substr(0,255);}" class="rounded" style="padding:4px; width:260px; height:50px;">{:$mycms['order']['reply']:}</textarea>
+				</td>
+			</tr>
+		</table>
+		
+		<!-- 商品信息 -->
+		<table class="product" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head">{:$lang['page']['field'][21]:}</td>
+				<td class="field_head">{:$lang['page']['field'][22]:}</td>
+				<td class="field_head">{:$lang['page']['field'][23]:}</td>
+				<td class="field_head">{:$lang['page']['field'][24]:}</td>
+				<td class="field_head">{:$lang['page']['field'][25]:}</td>
+				<td class="field_head">{:$lang['page']['field'][26]:}</td>
+				<td class="field_head">{:$lang['page']['field'][27]:}</td>
+			</tr>
+			{:$total = 0:}
+			{:foreach $mycms['order']['pid'] as $e => $id:}
+			{:$p = product::data(0,0,0,0,0,$id):}
+			<tr>
+				<td>
+					<a href="../detail.php?id={:$p['id']:}" target="_blank">{:$p['title']:}</a>
+					<img src="../inc/templates/manage/images/operation/picture.png" width="16" height="16" class="title2div" title="<img height=120 src=../{:$p['picture'][0]:} />" />
+				</td>
+				<td>{:$p['inventory']:}</td>
+				<td>{:$p['price']:}</td>
+				<td><input name="price[{:$e:}]" type="text" value="{:$mycms['order']['price'][$e]:}" size="6" maxlength="8" /></td>
+				<td><input name="number[{:$e:}]" type="text" value="{:$mycms['order']['number'][$e]:}" size="3" maxlength="4" /></td>
+				<td><input name="attribute[{:$e:}]" type="text" value="{:$mycms['order']['attribute'][$e]:}" size="20" maxlength="100" /></td>
+				<td>
+					{:$amount = $mycms['order']['price'][$e] * $mycms['order']['number'][$e]:}
+					{:$total = number_format($total + $amount,2,'.',''):}
+					{:number_format($amount,2,'.',''):}
+				</td>
+			</tr>
+			{:/foreach:}
+			<tr>
+				<td colspan="7" class="statistics">
+					{:$lang['page']['field'][28]:}<span class="red">{:$total:}</span><br />
+					{:$lang['page']['field'][29]:}{:$lang['page']['field'][30]:}({:$total:}) × {:$lang['page']['field'][31]:}({:$mycms['order']['discount']:} ÷ 10) + {:$lang['page']['field'][32]:}({:$mycms['order']['freight']:}) = <span class="red">{:$mycms['order']['amount']:}</span>
+				</td>
+			</tr>
+		</table>
+		
+		<table class="table">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['page']['submit']:}</a></td>
+				<td width="80"><input type="hidden" name="action" value="{:$mycms['action']:}" /></td>
+				<td><a class="submit reset" href="javascript:form.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>		
+		</form>
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+@charset "utf-8";
+@import url("common.css");
+
+.list{width:930px;}
+.list .titlebar{width:900px;}
+
+.form{padding:20px 0 0 180px;}
+.form ul{clear:both; height:50px; width:640px;} /* 640 total */
+.form .head{line-height:25px; height:auto; font-size:12px; padding:0 0 0 120px; background:url(../../../../images/msg_bg.png) 100px -102px no-repeat; color:#F60;}
+.form .head a{text-decoration:underline;}
+.form ul li{float:left;}
+.form ul .field{text-align:right; width:120px; font-size:14px; height:30px; line-height:30px; padding:10px 0;} /* 120 */
+.form ul .entry{width:220px; height:30px; line-height:30px; padding:10px 0;} /* 220 */
+.form ul .entry input{height:24px; line-height:24px; width:200px; padding:2px 5px; outline:none; border:1px #C8C8FF solid; font-size:14px;}
+.form ul .entry .captcha{width:60px;}
+.form ul .info{width:300px; height:40px; padding:5px 0;} /* 300 信息列 */
+.form ul .info .attention{height:36px; line-height:18px; padding:2px 2px 2px 25px; background:url(../../../../images/msg_bg.png) 4px -104px no-repeat #E5F5FF; color:#06F; border:1px #40B3FF solid; display:none;}
+.form ul .info .error{height:36px; line-height:18px; padding:2px 2px 2px 25px; background:url(../../../../images/msg_bg.png) 4px -50px no-repeat #FFF2F2; color:#F60; border:1px #F60 solid; display:none;}
+.form ul .info .ok{height:40px; background:url(../../../../images/msg_bg.png) 4px -149px no-repeat; display:none;}
+.form ul .info .loading{padding:12px 0; display:none;}
+.form ul .explain{width:300px; height:50px; line-height:50px; color:#F60;} /* 重发激活码备注 li */
+.form .new_mail{display:none;}
+.form ul .rank_image{width:100px; height:20px; margin:15px 0 15px 20px; background:url(../../../../images/rank.png) 0 2px no-repeat;} /* 密码强度图片 */
+.form ul .rank_score{height:50px; line-height:50px; font-size:14px; color:#F60;} /* 密码强度分数 */
+.form ul .rank_text{width:300px; padding:0 0 0 40px; height:50px; line-height:50px; font-size:14px; font-weight:bold;} /* 密码强度消息提示区 */
+.form .captcha{} /* 验证码 ul */
+.form .captcha .entry{width:65px;}
+.form .captcha .entry input{width:50px; text-transform:uppercase;}
+.form .captcha .image{width:155px; padding:5px 0 0 0;}
+.form .captcha .image span{position:absolute;}
+.form .captcha .image span img{border:1px #C8C8FF solid; display:none;}
+.form .agreement{height:120px; padding:10px 0 0 0;} /* 注册协议 ul */
+.form .agreement .field{height:100px; line-height:20px; vertical-align:top;}
+.form .agreement .entry{width:450px; height:100px; padding:5px 10px; line-height:20px; border:1px #C8C8FF solid; overflow:scroll; overflow-x:hidden;}
+.form .submit{width:300px; height:50px; padding:10px 0 0 120px;} /* 提交 ul */
+.form .submit input{border:0; width:150px; height:35px; line-height:35px; color:#FFF; font-size:14px; background:url(../images/sprite.png) 0 -233px no-repeat;}
+.form .submit input:hover{background:url(../images/sprite.png) 0 -269px no-repeat; cursor:pointer;}
+.remark{line-height:22px; padding:30px 0 20px 240px;}

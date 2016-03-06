@@ -1,0 +1,163 @@
+@charset "utf-8";
+@import url("common.css");
+
+/* member_checkout.tpl */
+.list{width:930px;}
+.list .titlebar{width:900px;}
+.clear{float:right; padding:0 0 0 30px;} /* 放回购物车按钮 */
+.clear a{display:block; width:86px; height:28px; color:#FFF; font-weight:bold; text-decoration:none; line-height:28px; background:url(../images/sprite.png) 0 -176px no-repeat; text-align:center;}
+.clear a:hover{background-position:0 -204px; text-decoration:none; color:#FFF;}
+
+/* member_checkout.tpl 商品列表 */
+.order{overflow:hidden; clear:both; width:928px; border-right:1px #DDD solid; border-top:1px #DDD solid; margin:0 auto 30px auto;}
+.order ul{width:928px; height:35px; overflow:hidden; clear:both; border-bottom:1px #DDD solid;}
+.order .head li{font-weight:bold;}
+.order ul li{float:left; height:35px; line-height:35px; overflow:hidden; text-align:center; border-left:1px #DDD solid;}
+.order ul a{color:#06C;}
+.order ul a:hover{text-decoration:underline; color:#F00;}
+.order ul .a{width:290px; padding:0 5px;}
+.order ul .b{width:107px;}
+.order .total li{text-align:right; width:910px; padding:0 18px 0 0;}
+
+/* member_checkout.tpl 收货人信息 */
+.consignee{overflow:hidden; clear:both; width:928px; margin:0 auto 30px auto;}
+.consignee ul{width:928px; height:35px; overflow:hidden; clear:both; background:url(../images/dotted.gif) repeat-x bottom;}
+.consignee ul li{float:left; height:35px; padding:0 2px; overflow:hidden;}
+.consignee ul .a{width:156px; line-height:35px; text-align:right;}
+.consignee ul .b{width:300px; height:31px; padding:4px 0 0 2px; text-align:left; height:30px;}
+.consignee ul li .input{height:20px; line-height:20px; width:250px; padding:2px; outline:none; border:1px #C8C8FF solid; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+
+/* member_checkout.tpl 配送方式 */
+.dispatching{overflow:hidden; clear:both; width:928px; border-right:1px #DDD solid; border-top:1px #DDD solid; margin:0 auto 30px auto;}
+.dispatching ul{width:928px; overflow:hidden; clear:both; height:35px; border-bottom:1px #DDD solid;}
+.dispatching ul li{float:left; line-height:35px; height:35px; overflow:hidden; text-align:center; border-left:1px #DDD solid;}
+.dispatching ul .a{width:40px; height:27px; line-height:normal; padding:8px 0 0 0;}
+.dispatching ul .b{width:120px;}
+.dispatching ul .c{width:502px; text-align:left; padding:0 5px;}
+.dispatching ul .d{width:80px;}
+.dispatching ul a{color:#06C;}
+.dispatching ul a:hover{text-decoration:underline; color:#F00;}
+.dispatching .head li{font-weight:bold; text-align:center; height:35px; line-height:35px; padding-top:0;}
+.dispatching .options #customer{width:700px; padding:0 26px 0 0; text-align:right;}
+.dispatching .options #vouch{width:200px; text-align:left; border:0;}
+
+/* member_checkout.tpl 订单附言及费用 */
+.parallel{overflow:hidden; clear:both; width:928px; margin:0 auto 20px auto; border-bottom:1px #CCC solid;}
+.parallel .fees{float:left; width:464px; background:url(../images/list_bg_200.gif) 425px 20px no-repeat;}
+.parallel .fees ol{clear:both; font-size:13px;}
+.parallel .fees .info{width:380px; height:30px; padding:0 0 0 10px; line-height:30px; background:url(../images/dotted.gif) 0 bottom repeat-x;}
+.parallel .message{float:left; width:464px;}
+.parallel .message .ol{clear:both;}
+.parallel .message .input textarea{width:300px; border:1px #C8C8FF solid; margin:6px 0 0 0; height:60px; padding:5px; outline:none;}
+.parallel .message .reply{line-height:25px; padding:5px 30px 0 5px;}
+
+/* member_checkout.tpl 提交订单 */
+.submit_order{clear:both; width:928px; margin:0 auto 10px auto; overflow:hidden; padding:0 0 20px 0;}
+.submit_order ol{float:left; width:45%; text-align:center; overflow:hidden;}
+.submit_order ol a{text-decoration:none; display:block; width:120px; height:33px; line-height:33px; font-size:14px; margin:auto; color:#FFF; font-weight:bold; background:url(../images/sprite.png) -152px -234px no-repeat;}
+.submit_order ol a:hover{background-position:-152px -269px;}
+
+/* component_manage.tpl 会员中心左侧菜单重定义样式 */
+.left_head ol{width:100%; height:100%; background:url(../images/member_center.gif) 120px 37px no-repeat;}
+.menu_box .menu_middle li{float:left; font-size:14px;}
+.menu_box .menu_middle .icon{width:20px; height:30px; padding:2px 0 0 0;} /* 32px */
+.menu_box .menu_middle .icon img{width:16px; height:16px; border:0;}
+
+/* order.tpl */
+.order_list{overflow:hidden; clear:both; width:640px; border-right:1px #DDD solid; border-top:1px #DDD solid; margin:0 auto;}
+.order_list ul{width:928px; height:35px; overflow:hidden; clear:both; border-bottom:1px #DDD solid;}
+.order_list .head li{font-weight:bold;}
+.order_list ul li{float:left; height:35px; line-height:35px; overflow:hidden; text-align:center; border-left:1px #DDD solid;}
+.order_list ul li d{color:#06C;}
+.order_list ul li d:hover{text-decoration:underline; color:#F00;}
+.order_list ul .a{width:90px;}
+.order_list ul .b{width:75px;}
+.order_list ul .c{width:150px;}
+.order_list ul .c img{border:0; width:16px; height:16px;}
+.order_list ul .d{width:170px;}
+
+/* recharge.tpl */
+.box .frame_main .select{width:650px; padding:10px 0 20px 0; clear:both; overflow:hidden;}
+.box .frame_main .select ul{float:left; overflow:hidden; padding:5px 10px; width:180px;}
+.box .frame_main .select .radio{float:left; width:30px; padding:6px 0 0 0;}
+.box .frame_main .select .logo{float:left; width:125px; height:30px; border:1px solid #DDD; cursor:pointer; background:url(../../../../images/bank_logo.png) no-repeat;}
+.box .frame_main .select .logo_info{float:left; width:15px; height:30px; background-color:#D2EEF7; border:1px solid #DDD; border-left:none; text-align:center; line-height:15px;}
+.box .frame_main .select .bank_01{background-position:5px -40px;} /* 中国工商银行 */
+.box .frame_main .select .bank_02{background-position:16px -520px;} /* 中国银行 */
+.box .frame_main .select .bank_03{background-position:7px -320px;} /* 中国建设银行 */
+.box .frame_main .select .bank_04{background-position:5px -480px;} /* 中国农业银行 */
+.box .frame_main .select .bank_05{background-position:17px -600px;} /* 交通银行 */
+.box .frame_main .select .bank_06{background-position:11px -200px;} /* 中信银行 */
+.box .frame_main .select .bank_07{background-position:5px -280px;} /* 广东发展银行 */
+.box .frame_main .select .bank_08{background-position:15px -80px;} /* 招商银行 */
+.box .frame_main .select .bank_09{background-position:4px -400px;} /* 中国邮政储蓄银行 */
+.box .frame_main .select .bank_10{background-position:7px -120px;} /* 中国民生银行 */
+.box .frame_main .select .bank_11{background-position:12px -640px;} /* 兴业银行 */
+.box .frame_main .select .bank_12{background-position:13px -1880px;} /* 平安银行 */
+.box .frame_main .select .bank_13{background-position:4px -440px;} /* 中国光大银行 */
+.box .frame_main .select .bank_14{background-position:12px -680px;} /* 中国光大银行 */
+.box .frame_main .select .bank_15{background-position:15px -840px;} /* 上海银行 */
+.box .frame_main .select .bank_16{background-position:5px -240px;} /* 深圳发展银行 */
+.box .frame_main .select .bank_17{background-position:20px -360px;} /* 上海浦东发展银行 */
+.box .frame_main .select .bank_18{background-position:2px -3240px;} /* 北京银行 */
+.box .frame_main .select .bank_19{background:url(../../../../images/tenpay_logo.png) 25px 3px no-repeat;} /* 财付通支付 */
+.box .frame_main .select .bank_20{background-position:16px -1240px;} /* 宁波银行 */
+.box .frame_main .select .bank_21{background-position:15px -760px;} /* 杭州银行 */
+.box .frame_main .select .bank_22{background-position:3px -2640px;} /* 北京农村商业银行 */
+.box .frame_main .select .bank_23{background-position:20px -1320px;} /* 富滇银行 */
+.box .frame_main .select .bank_24{background:url(../../../../images/alipay_logo.png) 6px 6px no-repeat;} /* 支付宝支付 */
+
+/* 充值金额 */
+.box .frame_main .amount{overflow:hidden; clear:both; height:30px; background:url(../images/menu_line.png) 0 0 repeat-x; padding:30px 0 20px 10px;}
+.box .frame_main .amount ol{float:left; height:30px; padding:0 2px; line-height:30px; font-size:14px;}
+.box .frame_main .amount ol input{height:22px; line-height:22px; outline:none; width:120px; font-weight:bold; color:#F60; font-family:arial,helvetica,sans-serif; font-size:16px; padding:3px; border:1px #F60 solid; margin:0; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+
+/* 提交按钮 */
+.box .frame_main .submit{padding:10px 0 30px 10px; clear:both;}
+.box .frame_main .submit input{width:177px; padding:0 25px 3px 0; height:35px; border:0; text-align:center; font-size:14px; font-family:"微软雅黑"; background:url(../images/payment_bt.png) 0 0 no-repeat; color:#000;}
+.box .frame_main .submit input:hover{background-position:0 -35px; cursor:pointer;}
+
+/* pwd_modify.tpl && pwd_modify.tpl */
+.form{padding:20px 0 0 0;}
+.form ul{clear:both; height:50px; width:640px;} /* 640 total */
+.form ul li{float:left;}
+.form ul .field{text-align:right; width:160px; font-size:14px; height:30px; line-height:30px; padding:10px 0;} /* 120 */
+.form ul .entry{width:220px; height:30px; line-height:30px; padding:10px 0;} /* 220 */
+.form ul .entry .input{height:24px; line-height:24px; width:200px; padding:2px 5px; outline:none; border:1px #C8C8FF solid; font-size:14px;}
+.form ul .info{width:260px; height:30px; line-height:30px; padding:10px 0; color:#F60;} /* 300 信息列 */
+.form .modify{width:300px; height:50px; padding:20px 0 10px 160px;} /* 提交 ul */
+.form .modify input{border:0; width:150px; height:35px; line-height:35px; color:#FFF; font-size:14px; background:url(../images/sprite.png) 0 -233px no-repeat;}
+.form .modify input:hover{background:url(../images/sprite.png) 0 -269px no-repeat; cursor:pointer;}
+.form ul li .readonly{background:#F4F4F4; color:#666;}
+
+/* center.tpl */
+.account{overflow:hidden; padding:10px 0; clear:both; height:160px;}
+.account .image{border:1px #DDD solid; padding:1px; width:148px; height:148px; overflow:hidden; float:left;}
+.account .status{width:478px; padding:0 0 0 10px; overflow:hidden; float:left;}
+.account .status ul{height:30px; line-height:30px; background:url(../images/dotted.gif) 0 29px repeat-x; clear:both;}
+.account .status ul li{width:230px; float:left; padding:0 0 0 7px;}
+.timeline{background:url(../images/left_gradient.png) 160px 10px no-repeat; clear:both;} /* 渐变线 */
+.whitebg{background:#FFF; padding:0 0 0 2px; width:20px; float:right;}
+.number_green{font-family:georgia; font-weight:bold; color:#006633; font-size:14px;} /* 绿色数字字体 */
+.myinfo{overflow:hidden; clear:both; height:170px;}
+.myinfo ul{height:30px; line-height:30px; padding:0 0 0 10px; background:url(../images/dotted.gif) 0 29px repeat-x; clear:both; overflow:hidden;}
+.myinfo ul li{float:left; height:30px; line-height:30px; width:315px;}
+
+.logs{border:0; background:#CCC; margin:5px 0 10px 0; width:640px;}
+.logs td{text-align:center; line-height:15px; padding:5px; background:#FFF; word-break:break-all;}
+.logs td h1{font-weight:100; font-size:12px; font-family:Verdana,Geneva,sans-serif; color:#000;}
+.logs td h2{font-style:italic; font-weight:100; font-size:12px; font-family:verdana,geneva,sans-serif; color:#999;}
+.logs td h3{font-style:italic; font-weight:100; font-size:12px; font-family:verdana,geneva,sans-serif; color:#F60;}
+.logs tr th{height:30px; background:#DDD;}
+.logs .a{width:160px;}
+.logs .b{width:100px;}
+.logs .c{width:300px; text-align:left;}
+.logs .d{width:40px;}
+
+/* avatar.tpl */
+.explain{clear:both; height:25px; line-height:25px; padding:0 0 0 20px; color:#666;}
+.avatar_img{clear:both; overflow:hidden;}
+.avatar_img ol{float:left; overflow:hidden; padding:0 10px 20px 20px;}
+.avatar_img img{border:1px #DDD solid; padding:1px;}
+.avatar_swf{overflow:hidden; padding:0 0 20px 20px;}
+

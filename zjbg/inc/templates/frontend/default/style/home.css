@@ -1,0 +1,101 @@
+@import url("common.css");
+/* 公告 */
+.notice{clear:both; height:25px; margin:0 auto; color:#333; background:#E4BA58;}
+.notice a{color:#333;}
+.notice a:hover{color:#000;}
+.notice .speaker{float:left; width:32px; height:25px; background:url(../images/sprite.png) -424px -141px no-repeat;}
+.notice .information{width:600px; height:25px; line-height:25px; overflow:hidden; float:left; color:#666;}
+.notice .date{line-height:25px; float:right; padding:0 100px 0 0;}
+/* 焦点图 */
+.photo{float:left; width:650px; height:260px; padding:20px; text-align:center; background:url(../images/home_focus_bg.gif) center center no-repeat;}
+.photo ol{width:650px; height:260px; background:url(../images/loading.gif) center center no-repeat;}
+.photo ol img{width:32px; height:32px; margin:110px 0 10px 0; clear:both;}
+/* 登录框 */
+.loginbox{float:left; width:230px; height:260px; padding:10px; margin:10px 0 0 0; background:url(../images/home_login_bg.gif) 0 0 no-repeat;}
+.loginbox #have_logged{display:none;}
+.loginbox .title{width:200px; height:30px; padding:0 0 0 30px; margin:0 0 3px 0; font-size:14px; font-weight:bold; background:url(../images/title_line_bg.gif) left bottom no-repeat;}
+.loginbox .text{font-size:14px; padding:0 0 2px 12px; clear:both;}
+.loginbox .field{height:35px; line-height:35px; padding:0 0 0 10px;}
+.loginbox .field input{border:0; outline:none; width:175px; padding:3px 10px 3px 25px; height:25px; line-height:25px; font-size:14px; background:url(../images/sprite.png) no-repeat;} /* 210 * 31px */
+.loginbox .field .left{width:25px; height:31px; display:block; float:left; background:url(../images/sprite.png) no-repeat 0 -140px;}
+.loginbox .field .username{background:url(../images/login_bg_center.png) 0 0 repeat-x; color:#999; float:left; padding:3px 0;}
+.loginbox .field .right{width:10px; height:31px; display:block; float:left; background:url(../images/sprite.png) no-repeat -200px -140px;}
+.loginbox .field .password{background-position:-214px -140px;}
+.loginbox .signinbutton{float:left; padding:5px 0 0 10px;}
+.loginbox .signinbutton input{width:86px; height:28px; line-height:28px; border:0; background:url(../images/sprite.png) 0 -176px no-repeat; color:#FFF; font-weight:bold;}
+.loginbox .signinbutton input:hover{background-position:0 -204px; cursor:pointer;}
+.loginbox .register{float:left; padding:5px 0 0 35px;}
+.loginbox .register a{display:block; width:86px; height:28px; color:#333; line-height:28px; background:url(../images/sprite.png) -86px -176px no-repeat; text-align:center;}
+.loginbox .register a:hover{background-position:-86px -204px; text-decoration:none;}
+.loginbox .captcha{float:left; padding:5px 0 0 5px;}
+.loginbox .captcha input{width:50px; padding:3px 5px; height:20px; line-height:20px; border:1px #CCC solid; color:#999; font-size:14px; outline:none; text-transform:uppercase;}
+.loginbox .captcha a{color:#F00; text-decoration:underline;}
+.loginbox .interval{clear:both; width:210px; margin:auto; height:20px; background:url(../images/line.gif) center bottom no-repeat;}
+.loginbox .interval_info{clear:both; width:210px; margin:auto; height:8px; background:url(../images/line.gif) center bottom no-repeat;}
+.loginbox .other{padding:8px 0 0 10px;}
+.loginbox .other img{width:100px; height:50px;}
+.loginbox .logged{line-height:26px; font-size:13px; padding:0 0 0 10px; height:160px;}
+.loginbox .logged a{color:#039;}
+.number_green{font-family:georgia; font-weight:bold; color:#006633; font-size:14px;} /* 绿色数字字体 */
+#siimage{border:1px #DFDFDF solid;}
+#siimage_div{display:none;}
+#siimage_div img{position:absolute; z-index:999; margin:2px 0;}
+.search{margin:0 0 5px 0;}
+.hot_search{clear:both; width:276px; height:20px; line-height:20px; padding:0 0 10px 0; overflow:hidden; margin:0 auto;}
+.hot_search ol{height:20px; line-height:20px; overflow:hidden;}
+/* 标题内容 */
+.ctitle{overflow:hidden; clear:both; padding:0 0 10px 0;}
+.ctitle ol{height:26px; width:280px; line-height:26px; padding:0 0 0 5px; background:url(../images/dotted.gif) 0 25px repeat-x; overflow:hidden; color:#666; white-space:nowrap;}
+/* 排行 Top */
+.ranking{background:url(../images/num.gif) 5px 8px no-repeat; overflow:hidden; clear:both; padding:0 0 10px 0; height:260px;}
+.ranking ol{height:26px; width:280px; line-height:26px; padding:0 0 0 30px; background:url(../images/dotted.gif) 0 25px repeat-x; overflow:hidden; color:#666; white-space:nowrap;}
+/* 推荐商品 */
+.recom{width:640px; clear:both;}
+.recom .circle{float:left; width:320px; height:117px; overflow:hidden;}
+.recom .circle ul{float:left; height:117px; overflow:hidden;}
+.recom .circle .image{width:115px;} /* ul */
+.recom .circle .image li{padding:1px; border:1px #DDD solid; width:100px; height:100px; margin:3px;}
+.recom .circle .image li:hover{border:1px #F90 solid;}
+.recom .circle .image li a{display:block; width:100px; height:100px; overflow:hidden;}
+.recom .circle .text{width:205px;} /* ul */
+.recom .circle .text li{font-size:13px; overflow:hidden;}
+.recom .circle .text .first{height:26px; line-height:26px;}
+.recom .circle .text .first a{color:#06C; font-size:14px;}
+.recom .circle .text .routine{height:21px; line-height:21px;}
+.caption{clear:both;}
+
+/* 中部滚动图集 */
+.thumbnail{width:620px; height:115px; overflow:hidden; padding:5px 9px; margin:3px auto 10px auto; border:1px #CCC solid;} /* width:640px */
+.thumbnail .pic{width:135px; height:90px; margin:0 10px; padding:1px; border:1px #CCC solid;}
+.thumbnail .pic a{width:135px; height:90px; overflow:hidden; display:block;}
+.thumbnail .pic:hover{border:1px #F90 solid;}
+.thumbnail .text{width:155px; height:25px; line-height:25px; text-align:center; overflow:hidden;}
+
+/* 软件下载 及 成功案例 */
+.parallel{width:640px; overflow:hidden;}
+.parallel .portfolio{width:310px; float:left;}
+.parallel .portfolio .rows{padding:0 10px 5px 0; overflow:hidden;}
+.parallel .portfolio .rows ol{height:24px; overflow:hidden; line-height:24px; font-size:13px; background:url(../images/common4.gif) 0 0 no-repeat; padding:0 0 0 10px;}
+.vertical{margin:0 0 0 10px; padding:0 0 0 9px; border-left:1px #CCC solid;}
+
+.timeline{background:url(../images/left_gradient.png) 160px 9px no-repeat; clear:both;} /* 渐变线 */
+
+/* 图文资讯 */
+.t_photo{width:620px; overflow:hidden; padding:5px 0 0 5px;} /* width:640px */
+.t_photo ul{float:left;}
+.t_photo .t_pic{width:120px; margin:0 0 0 15px; height:90px; padding:1px; border:1px #CCC solid;}
+.t_photo .t_pic a{width:120px; height:90px; overflow:hidden; display:block;}
+.t_photo .t_pic:hover{border:1px #F90 solid;}
+.t_photo .t_text{width:154px; height:25px; line-height:25px; text-align:center; overflow:hidden;}
+
+/* 友情链接 */
+.links{clear:both; width:930px; margin:0 auto; overflow:hidden;}
+.links ul{clear:both; overflow:hidden; background:url(../images/left_gradient.png) 160px 9px no-repeat;}
+.links ul li{float:left;}
+.links ul .heading{width:855px;}
+.links ul .add_link{padding:2px 10px 0 5px;}
+.links ol{float:left; padding:7px;}
+
+.ad_1{width:278px; height:100px; overflow:hidden; border:1px #DDD solid; padding:1px;}  /* 左侧广告位 1 */
+.ad_2{height:auto; clear:both; margin:0 auto; width:930px; padding:0 10px 10px 10px; overflow:hidden;} /* 中间通栏广告：930 x 100px */
+

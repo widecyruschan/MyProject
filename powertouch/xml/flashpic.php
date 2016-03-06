@@ -1,0 +1,1 @@
+<?include_once "../inc/config.php";include_once "../inc/config_db.php";				$db->query( "select * from {$DB_dbprefix}slide WHERE classID=0" );echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";echo "<main>";$db -> query($sql);while( $db->next_record( )){echo "<data url='".$db->Record['address']."' picUrl='{$webdir}".$db->Record['images']."'/>";}echo "</main>";?>

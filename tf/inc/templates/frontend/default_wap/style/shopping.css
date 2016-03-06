@@ -1,0 +1,44 @@
+@charset "utf-8";
+@import url("common.css");
+
+/* 购物流程 */
+
+/* cart.tpl ===================== */
+.list{width:930px;}
+.list .titlebar{width:900px;}
+.clear{float:right;} /* 清空购物车按钮 */
+.clear a{display:block; width:86px; height:28px; color:#FFF; font-weight:bold; text-decoration:none; line-height:28px; background:url(../images/sprite.png) 0 -176px no-repeat; text-align:center;}
+.clear a:hover{background-position:0 -204px; text-decoration:none; color:#FFF;}
+.empty{clear:both; height:100px; width:400px; padding:100px 0 100px 120px; margin:0 auto; font-size:14px; line-height:25px; background:url(../images/cart_null.png) 0 90px no-repeat;}
+.empty a{text-decoration:underline; color:#03C;}
+
+.cart{overflow:hidden; border:1px #DDD solid; clear:both; width:928px;}
+.cart ul{width:928px; height:35px; overflow:hidden; clear:both;}
+.cart ul li{float:left; height:35px; line-height:35px; overflow:hidden; text-align:center;}
+.cart ul .a{width:220px; padding:0 0 0 4px; text-align:left;}
+.cart ul .a a{color:#06C;}
+.cart ul .a a:hover{text-decoration:underline; color:#F00;}
+.cart ul .b{width:300px; padding:0 0 0 4px; background:url(../images/dotted_vertical.gif) 0 0 repeat-y;}
+/*.cart ul .b div{float:left; width:150px; overflow:hidden;} */ /* 如果有两个或以上的属性选择可能需要修改这里的样式 */
+.cart ul .c{width:80px;  background:url(../images/dotted_vertical.gif) 0 0 repeat-y;} /* 5*80=400px */
+.cart .head li{font-weight:bold; text-align:center;}
+.cart ul .number{padding:6px 0; height:23px; line-height:23px;}
+.cart ul .number input{width:50px; height:20px; line-height:20px; border:1px #999 solid; padding:0; margin:0; text-align:center; outline:none;}
+.cart ul .c .del_bg{display:block; width:16px; height:16px; background:url(../../../../images/msg_bg.png) 0 -53px no-repeat; margin:9px auto;} /* a 删除小图片背景 */
+.cart ul .discount{float:left; padding:0 0 0 10px; font-size:14px;}
+.cart ul .discount a{text-decoration:underline;}
+.cart ul .total{float:right; padding:0 10px 0 0; font-size:14px;}
+.cart ul li .num{font-family:georgia; font-weight:bold; color:#FF0000;}
+
+/* 继续购物、订单结算 bt */
+.cart_button{width:930px; margin:0 auto;}
+.cart_button ol{float:left; width:465px; text-align:center; padding:20px 0;}
+.cart_button ol a{display:block; width:120px; height:33px; line-height:33px; font-size:14px; margin:auto; color:#FFF; font-weight:bold; text-decoration:none; background:url(../images/sprite.png) no-repeat;}
+.cart_button .continue a{background-position:-275px -234px; padding:0 0 0 15px; width:105px; text-decoration:none; color:#FFF;}
+.cart_button .continue a:hover{background-position:-275px -269px;}
+.cart_button .clearing a{background-position:-152px -234px; text-decoration:none; color:#FFF;}
+.cart_button .clearing a:hover{background-position:-152px -269px;}
+/* 属性选择 */
+.attribute{display:block; padding:3px 6px; float:left; width:auto; height:16px; line-height:16px; margin:5px 5px 0 0; border:1px #999 solid; background:#FFF; text-decoration:none;}
+.attribute:hover{text-decoration:none; padding:2px 5px; color:#666; border:2px #FF6701 solid;}
+.attribute_select{padding:2px 5px; color:#000; border:2px #FF6701 solid; background:url(../images/selected_has.gif) right bottom no-repeat;}

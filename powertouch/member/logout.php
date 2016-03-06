@@ -1,0 +1,1 @@
+<?php/** * 用户退出代码 * 使用到的接口函数： * uc_user_synlogout()	可选，生成同步退出的代码 */include( "./inc/header.php" );setcookie('tun2_auth', '', -86400);//生成同步退出的代码if($uc_switch=='1'){$ucsynlogout = uc_user_synlogout();}session_unset( );session_destroy( );echo '退出成功'.$ucsynlogout.'<br><a href="login.php">继续</a>';exit;?>

@@ -1,0 +1,1 @@
+<?phpinclude( "./inc/header.php" );login_check();		$location=Location('index','');	define('IN' , true);	$tpl_refresh_time =  $skincache;	$tpl_default_dir =  "../templates/".$skindir."/member";	$t = new template;	$t->tpl_default_dir = $tpl_default_dir;	$t->tpl_refresh_time = $tpl_refresh_time;	include $t->tpl('index');?>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	mycms.alternately('list');
+});
+</script>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr>
+				<td class="title">{:$lang['page'][0]:}{:$mycms['title_lang']:}</td>
+			</tr>
+		</table>
+		
+		<table class="list td_align" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="field_head" width="25">{:$lang['page'][2]:}</td>			
+				<td class="field_head">{:$lang['page'][3]:}</td>			
+				<td class="field_head">{:$lang['page'][4]:}</td>			
+				<td class="field_head">{:$lang['page'][5]:}</td>			
+				<td class="field_head">{:$lang['page'][6]:}</td>			
+				<td class="field_head">{:$lang['page'][7]:}</td>			
+				<td class="field_head">{:$lang['page'][8]:}</td>			
+			</tr>
+			{:foreach $mycms['ad_list'] as $n:}
+			<tr>
+				<td>{:$n['id']:}</td>
+				<td>{:$n['aid']:}</td>
+				<td><a href="../app.php?a=ad&id={:$n['id']:}" target="_blank">{:$n['title']:}</a></td>
+				<td class="field">{:literal:}{:ad::show('{:/literal:}{:$n['aid']:}{:literal:}'):}{:/literal:}</td>
+				<td>{:if $n['click'] != -1:}{:$n['click']:}{:else:}<img width="16" height="16" border="0" src="../inc/templates/manage/images/operation/disabled.png" title="{:$lang['page'][10]:}" />{:/if:}</td>
+				<td>
+					{:if $n['enable'] == '0':}<span class="red">{:$lang['page'][11]:}</span> <!-- 已关闭 -->
+					{:elseif $n['limit'] == '0':}{:$lang['page'][12]:} <!-- 永不过期 -->
+					{:elseif $n['end'] < $mycms['gmt_time']:}<span class="blue">{:$lang['page'][13]:}</span> <!-- 已过期 -->
+					{:elseif $n['start'] > $mycms['gmt_time']:}<span class="green">{:$lang['page'][14]:}</span> <!-- 还没开始 -->
+					{:else:}{:$lang['page'][15]|cat:ceil(($n['end']-$mycms['gmt_time'])/86400)|cat:$lang['page'][16]:} <!-- 正常范围内 -->
+					{:/if:}
+				</td>
+				<td class="operation">
+					{:if $n['enable']:}<a href="ad_manage.php?page={:$mycms['dpage']:}&action=unenable&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/accept.png" title="{:$lang['page'][19]:}" /></a>{:else:}<a href="ad_manage.php?page={:$mycms['dpage']:}&action=enable&id={:$n['id']:}"><img src="../inc/templates/manage/images/operation/ban.png" title="{:$lang['page'][20]:}" /></a>{:/if:}
+					<a href="ad_update.php?id={:$n['id']:}"><img width="16" height="16" border="0" src="../inc/templates/manage/images/operation/pencil.png" title="{:$lang['page'][17]:}" /></a>
+					<a href="ad_manage.php?page={:$mycms['dpage']:}&action=del&id={:$n['id']:}" onclick="return confirm('{:$lang['page'][21]:}');"><img width="16" height="16" border="0" src="../inc/templates/manage/images/operation/delete.png" title="{:$lang['page'][18]:}" /></a>
+				</td>
+			</tr>
+			{:foreachelse:}<tr><td colspan="8" class="field_head">{:$lang['page'][9]:}</td></tr>
+			{:/foreach:}
+		</table>
+		{:$mycms['page']:}
+		{:if $admin['information']:}<div class="information rounded"><ol></ol>
+		1、{:$lang['page'][29]:}<br />
+		2、{:$lang['page'][25]:}<br />
+		3、{:$lang['page'][26]:}<br />
+		4、{:$lang['page'][27]:}<br />
+		5、{:$lang['page'][28]:}
+		</div>{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

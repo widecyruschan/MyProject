@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:$lang['common']['web_title']:}</title>
+<link rel="stylesheet" type="text/css" href="../inc/templates/manage/css/common_{:$admin['theme']:}.css" />
+<script type="text/javascript" src="../inc/script/jquery.js"></script>
+<script type="text/javascript" src="../inc/templates/manage/js/common.js"></script>
+<script type="text/javascript">
+var top_error_isshow = false; //错误提示框是否已显示
+function detect(){
+	if($('#title').val() == ''){
+		mycms.top_error('{:$lang['page']['detect'][0]:}');
+		top_error_isshow = true;
+		return false;
+	}
+	return true;
+}
+$(function(){
+	mycms.alternately('list');
+	mycms.title2div('title2div');
+	mycms.keysubmit('category','submit','detect()');
+	
+	$('form input,form select,form textarea').change(function(){
+		if(top_error_isshow){
+			$('.top_error').fadeTo(400,0,function(){$(this).slideUp(400);});
+			top_error_isshow = false;
+		}
+	});	
+});
+</script>
+<style type="text/css">
+.picture ol{float:left; padding:0 5px 0 0; height:30px;}
+</style>
+</head>
+<body>
+{:include file='component_header.dwt':}
+<div id="body_box">
+	<table cellpadding="0" cellspacing="0" border="0" class="icon">
+		<tr><td>{:$mycms['icon']:}</td></tr>
+	</table>
+	<div class="rounded table">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="box_top">
+			<tr><td class="title">{:$lang['page']['title']:}{:$mycms['title_lang']:}</td></tr>
+		</table>
+		<div class="error rounded top_error"><ol></ol><span></span></div>
+		<form action="" method="post" name="category" id="category">
+		<table class="list" cellpadding="0" cellspacing="1" border="0">
+		{:if $mycms['channel_show']:}
+			<tr>
+				<td class="name">{:$lang['page']['channel']:}</td>
+				<td>
+					<select class="select rounded" onchange="window.open(this.options[this.selectedIndex].value,'_self')" size="1">{:$mycms['category']['channel_text']:}</select> <span class="red">*</span>
+					<img title="{:$lang['page']['channel_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+					<a href="channel_update.php"><img src="../inc/templates/manage/images/operation/add.png" width="16" height="16" class="title2div" title="{:$lang['page']['channel_add']:}"></a>								
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['channel']:}{:/literal:}</td>
+			</tr>
+		{:/if:}
+		{:if $mycms['category_show']:}	
+			<tr>
+				<td class="name">{:$lang['page']['category']:}</td>
+				<td>
+					<select name="nexus" class="select rounded" style="font-family:'Courier New',Courier,monospace;">{:$mycms['category']['nexus_text']:}</select> 
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['nexus']:}{:/literal:}</td>
+			</tr>
+		{:/if:}		
+			<tr>
+				<td class="name" width="150">{:$lang['page']['category_name']:}</td>
+				<td><input type="text" class="input rounded" name="title" id="title" size="30" value="{:$mycms['category']['title']:}" /> <span class="red">*</span></td>
+				<td class="field">{:literal:}{:$mycms['category']['title']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['seotitle']:}</td>
+				<td>
+					<input type="text" class="input rounded" name="seotitle" size="50" value="{:$mycms['category']['seotitle']:}" style="width:300px;" />
+					<img title="{:$lang['page']['seotitle_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['seotitle']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['seokey']:}</td>
+				<td>
+					<input type="text" class="input rounded" name="seokey" size="50" value="{:$mycms['category']['seokey']:}" style="width:300px;" />
+					<img title="{:$lang['page']['seokey_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />				
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['seokey']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['seodescr']:}</td>
+				<td>
+					<textarea name="seodescr" class="rounded" style="width:300px; height:60px; padding:5px;">{:$mycms['category']['seodescr']:}</textarea> 
+					<img title="{:$lang['page']['seodescr_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />				
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['seodescr']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['permission']:}</td>
+				<td>
+					<select name="permission[]" class="rounded" style="width:205px; height:80px;" multiple id="select">
+						{:$mycms['category']['permission_text']:}
+					</select>
+					<img title="{:$lang['page']['permission_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+					<a href="member_rank.php"><img src="../inc/templates/manage/images/operation/add.png" width="16" height="16" class="title2div" title="{:$lang['page']['add_level']:}"></a>
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['permission']:}{:/literal:}</td>
+			</tr>				
+			<tr>
+				<td class="name">{:$lang['page']['templatelist']:}</td>
+				<td>
+					<input type="text" class="input rounded" name="templatelist" id="templatelist" size="30" value="{:$mycms['category']['templatelist']:}" />
+					<img title="{:$lang['page']['templatelist_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['templatelist']:}{:/literal:}</td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['templatecontent']:}</td>
+				<td>
+					<input type="text" class="input rounded" name="templatecontent" id="templatecontent" size="30" value="{:$mycms['category']['templatecontent']:}" />  
+					<img title="{:$lang['page']['templatecontent_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['templatecontent']:}{:/literal:}</td>
+			</tr>
+			
+			<tr>
+				<td class="name">{:$lang['page']['picture']:}</td>
+				<td>
+					<div class="picture">
+					{:if $mycms['category']['picture'] != '':}
+					<ol><img src="../inc/templates/manage/images/operation/picture.png" width="16" height="16" border="0" class="title2div" title="<img width='180' border='0' src='../{:$mycms['category']['picture']:}' />"></ol>
+					{:/if:}
+					<ol><input type="text" name="picture" id="picture" class="input rounded" value="{:$mycms['category']['picture']:}" size="20" /></ol>
+					<ol><iframe src="upload.php?dir=category&preview=upload_preview&return_id=picture" width="183" height="30" border="0" scrolling="no" frameborder="0"></iframe></ol>
+					<ol><img title="{:$lang['page']['picture_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" /></ol>
+					</div>					
+				</td>
+				<td class="field"><div id="upload_preview">{:literal:}{:$mycms['category']['picture']:}{:/literal:}</div></td>
+			</tr>
+			<tr>
+				<td class="name">{:$lang['page']['introduction']:}</td>
+				<td>
+					<textarea name="introduction" class="rounded" style="width:300px; height:60px; padding:5px;">{:$mycms['category']['introduction']:}</textarea> 
+					<img title="{:$lang['page']['introduction_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />				
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['introduction']:}{:/literal:}</td>
+			</tr>
+			
+			
+			<tr>
+				<td class="name">{:$lang['page']['sort']:}</td>
+				<td>
+					<input type="text" name="sort" value="{:$mycms['category']['sort']:}" class="input rounded" size="10" />  
+					<img title="{:$lang['page']['sort_title']:}" class="title2div" src="../inc/templates/manage/images/operation/help.png" width="16" height="16" />
+				</td>
+				<td class="field">{:literal:}{:$mycms['category']['sort']:}{:/literal:}</td>
+			</tr>
+		</table>
+		<table class="table top_line">
+			<tr>
+				<td align="right" height="60"><a id="submit" class="submit" href="#">{:$lang['common']['submit']:}</a></td>
+				<td width="80"><input type="hidden" name="action" value="{:$mycms['action']:}" /></td>
+				<td><a class="submit reset" href="javascript:category.reset();">{:$lang['common']['reset']:}</a></td>
+			</tr>
+		</table>
+		</form>
+		{:if $admin['attention'] && $mycms['action']=='update':}<div class="attention rounded"><ol></ol>{:$lang['page']['attention']:}</div>{:/if:}
+		{:if $admin['information']:}
+		<div class="information rounded"><ol></ol>
+			1、{:$lang['page']['information'][0]:}<br />
+			2、{:$lang['page']['information'][1]:}
+		</div>
+		{:/if:}
+	</div>
+	{:include file='component_footer.dwt':}
+</div>
+</body>
+</html>

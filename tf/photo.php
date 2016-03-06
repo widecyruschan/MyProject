@@ -1,0 +1,1 @@
+<?phpdefine('MODCODE','MO003x');require_once(dirname(__FILE__).'/article.php');

@@ -1,0 +1,56 @@
+@charset "utf-8";
+body,ul,ol,li,form,img,div{outline:0; margin:0; padding:0; list-style:none; border:0; font-size:12px;}
+body{background:none; padding:10px;}
+a{color:#0001CF;}
+a:hover{color:#F00;}
+.search_keyword{color:#F00;}
+
+.top{height:70px; width:100%; border-bottom:1px #ABABAB solid; margin:0 0 20px 0;}
+.top .logo{float:left; padding:2px 0 0 0;}
+.top .logo img{width:180px; height:50px; border:0;}
+.top .form{float:left; padding:0 0 0 10px;}
+.top .form .type{height:25px; line-height:25px;}
+.top .form .type a{font-size:14px;}
+.top .form .type .current{font-weight:bold; color:#000; text-decoration:none;}
+.top .form .input{height:28px; width:408px;}
+.top .form .input ol{float:left;}
+.top .form .input .word input{width:300px; height:20px; line-height:20px; padding:3px 5px; outline:none; border:1px #ABABAB solid; font-size:14px;}
+.top .form .input .submit input{display:block; width:86px; margin:0 0 0 10px; height:28px; border:0; font-size:14px; color:#333; line-height:28px; background:url(../images/sprite.png) -86px -204px no-repeat;}
+.top .form .input .submit input:hover{background-position:-86px -176px; cursor:pointer;}
+.top .login{position:absolute; right:10px; top:10px;}
+.footer{width:100%; text-align:center; font-family:arial,helvetica,sans-serif; border-top:1px #DDD solid; clear:both; color:#666; padding:3px 0; line-height:20px; margin:30px 0 0 0;}
+.footer a{color:#666;}
+
+.ad{width:240px; overflow:hidden; padding:10px; border-left:1px #CCC solid; position:absolute; top:100px; right:100px; line-height:20px;}
+
+/* 无搜索时 样式 */
+.nosearch{border:none; padding:100px 0 0 0; height:auto;}
+.nosearch .logo{clear:both; width:100%; text-align:center;}
+.nosearch .logo img{margin:0 80px 0 0;}
+.nosearch .form{clear:both; width:100%; padding:50px 0 0 0; text-align:center;}
+.nosearch .form .type{padding:0 130px 0 0; height:30px; line-height:30px;}
+.nosearch .input{clear:both; margin:0 auto 100px auto;}
+
+.data{clear:both; width:610px; height:85px; margin:0 0 22px 0;}
+.data .image{float:left; width:110px; height:80px;} /* width:110px */
+.data .image ol{width:100px; height:75px; padding:1px; border:1px #DDD solid;}
+.data .image ol:hover{border:1px #F90 solid;}
+.data .image ol a{display:block; width:100px; height:75px; overflow:hidden;}
+.data .cntent{float:left; width:500px; word-break:break-all;}
+.data .title{height:25px; line-height:25px;}
+.data .title a{font-size:16px; font-family:"宋体","新宋体";}
+.data .text{line-height:20px; font-size:13px; height:40px; overflow:hidden; font-family:"宋体","新宋体";}
+.data .url{color:#008000; height:20px; line-height:20px; overflow:hidden; font-family:Arial,Helvetica,sans-serif;}
+.data .nophoto{width:610px;}
+.notdata{font-size:14px; line-height:25px; padding:0 0 0 30px;}
+
+/* component_page_style */
+.page_style{height:22px; clear:both; padding:20px 0 30px 0; overflow:hidden;}
+.page_style a{text-decoration:none;}
+.page_style ol{float:left; height:22px; line-height:22px; margin:0 5px 0 0;}
+.page_style .effective a{height:22px; line-height:22px; padding:0 8px; display:block; text-align:center; border:1px #DDD solid; background:#F9F9F9; width:40px;}
+.page_style .invalid{text-align:center; padding:0 8px; border:1px #DDD solid; color:#666; background:#F9F9F9; width:40px;}
+.page_style .numeric{font-family:arial,helvetica,sans-serif;}
+.page_style .numeric a{display:block; padding:0 8px; border:1px #DDD solid; background:#F9F9F9; font-family:arial,helvetica,sans-serif;}
+.page_style .numeric a:hover{color:#F00; border:1px #EE7700 solid; background:#FFEEDD; text-decoration:none;}
+.page_style .current,.page_style .effective a:hover{color:#F00; border:1px #EE7700 solid; background:#FFEEDD; padding:0 8px; text-decoration:none;}
